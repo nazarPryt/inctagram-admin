@@ -1,5 +1,5 @@
-import { Button } from '@/shared/Button'
+import { Loader } from '@nazar-pryt/inctagram-ui-kit'
 
 export default function Home() {
-  return <Button />
+  return <Loader />
 }
