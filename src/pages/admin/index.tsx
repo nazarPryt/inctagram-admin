@@ -1,3 +1,5 @@
+import { LoginForm } from '@/features/auth/login/ui/LoginForm'
+
 export default function AdminPage() {
-  return <div>admin page</div>
+  return <LoginForm />
 }
