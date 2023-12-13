@@ -8,6 +8,7 @@
     "start": "next start",
     "format": "prettier --write src",
     "lint": "eslint . --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
+    "codegen": "graphql-codegen -r ts-node/register --config codegen.ts",
     "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "@it-incubator/eslint-config": "1.0.1",
     "@it-incubator/prettier-config": "0.1.2",
     "@it-incubator/stylelint-config": "0.1.5",
+    "@parcel/watcher": "2.3.0",
     "@types/node": "20",
     "@types/nprogress": "^0.2.3",
     "@types/react": "18",
@@ -43,6 +45,7 @@
     "eslint-plugin-perfectionist": "2.5.0",
     "eslint-plugin-prettier": "5.0.1",
     "stylelint": "15.11.0",
+    "ts-node": "10.9.2",
     "typescript": "5"
   }
 }

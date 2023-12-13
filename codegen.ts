@@ -10,14 +10,14 @@ const config: CodegenConfig = {
       plugins: ['typescript-operations', 'typescript-react-apollo'],
       preset: 'near-operation-file',
       presetConfig: {
-        baseTypesPath: 'types.ts',
+        baseTypesPath: 'ApolloClient.types.ts',
         extension: '.generated.tsx',
       },
     },
-    'src/types.ts': { plugins: ['typescript'] },
+    'src/shared/lib/ApolloClient/ApolloClient.types.ts': { plugins: ['typescript'] },
   },
   ignoreNoDocuments: true,
-  schema: process.env.NEXT_PUBLIC_API_URL,
+  schema: 'https://instareplica.fun/api/v1/graphql',
 }
 
 export default config
