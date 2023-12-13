@@ -1,13 +1,17 @@
 import { LoginFormStyled } from '@/features/auth/login/ui/LoginForm.styled'
-import { Button, InputPassword, InputText } from '@nazar-pryt/inctagram-ui-kit'
+import { AuthContainer, Button, InputPassword, InputText } from '@nazar-pryt/inctagram-ui-kit'
 
 export const LoginForm = () => {
   return (
-    <LoginFormStyled>
-      <h1>Sign In</h1>
-      <InputText type={'email'} />
-      <InputPassword />
-      <Button fullwidth>Sign In</Button>
-    </LoginFormStyled>
+    <AuthContainer>
+      <LoginFormStyled>
+        <h1>Sign In</h1>
+        <InputText label={'Email'} type={'email'} />
+        <InputPassword label={'Password'} />
+        <Button fullwidth type={'submit'}>
+          Sign In
+        </Button>
+      </LoginFormStyled>
+    </AuthContainer>
   )
 }

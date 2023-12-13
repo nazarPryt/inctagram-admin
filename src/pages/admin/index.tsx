@@ -1,5 +1,6 @@
-import { LoginForm } from '@/features/auth/login/ui/LoginForm'
+import { getAuthorizedLayout } from '@/shared/layouts/Authorized/AuthorizedLayout'
 
 export default function AdminPage() {
-  return <LoginForm />
+  return <div>protected admin page </div>
 }
+AdminPage.getLayout = getAuthorizedLayout

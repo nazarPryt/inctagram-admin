@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
   },
   "dependencies": {
-    "@nazar-pryt/inctagram-ui-kit": "^0.0.4",
+    "@nazar-pryt/inctagram-ui-kit": "^0.0.5",
     "next": "14.0.3",
     "nprogress": "^0.2.0",
     "react": "18",
