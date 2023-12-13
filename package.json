@@ -7,10 +7,13 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write src",
-    "lint": "eslint . --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
+    "lint": "eslint . --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
+    "codegen:watch": "graphql-codegen --watch"
   },
   "dependencies": {
+    "@apollo/client": "3.8.8",
     "@nazar-pryt/inctagram-ui-kit": "^0.0.5",
+    "graphql": "16.8.1",
     "next": "14.0.3",
     "nprogress": "^0.2.0",
     "react": "18",
@@ -18,6 +21,13 @@
     "styled-components": "6.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@graphql-codegen/near-operation-file-preset": "3.0.0",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-operations": "4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "4.1.0",
+    "@graphql-eslint/eslint-plugin": "3.20.1",
     "@it-incubator/eslint-config": "1.0.1",
     "@it-incubator/prettier-config": "0.1.2",
     "@it-incubator/stylelint-config": "0.1.5",
