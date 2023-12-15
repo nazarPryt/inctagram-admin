@@ -1,4 +1,4 @@
-import * as Types from '../../../../ApolloClient.types';
+import * as Types from '../../../../shared/lib/ApolloClient/Schema.types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
