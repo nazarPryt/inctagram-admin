@@ -14,10 +14,10 @@
   "dependencies": {
     "@apollo/client": "3.8.8",
     "@hookform/resolvers": "3.3.2",
-    "@nazar-pryt/inctagram-ui-kit": "^0.0.5",
+    "@nazar-pryt/inctagram-ui-kit": "^0.0.7",
     "graphql": "16.8.1",
     "next": "14.0.3",
-    "nprogress": "^0.2.0",
+    "nprogress": "0.2.0",
     "react": "18",
     "react-dom": "18",
     "react-hook-form": "7.49.2",

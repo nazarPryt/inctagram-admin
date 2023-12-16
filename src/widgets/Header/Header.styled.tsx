@@ -14,10 +14,11 @@ export const HeaderStyled = styled.header`
   a {
     padding: 12px 0;
     text-decoration: none;
-    ${props => props.theme.typography.Large()}
+    ${props => props.theme.typography.Large}
     color: ${props => props.theme.textColor['100']};
+
     span {
-      ${props => props.theme.typography.Semi_bold_small_text()}
+      ${props => props.theme.typography.Semi_bold_small_text}
     }
   }
 

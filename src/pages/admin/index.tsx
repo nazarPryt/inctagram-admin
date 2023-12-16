@@ -1,6 +1,6 @@
 import { getAuthorizedLayout } from '@/shared/layouts/Authorized/AuthorizedLayout'
 
 export default function AdminPage() {
-  return <div>protected admin page </div>
+  return <div></div>
 }
 AdminPage.getLayout = getAuthorizedLayout

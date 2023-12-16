@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactElement } from 'react'
 
 import { useIsAuth } from '@/shared/hooks/useIsAuth'
+import { Aside } from '@/widgets/Aside'
 import { Header } from '@/widgets/Header'
 import { Container } from '@nazar-pryt/inctagram-ui-kit'
 import { NextPage } from 'next'
@@ -11,13 +12,13 @@ export const AuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const {} = useIsAuth()
 
   return (
-    <AuthorizedLayoutStyled>
-      <Container>
+    <Container>
+      <AuthorizedLayoutStyled>
         <Header />
-        authorized
-        {children}
-      </Container>
-    </AuthorizedLayoutStyled>
+        <Aside />
+        <section>{children}</section>
+      </AuthorizedLayoutStyled>
+    </Container>
   )
 }
 
