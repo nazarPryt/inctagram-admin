@@ -1453,10 +1453,10 @@
   resolved "https://registry.yarnpkg.com/@kamilkisiela/fast-url-parser/-/fast-url-parser-1.1.4.tgz#9d68877a489107411b953c54ea65d0658b515809"
   integrity sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==
 
-"@nazar-pryt/inctagram-ui-kit@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.7.tgz#d529bf76a2a6ace696aedec554115c99a99ac5b3"
-  integrity sha512-fFue1ZMOX3zBsoO7R2XBmIBO9Cf0IoFSfmE0zQv2A2xD9vVE7d0KOEEXfCn3xze6pkdlYDYTAzW/h9dCHc9Ewg==
+"@nazar-pryt/inctagram-ui-kit@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.8.tgz#056b26c3c06aa237f1d79d214175fa1ea5f7d13d"
+  integrity sha512-ohlnv7WYN6HerFAmSyiCLnL0mYWOLM62+S1OGlknibE/l9wQE85Zu1VxNdXxp0RjrlCQjGR0ZcO2I3hrl9wfRw==
   dependencies:
     "@radix-ui/react-select" "2.0.0"
     clsx "2.0.0"

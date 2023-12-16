@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
 
-import { useLoginAdminMutation } from '../api/login.types'
+import { useLoginAdminMutation } from '../api/login.api.types'
 
 const loginAdminSchema = z.object({
   email: z.string().email(),
@@ -17,6 +17,7 @@ type loginAdminSchemaType = z.infer<typeof loginAdminSchema>
 
 export const useLogin = () => {
   const router = useRouter()
+
   const [loginAdminMutation, { loading }] = useLoginAdminMutation()
 
   const {
@@ -32,7 +33,7 @@ export const useLogin = () => {
 
     if (res.data?.loginAdmin.logged) {
       sessionStorage.setItem(isLoggedIn, 'true')
-      await router.push(PATH.ADMIN)
+      await router.push(PATH.USERS)
     }
   }
 

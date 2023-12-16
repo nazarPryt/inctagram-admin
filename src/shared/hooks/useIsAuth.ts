@@ -10,8 +10,6 @@ export const useIsAuth = () => {
   const isAuth = loadFromSessionStorage(isLoggedIn)
   const currentPath = router.pathname
 
-  console.log('currentPath: ', currentPath)
-
   useEffect(() => {
     if (currentPath.includes('admin') && isAuth) {
       return
@@ -19,8 +17,14 @@ export const useIsAuth = () => {
     if (currentPath.includes('admin') && !isAuth) {
       router.push(PATH.LOGIN)
     }
+    if (currentPath.includes('/') && !isAuth) {
+      router.push(PATH.LOGIN)
+    }
+    if (currentPath.includes('/') && isAuth) {
+      router.push(PATH.USERS)
+    }
     if (currentPath.includes(PATH.LOGIN) && isAuth) {
-      router.push(PATH.ADMIN)
+      router.push(PATH.USERS)
     }
   }, [isAuth])
 

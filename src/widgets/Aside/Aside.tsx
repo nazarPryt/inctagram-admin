@@ -1,11 +1,11 @@
 import { PATH } from '@/shared/constants/PATH'
 import { useLogOut } from '@/shared/hooks/useLogOut'
+import { NavLink } from '@/widgets/Aside/ui/NavLink'
 import {
-  MyProfileIcon,
   NavButton,
-  NavLink,
   PaymentIcon,
   PostsIcon,
+  ProfileIcon,
   StatisticsIcon,
 } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -17,7 +17,7 @@ export const Aside = () => {
   return (
     <AsideStyled>
       <nav>
-        <NavLink href={PATH.USERS} icon={<MyProfileIcon />} name={'Users list'} />
+        <NavLink href={PATH.USERS} icon={<ProfileIcon />} name={'Users list'} />
         <NavLink href={PATH.STATISTICS} icon={<StatisticsIcon />} name={'Statistics'} />
         <NavLink href={PATH.PAYMENTS} icon={<PaymentIcon />} name={'Payments list'} />
         <NavLink href={PATH.POSTS} icon={<PostsIcon />} name={'Posts list'} />
