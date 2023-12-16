@@ -1,3 +1,5 @@
+import { Loader } from '@nazar-pryt/inctagram-ui-kit'
+
 import { useGetUsersQuery } from '../api/getUsers.api.types'
 import { UsersListStyled } from './UsersList.styled'
 
@@ -13,7 +15,7 @@ export const UsersList = () => {
 
   console.log('data: ', data)
   if (loading) {
-    return 'Loading...'
+    return <Loader />
   }
   if (error) {
     return `Error! ${error.message}`

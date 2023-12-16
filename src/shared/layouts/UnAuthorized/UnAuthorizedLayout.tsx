@@ -7,7 +7,7 @@ import { NextPage } from 'next'
 
 import { UnAuthorizedLayoutStyled } from './UnAuthorizedLayout.styled'
 
-export const UnAuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
+const UnAuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const {} = useIsAuth()
 
   return (
@@ -19,6 +19,7 @@ export const UnAuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) =>
     </UnAuthorizedLayoutStyled>
   )
 }
+
 export const getUnAuthorizedLayout = (page: ReactElement) => {
   return <UnAuthorizedLayout>{page}</UnAuthorizedLayout>
 }

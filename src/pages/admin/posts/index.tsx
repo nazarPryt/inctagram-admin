@@ -1,4 +1,4 @@
-import { getAuthorizedLayout } from '@/shared/layouts/Authorized/AuthorizedLayout'
+import { getAuthorizedLayout } from '@/shared/layouts/Authorized'
 
 export default function PostsPage() {
   return <div>Posts Page </div>

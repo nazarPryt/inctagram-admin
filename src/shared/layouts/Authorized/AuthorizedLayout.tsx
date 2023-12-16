@@ -8,7 +8,7 @@ import { NextPage } from 'next'
 
 import { AuthorizedLayoutStyled } from './AuthorizedLayout.styled'
 
-export const AuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
+const AuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const {} = useIsAuth()
 
   return (
