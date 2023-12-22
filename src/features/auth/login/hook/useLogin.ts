@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { authToken, isLoggedIn } from '@/shared/constants'
 import { PATH } from '@/shared/constants/PATH'
-import { isLoggedIn } from '@/shared/constants/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
@@ -32,10 +32,17 @@ export const useLogin = () => {
     const res = await loginAdminMutation({ variables: data })
 
     if (res.data?.loginAdmin.logged) {
-      sessionStorage.setItem(isLoggedIn, 'true')
+      saveAuthToken(data)
       await router.push(PATH.USERS)
     }
   }
 
   return { errors, handleSubmit, loading, onSubmit, register }
+}
+export const saveAuthToken = (data: loginAdminSchemaType) => {
+  sessionStorage.setItem(isLoggedIn, 'true')
+
+  const base64 = btoa(`${data.email}:${data.password}`)
+
+  sessionStorage.setItem(authToken, base64)
 }

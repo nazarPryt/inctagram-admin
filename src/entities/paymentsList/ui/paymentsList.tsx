@@ -5,10 +5,10 @@ export const PaymentsList = () => {
   const { data, error, loading } = useGetListPaymentsQuery({
     variables: {
       pageNumber: 1,
-      pageSize: 10,
-      searchTerm: '',
+      pagesize: 10,
       sortBy: 'createdAt',
-      sortDirection: 'desc',
+      // sortDirection: 'desc',
+      userID: 1,
     },
   })
 

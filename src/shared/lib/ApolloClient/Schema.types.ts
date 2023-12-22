@@ -21,37 +21,25 @@ export type Scalars = {
 
 export type Avatar = {
   __typename?: 'Avatar'
-  createdAt: Scalars['DateTime']['output']
-  fieldId: Scalars['String']['output']
   fileSize: Scalars['Int']['output']
   height: Scalars['Int']['output']
-  id: Scalars['Int']['output']
-  imageType: Scalars['String']['output']
-  profileId: Scalars['Int']['output']
-  sizeType: Scalars['String']['output']
   url: Scalars['String']['output']
   width: Scalars['Int']['output']
 }
 
-export type BusinessAccount = {
-  __typename?: 'BusinessAccount'
-  createdAt: Scalars['DateTime']['output']
-  stipeCustomerId?: Maybe<Scalars['String']['output']>
-  subscriptions: Array<Subscription>
-  userId: Scalars['Int']['output']
+export enum BlockStatus {
+  Blocked = 'blocked',
+}
+
+export enum CurrencyType {
+  Eur = 'EUR',
+  Usd = 'USD',
 }
 
 export type ImagePost = {
   __typename?: 'ImagePost'
-  createdAt: Scalars['DateTime']['output']
-  fieldId: Scalars['String']['output']
   fileSize: Scalars['Int']['output']
   height: Scalars['Int']['output']
-  id: Scalars['Int']['output']
-  imageType: Scalars['String']['output']
-  resourceId: Scalars['String']['output']
-  sizeType: Scalars['String']['output']
-  status: Scalars['String']['output']
   url: Scalars['String']['output']
   width: Scalars['Int']['output']
 }
@@ -89,7 +77,6 @@ export type MutationUnbanUserArgs = {
 
 export type PaginationModel = {
   __typename?: 'PaginationModel'
-  items: Array<User>
   page: Scalars['Int']['output']
   pageSize: Scalars['Int']['output']
   pagesCount: Scalars['Int']['output']
@@ -99,24 +86,46 @@ export type PaginationModel = {
 export type Payment = {
   __typename?: 'Payment'
   amount: Scalars['Int']['output']
-  createdAt: Scalars['DateTime']['output']
-  currency: Scalars['String']['output']
+  currency: CurrencyType
   id: Scalars['Int']['output']
-  paymentType?: Maybe<Scalars['String']['output']>
-  status: Scalars['String']['output']
-  user: User
   userId: Scalars['Int']['output']
+}
+
+export enum PaymentMethod {
+  Paypal = 'PAYPAL',
+  Stripe = 'STRIPE',
 }
 
 export type PaymentsPaginationModel = {
   __typename?: 'PaymentsPaginationModel'
-  pagination: _PaginationModel
-  payments: Array<Payment>
+  items: Array<Subscription>
+  page: Scalars['Int']['output']
+  pageSize: Scalars['Int']['output']
+  pagesCount: Scalars['Int']['output']
+  totalCount: Scalars['Int']['output']
 }
 
 export type Post = {
   __typename?: 'Post'
+  createdAt: Scalars['String']['output']
+  description: Scalars['String']['output']
+  id: Scalars['Int']['output']
   images: Array<ImagePost>
+  /** ownerId is the userId */
+  ownerId: Scalars['Int']['output']
+}
+
+export type PostImages = {
+  __typename?: 'PostImages'
+  images: Array<ImagePost>
+}
+
+export type PostsPaginationModel = {
+  __typename?: 'PostsPaginationModel'
+  items: Array<Post>
+  pageSize: Scalars['Int']['output']
+  pagesCount: Scalars['Int']['output']
+  totalCount: Scalars['Int']['output']
 }
 
 export type Profile = {
@@ -132,65 +141,81 @@ export type Profile = {
   userName?: Maybe<Scalars['String']['output']>
 }
 
+export type ProfileInfoModel = {
+  __typename?: 'ProfileInfoModel'
+  createdAt: Scalars['DateTime']['output']
+  id: Scalars['Int']['output']
+  posts: Array<PostImages>
+  profile: Profile
+  userName: Scalars['String']['output']
+}
+
 export type Query = {
   __typename?: 'Query'
   getListPayments: PaymentsPaginationModel
-  getUser: UserWithAdditionalInfo
-  getUsers: PaginationModel
+  getPosts: PostsPaginationModel
+  getProfileInfo: ProfileInfoModel
+  getUsers: UsersPaginationModel
 }
 
 export type QueryGetListPaymentsArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>
   pageSize?: InputMaybe<Scalars['Int']['input']>
-  searchTerm?: InputMaybe<Scalars['String']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
-  sortDirection?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+  userId: Scalars['Int']['input']
 }
 
-export type QueryGetUserArgs = {
+export type QueryGetPostsArgs = {
+  endCursorPostId?: InputMaybe<Scalars['Int']['input']>
+  pageSize?: InputMaybe<Scalars['Int']['input']>
+  searchTerm?: InputMaybe<Scalars['String']['input']>
+  sortBy?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+}
+
+export type QueryGetProfileInfoArgs = {
   userId: Scalars['Int']['input']
 }
 
 export type QueryGetUsersArgs = {
-  blockStatus?: InputMaybe<Scalars['String']['input']>
+  blockStatus?: InputMaybe<BlockStatus>
   pageNumber?: InputMaybe<Scalars['Int']['input']>
   pageSize?: InputMaybe<Scalars['Int']['input']>
   searchTerm?: InputMaybe<Scalars['String']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
-  sortDirection?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
 }
 
-export type Renewal = {
-  __typename?: 'Renewal'
-  dateOfRenewal: Scalars['DateTime']['output']
-  id: Scalars['Int']['output']
+export enum SortDirection {
+  Asc = 'asc',
+  Desc = 'desc',
 }
 
-export type Session = {
-  __typename?: 'Session'
-  deviceId: Scalars['Int']['output']
-  deviceName?: Maybe<Scalars['String']['output']>
-  ip: Scalars['String']['output']
-  lastActivity: Scalars['String']['output']
-  userId: Scalars['Int']['output']
+export enum StatusSubscriptionType {
+  Active = 'ACTIVE',
+  Deleted = 'DELETED',
+  Finished = 'FINISHED',
+  Pending = 'PENDING',
 }
 
 export type Subscription = {
   __typename?: 'Subscription'
-  autoRenew: Scalars['Boolean']['output']
-  businessAccountId: Scalars['Int']['output']
-  createdAt: Scalars['DateTime']['output']
-  customerId?: Maybe<Scalars['String']['output']>
   dateOfPayment?: Maybe<Scalars['DateTime']['output']>
-  endDate: Scalars['DateTime']['output']
+  endDate?: Maybe<Scalars['DateTime']['output']>
   id: Scalars['String']['output']
-  paymentType: Scalars['String']['output']
+  paymentType?: Maybe<PaymentMethod>
   payments: Array<Payment>
   price: Scalars['Int']['output']
-  renewals: Array<Renewal>
-  startDate: Scalars['DateTime']['output']
-  status: Scalars['String']['output']
-  type: Scalars['String']['output']
+  startDate?: Maybe<Scalars['DateTime']['output']>
+  status: StatusSubscriptionType
+  type: SubscriptionType
+}
+
+export enum SubscriptionType {
+  Day = 'DAY',
+  Monthly = 'MONTHLY',
+  Weekly = 'WEEKLY',
 }
 
 export type User = {
@@ -209,23 +234,8 @@ export type UserBan = {
   reason: Scalars['String']['output']
 }
 
-export type UserWithAdditionalInfo = {
-  __typename?: 'UserWithAdditionalInfo'
-  businessAccount?: Maybe<BusinessAccount>
-  createdAt: Scalars['DateTime']['output']
-  email: Scalars['String']['output']
-  id: Scalars['Int']['output']
-  posts: Array<Post>
-  profile: Profile
-  sessions: Array<Session>
-  userBan?: Maybe<UserBan>
-  userName: Scalars['String']['output']
-}
-
-export type _PaginationModel = {
-  __typename?: '_PaginationModel'
-  page: Scalars['Int']['output']
-  pageSize: Scalars['Int']['output']
-  pagesCount: Scalars['Int']['output']
-  totalCount: Scalars['Int']['output']
+export type UsersPaginationModel = {
+  __typename?: 'UsersPaginationModel'
+  pagination: PaginationModel
+  users: Array<User>
 }

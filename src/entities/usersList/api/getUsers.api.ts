@@ -1,25 +1,29 @@
 import { gql } from '@apollo/client'
 
 export const GET_USERS = gql`
-  query getUsers(
+  query getUsersList(
+    $pageSize: Int!
+    $pageNumber: Int
     $sortBy: String!
+    $sortDirection: SortDirection
     $searchTerm: String!
-    $sortDirection: String!
-    $pageNumber: Int!
+    $blockStatus: BlockStatus
   ) {
     getUsers(
+      pageSize: $pageSize
       pageNumber: $pageNumber
       sortBy: $sortBy
-      searchTerm: $searchTerm
       sortDirection: $sortDirection
+      searchTerm: $searchTerm
+      blockStatus: $blockStatus
     ) {
-      items {
-        email
+      users {
+        userName
+        id
       }
-      page
-      pagesCount
-      pageSize
-      totalCount
+      pagination {
+        pagesCount
+      }
     }
   }
 `

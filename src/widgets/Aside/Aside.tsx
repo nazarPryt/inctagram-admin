@@ -1,5 +1,5 @@
+import { useLogOut } from '@/features/auth/logOut'
 import { PATH } from '@/shared/constants/PATH'
-import { useLogOut } from '@/shared/hooks/useLogOut'
 import { NavLink } from '@/widgets/Aside/ui/NavLink'
 import {
   NavButton,

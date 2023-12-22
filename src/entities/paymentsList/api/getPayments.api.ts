@@ -2,24 +2,22 @@ import { gql } from '@apollo/client'
 
 export const GET_PAYMENTS = gql`
   query getListPayments(
-    $pageSize: Int!
+    $userID: Int!
+    $pagesize: Int!
     $pageNumber: Int!
     $sortBy: String!
-    $sortDirection: String!
-    $searchTerm: String!
+    $sortDirection: SortDirection
   ) {
     getListPayments(
-      pageSize: $pageSize
+      userId: $userID
+      pageSize: $pagesize
       pageNumber: $pageNumber
       sortBy: $sortBy
       sortDirection: $sortDirection
-      searchTerm: $searchTerm
     ) {
-      pagination {
-        totalCount
-      }
-      payments {
-        userId
+      items {
+        paymentType
+        id
       }
     }
   }

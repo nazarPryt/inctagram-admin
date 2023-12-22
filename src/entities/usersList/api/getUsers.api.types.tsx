@@ -4,90 +4,108 @@ import * as Apollo from '@apollo/client'
 import * as Types from '../../../shared/lib/ApolloClient/Schema.types'
 const defaultOptions = {} as const
 
-export type GetUsersQueryVariables = Types.Exact<{
-  pageNumber: Types.Scalars['Int']['input']
+export type GetUsersListQueryVariables = Types.Exact<{
+  blockStatus?: Types.InputMaybe<Types.BlockStatus>
+  pageNumber?: Types.InputMaybe<Types.Scalars['Int']['input']>
+  pageSize: Types.Scalars['Int']['input']
   searchTerm: Types.Scalars['String']['input']
   sortBy: Types.Scalars['String']['input']
-  sortDirection: Types.Scalars['String']['input']
+  sortDirection?: Types.InputMaybe<Types.SortDirection>
 }>
 
-export type GetUsersQuery = {
+export type GetUsersListQuery = {
   __typename?: 'Query'
   getUsers: {
-    __typename?: 'PaginationModel'
-    items: Array<{ __typename?: 'User'; email: string }>
-    page: number
-    pageSize: number
-    pagesCount: number
-    totalCount: number
+    __typename?: 'UsersPaginationModel'
+    pagination: { __typename?: 'PaginationModel'; pagesCount: number }
+    users: Array<{ __typename?: 'User'; id: number; userName: string }>
   }
 }
 
-export const GetUsersDocument = gql`
-  query getUsers(
+export const GetUsersListDocument = gql`
+  query getUsersList(
+    $pageSize: Int!
+    $pageNumber: Int
     $sortBy: String!
+    $sortDirection: SortDirection
     $searchTerm: String!
-    $sortDirection: String!
-    $pageNumber: Int!
+    $blockStatus: BlockStatus
   ) {
     getUsers(
+      pageSize: $pageSize
       pageNumber: $pageNumber
       sortBy: $sortBy
-      searchTerm: $searchTerm
       sortDirection: $sortDirection
+      searchTerm: $searchTerm
+
+      blockStatus: $blockStatus
     ) {
-      items {
-        email
+      users {
+        userName
+        id
       }
-      page
-      pagesCount
-      pageSize
-      totalCount
+      pagination {
+        pagesCount
+      }
     }
   }
 `
 
 /**
- * __useGetUsersQuery__
+ * __useGetUsersListQuery__
  *
- * To run a query within a React component, call `useGetUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUsersListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUsersListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetUsersQuery({
+ * const { data, loading, error } = useGetUsersListQuery({
  *   variables: {
- *      sortBy: // value for 'sortBy'
- *      searchTerm: // value for 'searchTerm'
- *      sortDirection: // value for 'sortDirection'
+ *      pageSize: // value for 'pageSize'
  *      pageNumber: // value for 'pageNumber'
+ *      sortBy: // value for 'sortBy'
+ *      sortDirection: // value for 'sortDirection'
+ *      searchTerm: // value for 'searchTerm'
+ *      blockStatus: // value for 'blockStatus'
  *   },
  * });
  */
-export function useGetUsersQuery(
-  baseOptions: Apollo.QueryHookOptions<GetUsersQuery, GetUsersQueryVariables>
+export function useGetUsersListQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUsersListQuery, GetUsersListQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options)
+  return Apollo.useQuery<GetUsersListQuery, GetUsersListQueryVariables>(
+    GetUsersListDocument,
+    options
+  )
 }
-export function useGetUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>
+export function useGetUsersListLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUsersListQuery, GetUsersListQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options)
+  return Apollo.useLazyQuery<GetUsersListQuery, GetUsersListQueryVariables>(
+    GetUsersListDocument,
+    options
+  )
 }
-export function useGetUsersSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<GetUsersQuery, GetUsersQueryVariables>
+export function useGetUsersListSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetUsersListQuery, GetUsersListQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useSuspenseQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, options)
+  return Apollo.useSuspenseQuery<GetUsersListQuery, GetUsersListQueryVariables>(
+    GetUsersListDocument,
+    options
+  )
 }
-export type GetUsersQueryHookResult = ReturnType<typeof useGetUsersQuery>
-export type GetUsersLazyQueryHookResult = ReturnType<typeof useGetUsersLazyQuery>
-export type GetUsersSuspenseQueryHookResult = ReturnType<typeof useGetUsersSuspenseQuery>
-export type GetUsersQueryResult = Apollo.QueryResult<GetUsersQuery, GetUsersQueryVariables>
+export type GetUsersListQueryHookResult = ReturnType<typeof useGetUsersListQuery>
+export type GetUsersListLazyQueryHookResult = ReturnType<typeof useGetUsersListLazyQuery>
+export type GetUsersListSuspenseQueryHookResult = ReturnType<typeof useGetUsersListSuspenseQuery>
+export type GetUsersListQueryResult = Apollo.QueryResult<
+  GetUsersListQuery,
+  GetUsersListQueryVariables
+>

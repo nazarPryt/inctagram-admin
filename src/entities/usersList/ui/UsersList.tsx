@@ -1,15 +1,16 @@
+import { useGetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { Loader } from '@nazar-pryt/inctagram-ui-kit'
 
-import { useGetUsersQuery } from '../api/getUsers.api.types'
 import { UsersListStyled } from './UsersList.styled'
 
 export const UsersList = () => {
-  const { data, error, loading } = useGetUsersQuery({
+  const { data, error, loading } = useGetUsersListQuery({
     variables: {
       pageNumber: 1,
+      pageSize: 10,
       searchTerm: '',
       sortBy: 'desc',
-      sortDirection: 'desc',
+      // sortDirection: 'desc',
     },
   })
 

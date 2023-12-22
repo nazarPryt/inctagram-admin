@@ -6,41 +6,43 @@ const defaultOptions = {} as const
 
 export type GetListPaymentsQueryVariables = Types.Exact<{
   pageNumber: Types.Scalars['Int']['input']
-  pageSize: Types.Scalars['Int']['input']
-  searchTerm: Types.Scalars['String']['input']
+  pagesize: Types.Scalars['Int']['input']
+
   sortBy: Types.Scalars['String']['input']
-  sortDirection: Types.Scalars['String']['input']
+  sortDirection?: Types.InputMaybe<Types.SortDirection>
+  userID: Types.Scalars['Int']['input']
 }>
 
 export type GetListPaymentsQuery = {
   __typename?: 'Query'
   getListPayments: {
     __typename?: 'PaymentsPaginationModel'
-    pagination: { __typename?: '_PaginationModel'; totalCount: number }
-    payments: Array<{ __typename?: 'Payment'; userId: number }>
+    items: Array<{
+      __typename?: 'Subscription'
+      id: string
+      paymentType?: Types.PaymentMethod | null
+    }>
   }
 }
 
 export const GetListPaymentsDocument = gql`
   query getListPayments(
-    $pageSize: Int!
+    $userID: Int!
+    $pagesize: Int!
     $pageNumber: Int!
     $sortBy: String!
-    $sortDirection: String!
-    $searchTerm: String!
+    $sortDirection: SortDirection
   ) {
     getListPayments(
-      pageSize: $pageSize
+      userId: $userID
+      pageSize: $pagesize
       pageNumber: $pageNumber
       sortBy: $sortBy
       sortDirection: $sortDirection
-      searchTerm: $searchTerm
     ) {
-      pagination {
-        totalCount
-      }
-      payments {
-        userId
+      items {
+        paymentType
+        id
       }
     }
   }
@@ -58,11 +60,11 @@ export const GetListPaymentsDocument = gql`
  * @example
  * const { data, loading, error } = useGetListPaymentsQuery({
  *   variables: {
- *      pageSize: // value for 'pageSize'
+ *      userID: // value for 'userID'
+ *      pagesize: // value for 'pagesize'
  *      pageNumber: // value for 'pageNumber'
  *      sortBy: // value for 'sortBy'
  *      sortDirection: // value for 'sortDirection'
- *      searchTerm: // value for 'searchTerm'
  *   },
  * });
  */
