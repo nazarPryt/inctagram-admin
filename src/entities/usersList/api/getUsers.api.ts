@@ -18,7 +18,12 @@ export const GET_USERS = gql`
       blockStatus: $blockStatus
     ) {
       users {
+        createdAt
         userName
+        userBan {
+          createdAt
+          reason
+        }
         id
       }
       pagination {

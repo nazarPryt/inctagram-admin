@@ -18,7 +18,13 @@ export type GetUsersListQuery = {
   getUsers: {
     __typename?: 'UsersPaginationModel'
     pagination: { __typename?: 'PaginationModel'; pagesCount: number }
-    users: Array<{ __typename?: 'User'; id: number; userName: string }>
+    users: Array<{
+      __typename?: 'User'
+      createdAt: any
+      id: number
+      userBan?: { __typename?: 'UserBan'; createdAt: any; reason: string } | null
+      userName: string
+    }>
   }
 }
 
@@ -37,11 +43,15 @@ export const GetUsersListDocument = gql`
       sortBy: $sortBy
       sortDirection: $sortDirection
       searchTerm: $searchTerm
-
       blockStatus: $blockStatus
     ) {
       users {
+        createdAt
         userName
+        userBan {
+          createdAt
+          reason
+        }
         id
       }
       pagination {

@@ -7,7 +7,6 @@ const defaultOptions = {} as const
 export type GetListPaymentsQueryVariables = Types.Exact<{
   pageNumber: Types.Scalars['Int']['input']
   pagesize: Types.Scalars['Int']['input']
-
   sortBy: Types.Scalars['String']['input']
   sortDirection?: Types.InputMaybe<Types.SortDirection>
   userID: Types.Scalars['Int']['input']
