@@ -1,13 +1,16 @@
-import { Table } from '@nazar-pryt/inctagram-ui-kit'
 import { styled } from 'styled-components'
 
-export const UsersListStyled = styled(Table)`
-  svg {
-    path {
-      fill: ${props => props.theme.textColor[100]};
+export const UsersListStyled = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  table {
+    width: 100%;
+
+    td {
+      border: none;
     }
-    line {
-      stroke: ${props => props.theme.textColor[100]};
-    }
-  } //todo move to ui-kit (make it default)
+  }
 `

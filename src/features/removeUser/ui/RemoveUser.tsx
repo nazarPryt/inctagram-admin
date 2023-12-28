@@ -10,7 +10,6 @@ export const RemoveUser = () => {
     },
   })
 
-  console.log('data', data)
   const handleRemove = async () => {
     await removeUserMutation()
   }
