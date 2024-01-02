@@ -1,27 +1,27 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 import { blockedUsersOptions } from '@/entities/usersList/ui/FilterBar/options/filterOptions'
-import { useDebounce } from '@/shared/hooks/useDebounce'
 import { InputText, Select } from '@nazar-pryt/inctagram-ui-kit'
 
 import { FilterBarStyled } from './FilterBar.styled'
 
 type FilterBarType = {
+  blockedValue: string
   clearSearch: () => void
   searchValue: string
+  setBlocked: (value: string) => void
   setSearch: (value: string) => void
 }
-export const FilterBar = ({ clearSearch, searchValue, setSearch }: FilterBarType) => {
-  const [select, setSelect] = useState('Not selected')
-
+export const FilterBar = ({
+  blockedValue,
+  clearSearch,
+  searchValue,
+  setBlocked,
+  setSearch,
+}: FilterBarType) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
   }
-  const debouncedValue = useDebounce<string>(searchValue, 800)
-
-  useEffect(() => {
-    setSearch(debouncedValue)
-  }, [debouncedValue])
 
   return (
     <FilterBarStyled>
@@ -33,10 +33,10 @@ export const FilterBar = ({ clearSearch, searchValue, setSearch }: FilterBarType
         value={searchValue}
       />
       <Select
-        onChange={setSelect}
+        onChange={setBlocked}
         options={blockedUsersOptions}
-        placeholder={select}
-        value={select}
+        placeholder={'Not selected'}
+        value={blockedValue}
         width={200}
       />
     </FilterBarStyled>

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 
+import { BlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
 import { BlockedIcon, ProfileIcon } from '@nazar-pryt/inctagram-ui-kit'
 
 type SelectOption = { label: ReactNode | string; value: string } //todo import from library
@@ -11,7 +12,7 @@ export const blockedUsersOptions: SelectOption[] = [
         <BlockedIcon /> Blocked
       </span>
     ),
-    value: 'blocked',
+    value: BlockStatus.Blocked,
   },
   {
     label: (
@@ -19,6 +20,6 @@ export const blockedUsersOptions: SelectOption[] = [
         <ProfileIcon /> Not Blocked
       </span>
     ),
-    value: 'null',
+    value: 'active',
   },
 ]
