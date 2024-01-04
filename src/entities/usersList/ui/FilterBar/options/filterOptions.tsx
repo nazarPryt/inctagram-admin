@@ -1,25 +1,13 @@
-import { ReactNode } from 'react'
-
 import { BlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
-import { BlockedIcon, ProfileIcon } from '@nazar-pryt/inctagram-ui-kit'
+import { SelectOptionType } from '@nazar-pryt/inctagram-ui-kit/dist/components/Select/Select'
 
-type SelectOption = { label: ReactNode | string; value: string } //todo import from library
-
-export const blockedUsersOptions: SelectOption[] = [
+export const blockedUsersOptions: SelectOptionType[] = [
   {
-    label: (
-      <span>
-        <BlockedIcon /> Blocked
-      </span>
-    ),
+    label: 'Blocked',
     value: BlockStatus.Blocked,
   },
   {
-    label: (
-      <span>
-        <ProfileIcon /> Not Blocked
-      </span>
-    ),
+    label: 'Not Blocked',
     value: 'active',
   },
 ]

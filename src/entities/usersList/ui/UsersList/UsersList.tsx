@@ -11,6 +11,7 @@ import { UsersListStyled } from './UsersList.styled'
 
 export const UsersList = () => {
   const [pageNumber, setPageNumber] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
   const [search, setSearch] = useState('') //search current input value
   const [searchTerm, setSearchTerm] = useState('') //search debounced value
   const [blocked, setBlocked] = useState('active')
@@ -21,7 +22,7 @@ export const UsersList = () => {
     variables: {
       blockStatus,
       pageNumber,
-      pageSize: 10,
+      pageSize,
       searchTerm,
       sortBy: 'desc',
       sortDirection: SortDirection.Asc,
@@ -53,7 +54,14 @@ export const UsersList = () => {
           setSearch={handleSearchTerm}
         />
         <UsersListTable userList={data} />
-        <Pagination count={totalPageCount} onChange={setPageNumber} page={pageNumber} />
+        <Pagination
+          count={totalPageCount}
+          onChange={setPageNumber}
+          onPerPageChange={setPageSize}
+          page={pageNumber}
+          perPage={pageSize}
+          perPageOptions={[10, 20, 30, 50, 100]}
+        />
       </UsersListStyled>
     )
   }
