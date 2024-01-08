@@ -1,34 +1,27 @@
-import {
-  GetUsersListQuery,
-  GetUsersListQueryHookResult,
-  GetUsersListQueryResult,
-} from '@/entities/usersList/api/getUsers.api.types'
+import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
+import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
 import {
   BlockedIcon,
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TableHeadCell,
+  TableHeadSortType,
   TableRow,
 } from '@nazar-pryt/inctagram-ui-kit'
 
+import { UsersListTableHeader } from './UsersListTableHeader'
+
 type PropsType = {
+  onSort: (sort: TableHeadSortType) => void
+  sort: TableHeadSortType
   userList: GetUsersListQuery
 }
-export const UsersListTable = ({ userList }: PropsType) => {
+
+export const UsersListTable = ({ onSort, sort, userList }: PropsType) => {
   return (
     <Table>
-      <TableHead>
-        <TableRow>
-          <TableHeadCell colSpan={2}>User ID</TableHeadCell>
-          <TableHeadCell>Username</TableHeadCell>
-          <TableHeadCell>Profile link</TableHeadCell>
-          <TableHeadCell>Date added</TableHeadCell>
-          <TableHeadCell></TableHeadCell>
-        </TableRow>
-      </TableHead>
-
+      <TableHead columns={UsersListTableHeader} onSort={onSort} sort={sort} />
       <TableBody>
         {userList.getUsers.users.map(user => {
           return (
@@ -38,7 +31,9 @@ export const UsersListTable = ({ userList }: PropsType) => {
               <TableCell>{user.userName}</TableCell>
               <TableCell>ва</TableCell>
               <TableCell>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</TableCell>
-              <TableCell>...</TableCell>
+              <TableCell>
+                <UsersListPopover />
+              </TableCell>
             </TableRow>
           )
         })}

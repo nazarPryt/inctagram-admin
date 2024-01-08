@@ -15,6 +15,10 @@ export const UsersList = () => {
   const [search, setSearch] = useState('') //search current input value
   const [searchTerm, setSearchTerm] = useState('') //search debounced value
   const [blocked, setBlocked] = useState('active')
+  const [sort, setOnSort] = useState<{ direction: SortDirection; key: string }>({
+    direction: SortDirection.Asc,
+    key: 'id',
+  })
 
   const blockStatus = blocked === 'active' ? undefined : BlockStatus.Blocked
 
@@ -24,11 +28,30 @@ export const UsersList = () => {
       pageNumber,
       pageSize,
       searchTerm,
-      sortBy: 'desc',
-      sortDirection: SortDirection.Asc,
+      sortBy: sort.key,
+      sortDirection: sort.direction,
     },
   })
   const debouncedValue = useDebounce<string>(search, 800)
+
+  const handleSearchTerm = (value: string) => {
+    setSearch(value)
+  }
+
+  const handleClearSearch = () => {
+    setSearch('')
+  }
+  const handleOnSort = (value: any) => {
+    if (!value) {
+      setOnSort({
+        direction: SortDirection.Asc,
+        key: 'id',
+      })
+    } else {
+      setOnSort(value)
+    }
+    console.log('value', value)
+  }
 
   useEffect(() => {
     setSearchTerm(debouncedValue)
@@ -36,13 +59,6 @@ export const UsersList = () => {
 
   if (data?.getUsers.users) {
     const totalPageCount = data.getUsers.pagination.pagesCount
-
-    const handleSearchTerm = (value: string) => {
-      setSearch(value)
-    }
-    const handleClearSearch = () => {
-      setSearch('')
-    }
 
     return (
       <UsersListStyled>
@@ -53,7 +69,7 @@ export const UsersList = () => {
           setBlocked={setBlocked}
           setSearch={handleSearchTerm}
         />
-        <UsersListTable userList={data} />
+        <UsersListTable onSort={handleOnSort} sort={sort} userList={data} />
         <Pagination
           count={totalPageCount}
           onChange={setPageNumber}
