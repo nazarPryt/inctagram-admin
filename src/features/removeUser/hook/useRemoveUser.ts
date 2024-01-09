@@ -26,11 +26,10 @@ export const useRemoveUser = ({ setPopover, userId, userName }: useRemoveUserTyp
   }
   const handleDeleteUser = async () => {
     try {
-      await removeUserMutation() //todo attention it WORKS!!
-      if (data?.removeUser) {
+      const res = await removeUserMutation()
+
+      if (res.data?.removeUser) {
         toast(`User ${userName} was successfully removed`, { type: 'success' })
-      } else {
-        toast(error?.message, { type: 'error' })
       }
     } catch (e) {
       toast(`cant do it`, { type: 'error' })

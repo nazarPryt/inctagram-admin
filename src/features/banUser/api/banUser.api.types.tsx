@@ -28,7 +28,6 @@ export type BanUserMutationFn = Apollo.MutationFunction<BanUserMutation, BanUser
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
- *
  * @example
  * const [banUserMutation, { data, loading, error }] = useBanUserMutation({
  *   variables: {

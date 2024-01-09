@@ -18,8 +18,21 @@ export type GetListPaymentsQuery = {
     __typename?: 'PaymentsPaginationModel'
     items: Array<{
       __typename?: 'Subscription'
+      dateOfPayment?: any | null
+      endDate?: any | null
       id: string
       paymentType?: Types.PaymentMethod | null
+      payments: Array<{
+        __typename?: 'Payment'
+        amount: number
+        currency: Types.CurrencyType
+        id: number
+        userId: number
+      }>
+      price: number
+      startDate?: any | null
+      status: Types.StatusSubscriptionType
+      type: Types.SubscriptionType
     }>
   }
 }
@@ -41,6 +54,18 @@ export const GetListPaymentsDocument = gql`
     ) {
       items {
         paymentType
+        price
+        dateOfPayment
+        endDate
+        status
+        type
+        startDate
+        payments {
+          userId
+          id
+          currency
+          amount
+        }
         id
       }
     }

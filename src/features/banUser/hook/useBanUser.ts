@@ -26,12 +26,10 @@ export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => 
   }
   const handleBanUser = async () => {
     try {
-      await banUserMutation()
+      const res = await banUserMutation()
 
-      if (data?.banUser) {
+      if (res.data?.banUser) {
         toast(`User ${userName} was successfully BANED`, { type: 'success' })
-      } else {
-        toast('cant do it', { type: 'error' })
       }
     } catch (e) {
       toast(`cant do it`, { type: 'error' })

@@ -17,6 +17,18 @@ export const GET_PAYMENTS = gql`
     ) {
       items {
         paymentType
+        price
+        dateOfPayment
+        endDate
+        status
+        type
+        startDate
+        payments {
+          userId
+          id
+          currency
+          amount
+        }
         id
       }
     }
