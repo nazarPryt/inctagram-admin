@@ -32,7 +32,7 @@ export const UsersListTable = ({ onSort, sort, userList }: PropsType) => {
               <TableCell>ва</TableCell>
               <TableCell>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</TableCell>
               <TableCell>
-                <UsersListPopover userID={user.id} userName={user.userName} />
+                <UsersListPopover userId={user.id} userName={user.userName} />
               </TableCell>
             </TableRow>
           )

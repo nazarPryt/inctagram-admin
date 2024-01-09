@@ -1,24 +1,28 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { UsersListPopoverType } from '@/entities/usersList/ui/UsersListPopover/UsersListPopover'
 import { useRemoveUserMutation } from '@/features/removeUser/api/removeUser.api.types'
 
-export const useRemoveUser = ({ userID, userName }: UsersListPopoverType) => {
+type useRemoveUserType = {
+  setPopover: Dispatch<SetStateAction<boolean>>
+  userId: number
+  userName: string
+}
+
+export const useRemoveUser = ({ setPopover, userId, userName }: useRemoveUserType) => {
   const [removeUserMutation, { data, error, loading }] = useRemoveUserMutation({
     variables: {
-      // userId: userID,
-      userId: 55555555,
+      userId,
     },
   })
-  const [popover, setPopover] = useState(false)
-  const [dialog, setDialog] = useState(false)
+
+  const [removeDialog, setRemoveDialog] = useState(false)
 
   const handleOpenDialog = () => {
-    setDialog(true)
+    setRemoveDialog(true)
   }
   const handleCloseDialog = () => {
-    setDialog(false)
+    setRemoveDialog(false)
   }
   const handleDeleteUser = async () => {
     try {
@@ -26,24 +30,21 @@ export const useRemoveUser = ({ userID, userName }: UsersListPopoverType) => {
       if (data?.removeUser) {
         toast(`User ${userName} was successfully removed`, { type: 'success' })
       } else {
-        toast('cant do it', { type: 'error' })
+        toast(error?.message, { type: 'error' })
       }
-    } catch (e: any) {
-      console.log(e)
+    } catch (e) {
       toast(`cant do it`, { type: 'error' })
     } finally {
       setPopover(false)
-      setDialog(false)
+      setRemoveDialog(false)
     }
   }
 
   return {
-    dialog,
     handleCloseDialog,
     handleDeleteUser,
     handleOpenDialog,
     loading,
-    popover,
-    setPopover,
+    removeDialog,
   }
 }

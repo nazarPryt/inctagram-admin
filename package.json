@@ -14,7 +14,7 @@
   "dependencies": {
     "@apollo/client": "3.8.8",
     "@hookform/resolvers": "3.3.2",
-    "@nazar-pryt/inctagram-ui-kit": "^0.0.16",
+    "@nazar-pryt/inctagram-ui-kit": "^0.0.17",
     "graphql": "16.8.1",
     "next": "14.0.3",
     "nprogress": "0.2.0",

@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { banOptions } from '@/features/banUser/banOptions'
-import { useRemoveUserMutation } from '@/features/removeUser/api/removeUser.api.types'
+import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
 import {
   BlockedIcon,
@@ -14,27 +13,32 @@ import {
   Select,
 } from '@nazar-pryt/inctagram-ui-kit'
 
-export type UsersListPopoverType = { userID: number; userName: string }
+export type UsersListPopoverType = { userId: number; userName: string }
 
-export const UsersListPopover = ({ userID, userName }: UsersListPopoverType) => {
+export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => {
+  const [popover, setPopover] = useState(false)
+
+  const { handleCloseDialog, handleDeleteUser, handleOpenDialog, loading, removeDialog } =
+    useRemoveUser({
+      setPopover,
+      userId,
+      userName,
+    })
   const {
-    dialog,
-    handleCloseDialog,
-    handleDeleteUser,
-    handleOpenDialog,
-    loading,
-    popover,
+    banDialog,
+    banReason,
+    handleBanUser,
+    handleCloseBanDialog,
+    handleOpenBanDialog,
+    setBanReason,
+  } = useBanUser({
     setPopover,
-  } = useRemoveUser({ userID, userName })
+    userId,
+    userName,
+  })
 
-  const [banReason, setBanReason] = useState('')
-
-  const handleBunInSystem = () => {
-    console.log('handleBunInSystem')
-    setPopover(false)
-  }
   const handleMoreInformation = () => {
-    console.log('handleMoreInformation')
+    alert('handleMoreInformation')
     setPopover(false)
   }
 
@@ -45,7 +49,7 @@ export const UsersListPopover = ({ userID, userName }: UsersListPopoverType) => 
         <PopoverItem
           icon={<BlockedIcon />}
           name={'Bun in the system'}
-          onClick={handleBunInSystem}
+          onClick={handleOpenBanDialog}
         />
         <PopoverItem
           icon={<DotsHorizontal />}
@@ -57,10 +61,10 @@ export const UsersListPopover = ({ userID, userName }: UsersListPopoverType) => 
         cancelButtonText={'No'}
         confirmButtonText={'Yes'}
         invertButtons
-        onCancelButtonClick={handleCloseDialog}
-        onClose={handleCloseDialog}
-        onConfirmButtonClick={handleDeleteUser}
-        open={dialog}
+        onCancelButtonClick={handleCloseBanDialog}
+        onClose={handleCloseBanDialog}
+        onConfirmButtonClick={handleBanUser}
+        open={banDialog}
         title={'Ban user'}
       >
         <p>Are you sure to ban this user, {userName}?</p>
@@ -68,6 +72,7 @@ export const UsersListPopover = ({ userID, userName }: UsersListPopoverType) => 
           onChange={setBanReason}
           options={banOptions}
           placeholder={'Reason for ban'}
+          portal={false}
           value={banReason}
         />
       </Dialog>
@@ -78,7 +83,7 @@ export const UsersListPopover = ({ userID, userName }: UsersListPopoverType) => 
         onCancelButtonClick={handleCloseDialog}
         onClose={handleCloseDialog}
         onConfirmButtonClick={handleDeleteUser}
-        open={dialog}
+        open={removeDialog}
         title={'Delete user'}
       >
         <p>Are you sure to delete user {userName}?</p>
