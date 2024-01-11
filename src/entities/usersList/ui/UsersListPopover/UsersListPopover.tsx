@@ -32,7 +32,6 @@ export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => 
     handleOpenBanDialog,
     setBanReason,
   } = useBanUser({
-    setPopover,
     userId,
     userName,
   })

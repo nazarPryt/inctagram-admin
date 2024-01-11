@@ -1,14 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { useBanUserMutation } from '@/features/banUser/api/banUser.api.types'
 
 type useBanUserType = {
-  setPopover: Dispatch<SetStateAction<boolean>>
   userId: number
   userName: string
 }
-export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => {
+export const useBanUser = ({ userId, userName }: useBanUserType) => {
   const [banReason, setBanReason] = useState('')
   const [banDialog, setBanDialog] = useState(false)
 
@@ -34,7 +33,6 @@ export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => 
     } catch (e) {
       toast(`cant do it`, { type: 'error' })
     } finally {
-      setPopover(false)
       setBanDialog(false)
     }
   }

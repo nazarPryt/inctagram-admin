@@ -12,13 +12,13 @@ const AuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
   const {} = useIsAuth()
 
   return (
-    <Container>
+    <div style={{ marginInline: 'auto', maxWidth: '1160px', padding: '0 20px' }}>
       <AuthorizedLayoutStyled>
         <Header />
         <Aside />
         <section>{children}</section>
       </AuthorizedLayoutStyled>
-    </Container>
+    </div>
   )
 }
 

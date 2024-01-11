@@ -1490,13 +1490,14 @@
   resolved "https://registry.yarnpkg.com/@kamilkisiela/fast-url-parser/-/fast-url-parser-1.1.4.tgz#9d68877a489107411b953c54ea65d0658b515809"
   integrity sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==
 
-"@nazar-pryt/inctagram-ui-kit@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.17.tgz#6a455f57a23fdc70c9e0913736d36939ce8dcdff"
-  integrity sha512-Mg8g9yC4+hsxRsGh1Midlkx75w4aGhO0yJMcVU+wKf21bHK8HZP0O0SEa1NG1OBYdgIxK8FRBI1B8P7BOweh7g==
+"@nazar-pryt/inctagram-ui-kit@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.19.tgz#0c32973042543aeb2cc637a45d995ae0ca9059dc"
+  integrity sha512-fGs0d2t69lid0qDPGK0R9kUGt5UzFNJPXA4ZlvN5ckyDrcOMI6nES4M5WYTUqSR/ox71geJC/gAtZ9cgUco+Ag==
   dependencies:
     "@headlessui-float/react" "0.13.0"
     "@headlessui/react" "1.7.17"
+    "@radix-ui/react-avatar" "1.0.4"
     "@radix-ui/react-dialog" "1.0.5"
     "@radix-ui/react-label" "2.0.2"
     "@radix-ui/react-popover" "1.0.7"
@@ -1731,6 +1732,17 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-primitive" "1.0.3"
+
+"@radix-ui/react-avatar@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-avatar/-/react-avatar-1.0.4.tgz#de9a5349d9e3de7bbe990334c4d2011acbbb9623"
+  integrity sha512-kVK2K7ZD3wwj3qhle0ElXhOjbezIgyl2hVvgwfIdexL3rN6zJmy5AqqIf+D31lxVppdzV8CjAfZ6PklkmInZLw==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-context" "1.0.1"
+    "@radix-ui/react-primitive" "1.0.3"
+    "@radix-ui/react-use-callback-ref" "1.0.1"
+    "@radix-ui/react-use-layout-effect" "1.0.1"
 
 "@radix-ui/react-collection@1.0.3":
   version "1.0.3"
@@ -3100,6 +3112,11 @@ dataloader@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.2.2.tgz#216dc509b5abe39d43a9b9d97e6e5e473dfbe3e0"
   integrity sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==
+
+date-fns@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.2.0.tgz#c97cf685b62c829aa4ecba554e4a51768cf0bffc"
+  integrity sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==
 
 debounce@^1.2.0:
   version "1.2.1"
@@ -6276,6 +6293,11 @@ swap-case@^2.0.2:
   integrity sha512-kc6S2YS/2yXbtkSMunBtKdah4VFETZ8Oh6ONSmSd9bRxhqTrtARUCBUiWXH3xVPpvR7tz2CSnkuXVE42EcGnMw==
   dependencies:
     tslib "^2.0.3"
+
+swiper@11.0.5:
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.0.5.tgz#6ed1ad06e6906ba42fd4b93d4988f0626a49046e"
+  integrity sha512-rhCwupqSyRnWrtNzWzemnBLMoyYuoDgGgspAm/8iBD3jCvAWycPLH4Z3TB0O5520DHLzMx94yUMH/B9Efpa48w==
 
 symbol-observable@^4.0.0:
   version "4.0.0"

@@ -5,7 +5,7 @@ import { FilterBar } from '@/entities/usersList/ui/FilterBar/FilterBar'
 import { UsersListTable } from '@/entities/usersList/ui/UsersListTable/UsersListTable'
 import { useDebounce } from '@/shared/hooks/useDebounce'
 import { BlockStatus, SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
-import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
+import { Loader, Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
 import { UsersListStyled } from './UsersList.styled'
 
@@ -22,7 +22,7 @@ export const UsersList = () => {
 
   const blockStatus = blocked === 'active' ? undefined : BlockStatus.Blocked
 
-  const { data } = useGetUsersListQuery({
+  const { data, loading } = useGetUsersListQuery({
     variables: {
       blockStatus,
       pageNumber,
@@ -57,6 +57,9 @@ export const UsersList = () => {
     setSearchTerm(debouncedValue)
   }, [debouncedValue])
 
+  if (loading) {
+    return <Loader />
+  }
   if (data?.getUsers.users) {
     const totalPageCount = data.getUsers.pagination.pagesCount
 
