@@ -1,0 +1,1 @@
+export { getJustHeader } from './JustHeader'

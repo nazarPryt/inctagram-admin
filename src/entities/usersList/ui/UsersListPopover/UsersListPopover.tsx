@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
+import { PATH } from '@/shared/constants/PATH'
 import {
   BlockedIcon,
   Dialog,
@@ -12,6 +13,7 @@ import {
   PopoverItem,
   Select,
 } from '@nazar-pryt/inctagram-ui-kit'
+import Link from 'next/link'
 
 export type UsersListPopoverType = { userId: number; userName: string }
 
@@ -36,11 +38,6 @@ export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => 
     userName,
   })
 
-  const handleMoreInformation = () => {
-    alert('handleMoreInformation')
-    setPopover(false)
-  }
-
   return (
     <>
       <Popover icon={<DotsHorizontal />} isOpen={popover} onOpenChange={setPopover}>
@@ -51,9 +48,10 @@ export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => 
           onClick={handleOpenBanDialog}
         />
         <PopoverItem
+          as={Link}
+          href={`user/${userId}`}
           icon={<DotsHorizontal />}
           name={'More information'}
-          onClick={handleMoreInformation}
         />
       </Popover>
       <Dialog
