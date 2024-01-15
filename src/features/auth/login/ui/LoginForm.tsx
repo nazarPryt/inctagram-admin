@@ -14,7 +14,7 @@ export const LoginForm = () => {
   return (
     <AuthContainer>
       <LoginFormStyled onSubmit={handleSubmit(onSubmit)}>
-        {loading && <Loader />}
+        {loading && <Loader fullScreen />}
         <h1>Sign In</h1>
         <InputText
           {...register('email')}
