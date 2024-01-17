@@ -5,7 +5,7 @@ import { FilterBar } from '@/entities/usersList/ui/FilterBar/FilterBar'
 import { UsersListTable } from '@/entities/usersList/ui/UsersListTable/UsersListTable'
 import { useDebounce } from '@/shared/hooks/useDebounce'
 import { BlockStatus, SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
-import { Loader, Pagination } from '@nazar-pryt/inctagram-ui-kit'
+import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
 import { UsersListStyled } from './UsersList.styled'
 
@@ -40,6 +40,7 @@ export const UsersList = () => {
 
   const handleClearSearch = () => {
     setSearch('')
+    setSearchTerm('')
   }
   const handleOnSort = (value: any) => {
     if (!value) {
@@ -50,38 +51,36 @@ export const UsersList = () => {
     } else {
       setOnSort(value)
     }
-    console.log('value', value)
   }
 
   useEffect(() => {
     setSearchTerm(debouncedValue)
   }, [debouncedValue])
+  const totalPageCount = data ? data.getUsers.pagination.pagesCount : 1
 
-  if (loading) {
-    return <Loader />
-  }
-  if (data?.getUsers.users) {
-    const totalPageCount = data.getUsers.pagination.pagesCount
-
-    return (
-      <UsersListStyled>
-        <FilterBar
-          blockedValue={blocked}
-          clearSearch={handleClearSearch}
-          searchValue={search}
-          setBlocked={setBlocked}
-          setSearch={handleSearchTerm}
-        />
-        <UsersListTable onSort={handleOnSort} sort={sort} userList={data} />
-        <Pagination
-          count={totalPageCount}
-          onChange={setPageNumber}
-          onPerPageChange={setPageSize}
-          page={pageNumber}
-          perPage={pageSize}
-          perPageOptions={[10, 20, 30, 50, 100]}
-        />
-      </UsersListStyled>
-    )
-  }
+  return (
+    <UsersListStyled>
+      <FilterBar
+        blockedValue={blocked}
+        clearSearch={handleClearSearch}
+        searchValue={search}
+        setBlocked={setBlocked}
+        setSearch={handleSearchTerm}
+      />
+      <UsersListTable
+        loading={loading}
+        onSort={handleOnSort}
+        sort={sort}
+        userList={data?.getUsers.users}
+      />
+      <Pagination
+        count={totalPageCount}
+        onChange={setPageNumber}
+        onPerPageChange={setPageSize}
+        page={pageNumber}
+        perPage={pageSize}
+        perPageOptions={[10, 20, 30, 50, 100]}
+      />
+    </UsersListStyled>
+  )
 }

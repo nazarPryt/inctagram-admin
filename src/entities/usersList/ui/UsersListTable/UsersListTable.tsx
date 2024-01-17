@@ -1,5 +1,6 @@
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
+import { TableSkeleton } from '@/shared/components/TableSkeleton/TableSkeleton'
 import {
   BlockedIcon,
   Table,
@@ -13,30 +14,36 @@ import {
 import { UsersListTableHeader } from './UsersListTableHeader'
 
 type PropsType = {
+  loading: boolean
   onSort: (sort: TableHeadSortType) => void
   sort: TableHeadSortType
-  userList: GetUsersListQuery
+  userList?: GetUsersListQuery['getUsers']['users']
 }
 
-export const UsersListTable = ({ onSort, sort, userList }: PropsType) => {
+export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) => {
+  if (loading) {
+    return <TableSkeleton />
+  }
+
   return (
     <Table>
       <TableHead columns={UsersListTableHeader} onSort={onSort} sort={sort} />
       <TableBody>
-        {userList.getUsers.users.map(user => {
-          return (
-            <TableRow key={user.id}>
-              <TableCell>{user.userBan && <BlockedIcon />}</TableCell>
-              <TableCell>{user.id}</TableCell>
-              <TableCell>{user.userName}</TableCell>
-              <TableCell>ва</TableCell>
-              <TableCell>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</TableCell>
-              <TableCell>
-                <UsersListPopover userId={user.id} userName={user.userName} />
-              </TableCell>
-            </TableRow>
-          )
-        })}
+        {userList &&
+          userList.map(user => {
+            return (
+              <TableRow key={user.id}>
+                <TableCell>{user.userBan && <BlockedIcon />}</TableCell>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.userName}</TableCell>
+                <TableCell>ва</TableCell>
+                <TableCell>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</TableCell>
+                <TableCell>
+                  <UsersListPopover userId={user.id} userName={user.userName} />
+                </TableCell>
+              </TableRow>
+            )
+          })}
       </TableBody>
     </Table>
   )

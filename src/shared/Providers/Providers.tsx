@@ -6,6 +6,7 @@ import { GlobalStyles, ToastContainerStyled, darkTheme } from '@nazar-pryt/incta
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'styled-components'
 
+import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 const inter = Inter({ subsets: ['latin'] })

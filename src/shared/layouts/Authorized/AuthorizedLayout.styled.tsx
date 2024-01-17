@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 
 export const AuthorizedLayoutStyled = styled.div`
   display: grid;
+  grid-template-columns: 220px 1fr;
   grid-template-areas: 'header header header' 'aside section section' 'aside section section';
 
   header {
@@ -9,9 +10,6 @@ export const AuthorizedLayoutStyled = styled.div`
   }
 
   aside {
-    width: 100%;
-    max-width: 220px;
-    min-width: 145px;
     grid-area: aside;
   }
 
