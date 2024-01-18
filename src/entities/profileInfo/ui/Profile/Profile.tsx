@@ -8,7 +8,7 @@ export const Profile = ({ userId }: { userId: number }) => {
   return (
     <ProfileStyled>
       <BackToPrevious href={PATH.USERS} title={'Back to Users List'} />
-      <ProfileInfo />
+      <ProfileInfo userID={userId} />
       <ProfileTabs userId={userId} />
     </ProfileStyled>
   )

@@ -1,27 +1,51 @@
+import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo.api.types'
+import { ProfileInfoSkeleton } from '@/shared/components/ProfileInfoSkeleton/ProfileInfoSkeleton'
 import { Avatar } from '@nazar-pryt/inctagram-ui-kit'
 
 import { ProfileInfoStyled } from './ProfileInfo.styled'
 
-export const ProfileInfo = () => {
-  return (
-    <ProfileInfoStyled>
-      <div className={'avatarGroup'}>
-        <Avatar size={60} src={''} userName={'Ivan Yakimenko'} />
-        <div>
-          <h1>Ivan Yakimenko</h1>
-          <p>Ivan.sr.yakimenko</p>
+export const ProfileInfo = ({ userID }: { userID: number }) => {
+  const { data, loading } = useGetProfileInfoQuery({
+    variables: {
+      userID,
+    },
+  })
+
+  if (loading) {
+    return <ProfileInfoSkeleton />
+  }
+  if (data) {
+    const profile = data.getProfileInfo.profile
+    const profileAvatar = profile.avatars?.length ? profile.avatars[1].url : ''
+
+    return (
+      <ProfileInfoStyled>
+        <div className={'avatarGroup'}>
+          <Avatar
+            size={60}
+            src={profileAvatar}
+            userName={`${profile.firstName} ${profile.lastName}`}
+          />
+          <div>
+            <h1>
+              {profile.firstName} {profile.lastName}
+            </h1>
+            <p>{profile.userName}</p>
+          </div>
         </div>
-      </div>
-      <div className={'bottomGroup'}>
-        <div>
-          <div className={'blurText'}>UserID</div>
-          <div className={'importantText'}>21331QErQe21</div>
+        <div className={'bottomGroup'}>
+          <div>
+            <div className={'blurText'}>UserID</div>
+            <div className={'importantText'}>{profile.id}</div>
+          </div>
+          <div>
+            <div className={'blurText'}>Profile Creation Date</div>
+            <div className={'importantText'}>
+              {new Date(profile.createdAt).toLocaleDateString('ru-RU')}
+            </div>
+          </div>
         </div>
-        <div>
-          <div className={'blurText'}>Profile Creation Date</div>
-          <div className={'importantText'}>12.12.2022</div>
-        </div>
-      </div>
-    </ProfileInfoStyled>
-  )
+      </ProfileInfoStyled>
+    )
+  }
 }

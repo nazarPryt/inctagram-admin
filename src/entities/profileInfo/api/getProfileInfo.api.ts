@@ -7,6 +7,7 @@ export const GET_PROFILE_INFO = gql`
         createdAt
         id
         lastName
+        firstName
         userName
         avatars {
           url
