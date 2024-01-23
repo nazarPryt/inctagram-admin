@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { useGetListPaymentsQuery } from '@/entities/paymentsList/api/getPayments.api.types'
 import { SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
+
+import { useGetUserPaymentsQuery } from '../api/getUserPayments/getUserPayments.api.types'
 
 export const useProfilePayments = ({ userID }: { userID: number }) => {
   const [pageNumber, setPageNumber] = useState(1)
@@ -11,7 +12,7 @@ export const useProfilePayments = ({ userID }: { userID: number }) => {
     direction: SortDirection.Asc,
     key: 'id',
   })
-  const { data, error, loading } = useGetListPaymentsQuery({
+  const { data, loading } = useGetUserPaymentsQuery({
     variables: {
       pageNumber,
       pagesize,

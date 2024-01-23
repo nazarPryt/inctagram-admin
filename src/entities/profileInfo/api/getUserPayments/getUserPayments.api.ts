@@ -1,14 +1,14 @@
 import { gql } from '@apollo/client'
 
 export const GET_PAYMENTS = gql`
-  query getListPayments(
+  query getUserPayments(
     $userID: Int!
     $pagesize: Int!
     $pageNumber: Int!
     $sortBy: String!
     $sortDirection: SortDirection
   ) {
-    getListPayments(
+    getListPaymentsById(
       userId: $userID
       pageSize: $pagesize
       pageNumber: $pageNumber

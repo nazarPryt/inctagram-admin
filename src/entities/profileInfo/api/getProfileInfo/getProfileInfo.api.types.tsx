@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 
-import * as Types from '../../../shared/lib/ApolloClient/Schema.types'
+import * as Types from '../../../../shared/lib/ApolloClient/Schema.types'
 const defaultOptions = {} as const
 
 export type GetProfileInfoQueryVariables = Types.Exact<{

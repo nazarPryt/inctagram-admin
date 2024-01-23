@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 
-import * as Types from '../../../shared/lib/ApolloClient/Schema.types'
+import * as Types from '../../../../shared/lib/ApolloClient/Schema.types'
 const defaultOptions = {} as const
 
-export type GetListPaymentsQueryVariables = Types.Exact<{
+export type GetUserPaymentsQueryVariables = Types.Exact<{
   pageNumber: Types.Scalars['Int']['input']
   pagesize: Types.Scalars['Int']['input']
   sortBy: Types.Scalars['String']['input']
@@ -12,10 +12,10 @@ export type GetListPaymentsQueryVariables = Types.Exact<{
   userID: Types.Scalars['Int']['input']
 }>
 
-export type GetListPaymentsQuery = {
+export type GetUserPaymentsQuery = {
   __typename?: 'Query'
-  getListPayments: {
-    __typename?: 'PaymentsPaginationModel'
+  getListPaymentsById: {
+    __typename?: 'PaymentPaginationModel'
     items: Array<{
       __typename?: 'Subscription'
       dateOfPayment?: any | null
@@ -37,15 +37,15 @@ export type GetListPaymentsQuery = {
   }
 }
 
-export const GetListPaymentsDocument = gql`
-  query getListPayments(
+export const GetUserPaymentsDocument = gql`
+  query getUserPayments(
     $userID: Int!
     $pagesize: Int!
     $pageNumber: Int!
     $sortBy: String!
     $sortDirection: SortDirection
   ) {
-    getListPayments(
+    getListPaymentsById(
       userId: $userID
       pageSize: $pagesize
       pageNumber: $pageNumber
@@ -73,16 +73,16 @@ export const GetListPaymentsDocument = gql`
 `
 
 /**
- * __useGetListPaymentsQuery__
+ * __useGetUserPaymentsQuery__
  *
- * To run a query within a React component, call `useGetListPaymentsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetListPaymentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserPaymentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserPaymentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetListPaymentsQuery({
+ * const { data, loading, error } = useGetUserPaymentsQuery({
  *   variables: {
  *      userID: // value for 'userID'
  *      pagesize: // value for 'pagesize'
@@ -92,42 +92,42 @@ export const GetListPaymentsDocument = gql`
  *   },
  * });
  */
-export function useGetListPaymentsQuery(
-  baseOptions: Apollo.QueryHookOptions<GetListPaymentsQuery, GetListPaymentsQueryVariables>
+export function useGetUserPaymentsQuery(
+  baseOptions: Apollo.QueryHookOptions<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useQuery<GetListPaymentsQuery, GetListPaymentsQueryVariables>(
-    GetListPaymentsDocument,
+  return Apollo.useQuery<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>(
+    GetUserPaymentsDocument,
     options
   )
 }
-export function useGetListPaymentsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetListPaymentsQuery, GetListPaymentsQueryVariables>
+export function useGetUserPaymentsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useLazyQuery<GetListPaymentsQuery, GetListPaymentsQueryVariables>(
-    GetListPaymentsDocument,
+  return Apollo.useLazyQuery<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>(
+    GetUserPaymentsDocument,
     options
   )
 }
-export function useGetListPaymentsSuspenseQuery(
-  baseOptions?: Apollo.SuspenseQueryHookOptions<GetListPaymentsQuery, GetListPaymentsQueryVariables>
+export function useGetUserPaymentsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 
-  return Apollo.useSuspenseQuery<GetListPaymentsQuery, GetListPaymentsQueryVariables>(
-    GetListPaymentsDocument,
+  return Apollo.useSuspenseQuery<GetUserPaymentsQuery, GetUserPaymentsQueryVariables>(
+    GetUserPaymentsDocument,
     options
   )
 }
-export type GetListPaymentsQueryHookResult = ReturnType<typeof useGetListPaymentsQuery>
-export type GetListPaymentsLazyQueryHookResult = ReturnType<typeof useGetListPaymentsLazyQuery>
-export type GetListPaymentsSuspenseQueryHookResult = ReturnType<
-  typeof useGetListPaymentsSuspenseQuery
+export type GetUserPaymentsQueryHookResult = ReturnType<typeof useGetUserPaymentsQuery>
+export type GetUserPaymentsLazyQueryHookResult = ReturnType<typeof useGetUserPaymentsLazyQuery>
+export type GetUserPaymentsSuspenseQueryHookResult = ReturnType<
+  typeof useGetUserPaymentsSuspenseQuery
 >
-export type GetListPaymentsQueryResult = Apollo.QueryResult<
-  GetListPaymentsQuery,
-  GetListPaymentsQueryVariables
+export type GetUserPaymentsQueryResult = Apollo.QueryResult<
+  GetUserPaymentsQuery,
+  GetUserPaymentsQueryVariables
 >

@@ -1,4 +1,4 @@
-import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo.api.types'
+import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
 import { ProfileInfoSkeleton } from '@/shared/components/ProfileInfoSkeleton/ProfileInfoSkeleton'
 import { Avatar } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -17,15 +17,15 @@ export const ProfileInfo = ({ userID }: { userID: number }) => {
   if (data) {
     const profile = data.getProfileInfo.profile
     const profileAvatar = profile.avatars?.length ? profile.avatars[1].url : ''
+    const userName =
+      profile.firstName && profile.lastName && profile.userName
+        ? `${profile.firstName} ${profile.lastName}`
+        : profile.userName || ''
 
     return (
       <ProfileInfoStyled>
         <div className={'avatarGroup'}>
-          <Avatar
-            size={60}
-            src={profileAvatar}
-            userName={`${profile.firstName} ${profile.lastName}`}
-          />
+          <Avatar size={60} src={profileAvatar} userName={userName} />
           <div>
             <h1>
               {profile.firstName} {profile.lastName}

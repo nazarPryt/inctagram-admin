@@ -8,9 +8,5 @@ export const UsersListStyled = styled.div`
 
   table {
     width: 100%;
-
-    td {
-      border: none;
-    }
   }
 `

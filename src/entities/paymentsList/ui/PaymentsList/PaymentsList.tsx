@@ -1,28 +1,42 @@
-import { useGetListPaymentsQuery } from '@/entities/paymentsList/api/getPayments.api.types'
+import { useState } from 'react'
+
+import { useGetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.api.types'
+import { useGetAllPayments } from '@/entities/paymentsList/hook/useGetAllPayments'
 import { PaymentsListTable } from '@/entities/paymentsList/ui/PaymentsListTable/PaymentsListTable'
-import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo.api.types'
+import { SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
+import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
 import { PaymentsListStyled } from './PaymentsList.styled'
 
 export const PaymentsList = () => {
-  // const { data, loading, error } = useGetProfileInfoQuery({
-  //   variables: {
-  //     userID: // value for 'userID'
-  //   },
-  // });
-  // const { data, error, loading } = useGetListPaymentsQuery({
-  //   variables: {
-  //     pageNumber: 1,
-  //     pagesize: 10,
-  //     sortBy: 'createdAt',
-  //     // sortDirection: 'desc',
-  //     userID: 1,
-  //   },
-  // })
+  const {
+    data,
+    handleOnSort,
+    loading,
+    pageNumber,
+    pageSize,
+    setPageNumber,
+    setPageSize,
+    sort,
+    totalPageCount,
+  } = useGetAllPayments()
 
   return (
     <PaymentsListStyled>
-      <PaymentsListTable />
+      <PaymentsListTable
+        loading={loading}
+        onSort={handleOnSort}
+        payments={data?.getAllPayments.items}
+        sort={sort}
+      />
+      <Pagination
+        count={totalPageCount}
+        onChange={setPageNumber}
+        onPerPageChange={setPageSize}
+        page={pageNumber}
+        perPage={pageSize}
+        perPageOptions={[10, 20, 30, 50, 100]}
+      />
     </PaymentsListStyled>
   )
 }

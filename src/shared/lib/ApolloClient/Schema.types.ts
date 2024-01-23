@@ -86,19 +86,30 @@ export type PaginationModel = {
 export type Payment = {
   __typename?: 'Payment'
   amount: Scalars['Int']['output']
+  createdAt: Scalars['String']['output']
   currency: CurrencyType
   id: Scalars['Int']['output']
   userId: Scalars['Int']['output']
 }
 
 export enum PaymentMethod {
+  CreditCard = 'CREDIT_CARD',
   Paypal = 'PAYPAL',
   Stripe = 'STRIPE',
 }
 
+export type PaymentPaginationModel = {
+  __typename?: 'PaymentPaginationModel'
+  items: Array<Subscription>
+  page: Scalars['Int']['output']
+  pageSize: Scalars['Int']['output']
+  pagesCount: Scalars['Int']['output']
+  totalCount: Scalars['Int']['output']
+}
+
 export type PaymentsPaginationModel = {
   __typename?: 'PaymentsPaginationModel'
-  items: Array<Subscription>
+  items: Array<SubscriptionPaymentsModel>
   page: Scalars['Int']['output']
   pageSize: Scalars['Int']['output']
   pagesCount: Scalars['Int']['output']
@@ -152,13 +163,21 @@ export type ProfileInfoModel = {
 
 export type Query = {
   __typename?: 'Query'
-  getListPayments: PaymentsPaginationModel
+  getAllPayments: PaymentsPaginationModel
+  getListPaymentsById: PaymentPaginationModel
   getPosts: PostsPaginationModel
   getProfileInfo: ProfileInfoModel
   getUsers: UsersPaginationModel
 }
 
-export type QueryGetListPaymentsArgs = {
+export type QueryGetAllPaymentsArgs = {
+  pageNumber?: InputMaybe<Scalars['Int']['input']>
+  pageSize?: InputMaybe<Scalars['Int']['input']>
+  sortBy?: InputMaybe<Scalars['String']['input']>
+  sortDirection?: InputMaybe<SortDirection>
+}
+
+export type QueryGetListPaymentsByIdArgs = {
   pageNumber?: InputMaybe<Scalars['Int']['input']>
   pageSize?: InputMaybe<Scalars['Int']['input']>
   sortBy?: InputMaybe<Scalars['String']['input']>
@@ -201,6 +220,7 @@ export enum StatusSubscriptionType {
 
 export type Subscription = {
   __typename?: 'Subscription'
+  businessAccountId: Scalars['Int']['output']
   dateOfPayment?: Maybe<Scalars['DateTime']['output']>
   endDate?: Maybe<Scalars['DateTime']['output']>
   id: Scalars['String']['output']
@@ -210,6 +230,19 @@ export type Subscription = {
   startDate?: Maybe<Scalars['DateTime']['output']>
   status: StatusSubscriptionType
   type: SubscriptionType
+}
+
+export type SubscriptionPaymentsModel = {
+  __typename?: 'SubscriptionPaymentsModel'
+  amount: Scalars['Int']['output']
+  avatars?: Maybe<Array<Avatar>>
+  createdAt: Scalars['String']['output']
+  currency: CurrencyType
+  id: Scalars['Int']['output']
+  paymentMethod: PaymentMethod
+  type: SubscriptionType
+  userId: Scalars['Int']['output']
+  userName: Scalars['String']['output']
 }
 
 export enum SubscriptionType {
