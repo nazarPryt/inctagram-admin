@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-export const PostsListStyled = styled.div`
+export const PostsListSkeletonStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
   align-items: start;

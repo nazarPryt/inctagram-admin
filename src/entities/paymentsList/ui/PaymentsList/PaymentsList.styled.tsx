@@ -5,6 +5,8 @@ export const PaymentsListStyled = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  padding: 20px 0;
+
   table {
     width: 100%;
   }

@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 export const AuthorizedLayoutStyled = styled.div`
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 160px 1fr;
   grid-template-areas: 'header header header' 'aside section section' 'aside section section';
 
   header {
@@ -15,5 +15,6 @@ export const AuthorizedLayoutStyled = styled.div`
 
   section {
     grid-area: section;
+    margin-left: 10px;
   }
 `

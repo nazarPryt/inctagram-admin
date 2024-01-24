@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 
 export const PostPhotosStyled = styled.div`
+  overflow: hidden;
+  margin-bottom: 5px;
   .swiperWrapper {
     height: 230px;
   }

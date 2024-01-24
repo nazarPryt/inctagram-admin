@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { useGetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
 import { PostsStyled } from '@/entities/postsList/ui/Posts/Posts.styled'
 import { PostsList } from '@/entities/postsList/ui/PostsList/PostsList'
 import { SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
-import { InputText, Pagination } from '@nazar-pryt/inctagram-ui-kit'
+import { InputText } from '@nazar-pryt/inctagram-ui-kit'
 
 export const Posts = () => {
   const [page, setPage] = useState(1)
-  const { data, error, loading } = useGetPostsQuery({
-    skip: true,
+  const { data, loading } = useGetPostsQuery({
+    // skip: true,
     variables: {
       endCursorPostId: 3,
       pageSize: 10,
@@ -22,7 +22,7 @@ export const Posts = () => {
   return (
     <PostsStyled>
       <InputText search />
-      <PostsList posts={''} />
+      <PostsList loading={loading} posts={data?.getPosts.items} />
     </PostsStyled>
   )
 }

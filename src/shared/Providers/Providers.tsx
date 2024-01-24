@@ -14,6 +14,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <>
+      <link
+        href={'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'}
+        rel={'stylesheet'}
+      />
       <style global jsx>{`
         html {
           font-family: ${inter.style.fontFamily};

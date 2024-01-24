@@ -1,14 +1,13 @@
+import { GetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
 import { PostPhotosStyled } from '@/entities/postsList/ui/PostPhotos/PostPhotos.styled'
 import Image from 'next/image'
 import { A11y, Autoplay, Keyboard, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-// import 'swiper/css'
-
 type PostItemType = {
-  photos: any
+  photos: GetPostsQuery['getPosts']['items'][number]['images']
 }
-export const PostPhotos = ({}: PostItemType) => {
+export const PostPhotos = ({ photos }: PostItemType) => {
   return (
     <PostPhotosStyled>
       <Swiper
@@ -21,38 +20,20 @@ export const PostPhotos = ({}: PostItemType) => {
         slidesPerView={1}
         spaceBetween={0}
       >
-        <SwiperSlide className={'slide'}>
-          <Image
-            alt={'Picture of the author'}
-            height={200}
-            src={'https://picsum.photos/200/300'}
-            width={200}
-          />
-        </SwiperSlide>
-        <SwiperSlide className={'slide'}>
-          <Image
-            alt={'Picture of the author'}
-            height={200}
-            src={'https://picsum.photos/200/300'}
-            width={200}
-          />
-        </SwiperSlide>
-        <SwiperSlide className={'slide'}>
-          <Image
-            alt={'Picture of the author'}
-            height={200}
-            src={'https://picsum.photos/200/300'}
-            width={200}
-          />
-        </SwiperSlide>
-        <SwiperSlide className={'slide'}>
-          <Image
-            alt={'Picture of the author'}
-            height={200}
-            src={'https://picsum.photos/200/300'}
-            width={200}
-          />
-        </SwiperSlide>
+        {photos.map((photo, index) => {
+          if (photo.height === 360) {
+            return (
+              <SwiperSlide className={'slide'} key={index}>
+                <Image
+                  alt={'Picture of the author'}
+                  height={photo.height}
+                  src={photo.url}
+                  width={photo.width}
+                />
+              </SwiperSlide>
+            )
+          }
+        })}
       </Swiper>
     </PostPhotosStyled>
   )

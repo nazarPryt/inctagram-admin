@@ -8,7 +8,7 @@ type PostDescriptionType = {
   description: string
 }
 export const PostDescription = ({ createdAt, description }: PostDescriptionType) => {
-  const day = formatDistance(subDays(new Date(createdAt), 1), new Date(), {
+  const day = formatDistance(subDays(new Date(+createdAt), 1), new Date(), {
     addSuffix: true,
   })
 
@@ -16,7 +16,7 @@ export const PostDescription = ({ createdAt, description }: PostDescriptionType)
     <PostDescriptionStyled>
       <span className={'day'}>{day}</span>
       <p>
-        <ReadMore maxLength={100} text={description} />
+        <ReadMore maxLength={80} text={description} />
       </p>
     </PostDescriptionStyled>
   )
