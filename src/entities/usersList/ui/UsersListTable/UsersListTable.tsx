@@ -1,6 +1,5 @@
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
-import { TableSkeleton } from '@/shared/components/TableSkeleton/TableSkeleton'
 import {
   BlockedIcon,
   Table,
@@ -9,6 +8,7 @@ import {
   TableHead,
   TableHeadSortType,
   TableRow,
+  TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 
 import { UsersListTableHeader } from './UsersListTableHeader'
@@ -22,7 +22,7 @@ type PropsType = {
 
 export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) => {
   if (loading) {
-    return <TableSkeleton />
+    return <TableSkeleton columns={5} rows={10} />
   }
 
   return (

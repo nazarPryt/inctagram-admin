@@ -1,7 +1,13 @@
 import { useProfilePayments } from '@/entities/profileInfo/hook/useProfilePayments'
 import { IsEmpty } from '@/shared/components/IsEmpty'
-import { TableSkeleton } from '@/shared/components/TableSkeleton/TableSkeleton'
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@nazar-pryt/inctagram-ui-kit'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSkeleton,
+} from '@nazar-pryt/inctagram-ui-kit'
 
 import { ProfilePaymentsStyled } from './ProfilePayments.styled'
 import { PaymentsListHeader } from './ProfilePaymentsHeader'
@@ -11,7 +17,7 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
     useProfilePayments({ userID })
 
   if (loading) {
-    return <TableSkeleton />
+    return <TableSkeleton columns={5} rows={5} />
   }
   if (data?.getListPaymentsById.items.length) {
     return (

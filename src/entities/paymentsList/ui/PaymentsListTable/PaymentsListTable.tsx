@@ -1,5 +1,5 @@
 import { GetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.api.types'
-import { TableSkeleton } from '@/shared/components/TableSkeleton/TableSkeleton'
+import { IsEmpty } from '@/shared/components/IsEmpty'
 import {
   Avatar,
   TableBody,
@@ -7,9 +7,9 @@ import {
   TableHead,
   TableHeadSortType,
   TableRow,
+  TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 
-import { IsEmpty } from '../../../../shared/components/IsEmpty'
 import { PaymentsListTableStyled } from './PaymentsListTable.styled'
 import { PaymentsListTableHeader } from './PaymentsListTableHeader'
 
@@ -21,7 +21,7 @@ type PropsType = {
 }
 export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType) => {
   if (loading) {
-    return <TableSkeleton />
+    return <TableSkeleton columns={5} rows={10} />
   }
   if (payments) {
     return (

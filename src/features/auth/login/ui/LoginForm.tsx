@@ -1,5 +1,6 @@
 import { useLogin } from '@/features/auth/login/hook/useLogin'
 import { LoginFormStyled } from '@/features/auth/login/ui/LoginForm.styled'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   AuthContainer,
   Button,
@@ -10,12 +11,13 @@ import {
 
 export const LoginForm = () => {
   const { errors, handleSubmit, loading, onSubmit, register } = useLogin()
+  const { t } = useTranslation()
 
   return (
     <AuthContainer>
       <LoginFormStyled onSubmit={handleSubmit(onSubmit)}>
         {loading && <Loader fullScreen />}
-        <h1>Sign In</h1>
+        <h1>Sign In {t.test}</h1>
         <InputText
           {...register('email')}
           error={errors.email?.message}

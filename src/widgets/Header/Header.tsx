@@ -1,3 +1,4 @@
+import { LangSelect } from '@/shared/components/LangSelect/LangSelect'
 import { PATH } from '@/shared/constants/PATH'
 import Link from 'next/link'
 
@@ -10,7 +11,7 @@ export const Header = () => {
         Inctagram<span>adminPage</span>
       </Link>
       <div className={'block'}>
-        <div>dsdsdsd</div>
+        <LangSelect />
       </div>
     </HeaderStyled>
   )
