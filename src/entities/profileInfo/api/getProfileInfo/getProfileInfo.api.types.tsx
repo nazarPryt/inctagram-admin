@@ -5,16 +5,21 @@ import * as Types from '../../../../shared/lib/ApolloClient/Schema.types'
 const defaultOptions = {} as const
 
 export type GetProfileInfoQueryVariables = Types.Exact<{
-  userID: Types.Scalars['Int']['input']
+  userID?: Types.Scalars['Int']['input']
 }>
 
 export type GetProfileInfoQuery = {
   __typename?: 'Query'
-  getProfileInfo: {
-    __typename?: 'ProfileInfoModel'
+  getUser: {
+    __typename?: 'User'
     profile: {
       __typename?: 'Profile'
-      avatars?: Array<{ __typename?: 'Avatar'; height: number; url: string; width: number }> | null
+      avatars?: Array<{
+        __typename?: 'Avatar'
+        height?: null | number
+        url?: null | string
+        width?: null | number
+      }> | null
       createdAt: any
       firstName?: null | string
       id: number
@@ -25,8 +30,8 @@ export type GetProfileInfoQuery = {
 }
 
 export const GetProfileInfoDocument = gql`
-  query getProfileInfo($userID: Int!) {
-    getProfileInfo(userId: $userID) {
+  query getProfileInfo($userID: Int! = 10) {
+    getUser(userId: $userID) {
       profile {
         createdAt
         id
@@ -60,7 +65,7 @@ export const GetProfileInfoDocument = gql`
  * });
  */
 export function useGetProfileInfoQuery(
-  baseOptions: Apollo.QueryHookOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
 

@@ -8,7 +8,7 @@ type PostDescriptionType = {
   description: string
 }
 export const PostDescription = ({ createdAt, description }: PostDescriptionType) => {
-  const day = formatDistance(subDays(new Date(+createdAt), 1), new Date(), {
+  const day = formatDistance(subDays(new Date(createdAt), 1), new Date(), {
     addSuffix: true,
   })
 

@@ -8,7 +8,7 @@ export const GET_PAYMENTS = gql`
     $sortBy: String!
     $sortDirection: SortDirection
   ) {
-    getListPaymentsById(
+    getPaymentsByUser(
       userId: $userID
       pageSize: $pagesize
       pageNumber: $pageNumber

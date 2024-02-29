@@ -19,13 +19,13 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
   if (loading) {
     return <TableSkeleton columns={5} rows={5} />
   }
-  if (data?.getListPaymentsById.items.length) {
+  if (data?.getPaymentsByUser.items.length) {
     return (
       <ProfilePaymentsStyled>
         <Table>
           <TableHead columns={PaymentsListHeader} sort={sort} />
           <TableBody>
-            {data?.getListPaymentsById.items.map(payment => {
+            {data?.getPaymentsByUser.items.map(payment => {
               return (
                 <TableRow key={payment.id}>
                   <TableCell>

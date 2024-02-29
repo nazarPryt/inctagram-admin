@@ -7,21 +7,27 @@ const defaultOptions = {} as const
 export type GetAllPaymentsQueryVariables = Types.Exact<{
   pageNumber?: Types.InputMaybe<Types.Scalars['Int']['input']>
   pageSize?: Types.InputMaybe<Types.Scalars['Int']['input']>
+  searchTerm?: Types.InputMaybe<Types.Scalars['String']['input']>
   sortBy?: Types.InputMaybe<Types.Scalars['String']['input']>
   sortDirection?: Types.InputMaybe<Types.SortDirection>
 }>
 
 export type GetAllPaymentsQuery = {
   __typename?: 'Query'
-  getAllPayments: {
+  getPayments: {
     __typename?: 'PaymentsPaginationModel'
     items: Array<{
       __typename?: 'SubscriptionPaymentsModel'
-      amount: number
-      avatars?: Array<{ __typename?: 'Avatar'; height: number; url: string; width: number }> | null
-      createdAt: string
-      currency: Types.CurrencyType
-      id: number
+      amount?: null | number
+      avatars?: Array<{
+        __typename?: 'Avatar'
+        height?: null | number
+        url?: null | string
+        width?: null | number
+      }> | null
+      createdAt?: any | null
+      currency?: Types.CurrencyType | null
+      id?: null | number
       paymentMethod: Types.PaymentMethod
       type: Types.SubscriptionType
       userName: string
@@ -38,12 +44,14 @@ export const GetAllPaymentsDocument = gql`
     $pageNumber: Int
     $sortBy: String
     $sortDirection: SortDirection
+    $searchTerm: String
   ) {
-    getAllPayments(
+    getPayments(
       pageSize: $pageSize
       sortBy: $sortBy
       sortDirection: $sortDirection
       pageNumber: $pageNumber
+      searchTerm: $searchTerm
     ) {
       pagesCount
       pageSize
@@ -82,6 +90,7 @@ export const GetAllPaymentsDocument = gql`
  *      pageNumber: // value for 'pageNumber'
  *      sortBy: // value for 'sortBy'
  *      sortDirection: // value for 'sortDirection'
+ *      searchTerm: // value for 'searchTerm'
  *   },
  * });
  */

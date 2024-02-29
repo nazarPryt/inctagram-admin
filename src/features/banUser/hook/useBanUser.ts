@@ -1,7 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { useBanUserMutation } from '@/features/banUser/api/banUser.api.types'
+import { GET_USERS } from '@/entities/usersList/api/getUsers.api'
+import {
+  UnbanUserMutation,
+  useBanUserMutation,
+  useUnbanUserMutation,
+} from '@/features/banUser/api/banUser.api.types'
 
 type useBanUserType = {
   userId: number
@@ -10,13 +15,21 @@ type useBanUserType = {
 export const useBanUser = ({ userId, userName }: useBanUserType) => {
   const [banReason, setBanReason] = useState('')
   const [banDialog, setBanDialog] = useState(false)
-
   const [banUserMutation, { data, error, loading }] = useBanUserMutation({
+    refetchQueries: [GET_USERS, 'getUsersList'],
     variables: {
       banReason,
       userId,
     },
   })
+  const [unBanUserMutation, { data: unBanData, error: unBanError, loading: unBanLoading }] =
+    useUnbanUserMutation({
+      refetchQueries: [GET_USERS, 'getUsersList'],
+      variables: {
+        userId,
+      },
+    })
+
   const handleOpenBanDialog = () => {
     setBanDialog(true)
   }
@@ -36,6 +49,21 @@ export const useBanUser = ({ userId, userName }: useBanUserType) => {
       setBanDialog(false)
     }
   }
+
+  const handleUnBan = async () => {
+    try {
+      const res = await unBanUserMutation()
+
+      if (res.data?.unbanUser) {
+        toast(`User ${userName} was successfully UNBANED`, { type: 'success' })
+      }
+    } catch (e) {
+      toast(`cant do it`, { type: 'error' })
+    } finally {
+      setBanDialog(false)
+    }
+  }
+
   const handleSetBanReason = (value: string) => {
     setBanReason(value)
   }
@@ -50,6 +78,7 @@ export const useBanUser = ({ userId, userName }: useBanUserType) => {
     handleCloseBanDialog,
     handleOpenBanDialog,
     handleSetBanReason,
+    handleUnBan,
     loading,
     setBanReason,
   }
