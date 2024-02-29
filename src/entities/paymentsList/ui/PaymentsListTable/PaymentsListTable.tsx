@@ -16,7 +16,7 @@ import { PaymentsListTableHeader } from './PaymentsListTableHeader'
 type PropsType = {
   loading: boolean
   onSort: (sort: TableHeadSortType) => void
-  payments?: GetAllPaymentsQuery['getAllPayments']['items']
+  payments?: GetAllPaymentsQuery['getPayments']['items']
   sort: TableHeadSortType
 }
 export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType) => {
@@ -34,7 +34,7 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
                 <TableCell className={'userNameCell'}>
                   <Avatar
                     size={36}
-                    src={payment.avatars?.length ? payment.avatars[0].url : ''}
+                    src={payment.avatars?.length ? payment.avatars[0].url || '' : ''}
                     userName={payment.userName}
                   />
                   {payment.userName}

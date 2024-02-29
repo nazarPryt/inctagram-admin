@@ -27,7 +27,7 @@ export const useUsersList = () => {
 
   useEffect(() => {
     setPageNumber(1)
-  }, [blockStatus]);
+  }, [blockStatus])
 
   const { data, loading } = useGetUsersListQuery({
     variables: {
