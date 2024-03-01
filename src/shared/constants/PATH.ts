@@ -4,6 +4,6 @@ export const PATH = {
   POSTS: '/admin/posts',
   STATISTICS: '/admin/statistics',
   USER: 'user/',
-  USER_PROFILE: 'https://instareplica.fun/ru/profile/user-profile',
+  USER_PROFILE: `${process.env.NEXT_PUBLIC_DOMAIN_URL}profile/user-profile`,
   USERS: '/admin/users',
 } as const

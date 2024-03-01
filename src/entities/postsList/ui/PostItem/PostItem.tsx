@@ -11,7 +11,7 @@ export const PostItem = ({ post }: PostItemType) => {
   return (
     <PostItemStyled>
       <PostPhotos photos={post.images} />
-      <PostUserInfo />
+      <PostUserInfo userID={post.ownerId} />
       <PostDescription createdAt={post.createdAt} description={post.description} />
     </PostItemStyled>
   )

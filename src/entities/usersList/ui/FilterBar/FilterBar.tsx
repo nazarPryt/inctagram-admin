@@ -34,6 +34,8 @@ export const FilterBar = ({
         value={searchValue}
       />
       <Select
+        //Todo Question
+
         onChange={setBlocked as (value: string) => void}
         options={blockedUsersOptions}
         placeholder={'Not selected'}

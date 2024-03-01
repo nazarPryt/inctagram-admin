@@ -1,34 +1,31 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { GET_PROFILE_INFO } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api'
 import { GET_USERS } from '@/entities/usersList/api/getUsers.api'
-import {
-  UnbanUserMutation,
-  useBanUserMutation,
-  useUnbanUserMutation,
-} from '@/features/banUser/api/banUser.api.types'
+import { useBanUserMutation, useUnbanUserMutation } from '@/features/banUser/api/banUser.api.types'
 
 type useBanUserType = {
+  setPopover: Dispatch<SetStateAction<boolean>>
   userId: number
   userName: string
 }
-export const useBanUser = ({ userId, userName }: useBanUserType) => {
+export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => {
   const [banReason, setBanReason] = useState('')
   const [banDialog, setBanDialog] = useState(false)
   const [banUserMutation, { data, error, loading }] = useBanUserMutation({
-    refetchQueries: [GET_USERS, 'getUsersList'],
+    refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
     variables: {
       banReason,
       userId,
     },
   })
-  const [unBanUserMutation, { data: unBanData, error: unBanError, loading: unBanLoading }] =
-    useUnbanUserMutation({
-      refetchQueries: [GET_USERS, 'getUsersList'],
-      variables: {
-        userId,
-      },
-    })
+  const [unBanUserMutation] = useUnbanUserMutation({
+    refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
+    variables: {
+      userId,
+    },
+  })
 
   const handleOpenBanDialog = () => {
     setBanDialog(true)
@@ -47,6 +44,7 @@ export const useBanUser = ({ userId, userName }: useBanUserType) => {
       toast(`cant do it`, { type: 'error' })
     } finally {
       setBanDialog(false)
+      setPopover(false)
     }
   }
 
@@ -60,7 +58,7 @@ export const useBanUser = ({ userId, userName }: useBanUserType) => {
     } catch (e) {
       toast(`cant do it`, { type: 'error' })
     } finally {
-      setBanDialog(false)
+      setPopover(false)
     }
   }
 
