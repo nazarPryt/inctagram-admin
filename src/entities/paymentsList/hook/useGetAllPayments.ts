@@ -31,7 +31,7 @@ export const useGetAllPayments = () => {
     }
   }
 
-  const totalPageCount = data ? data.getAllPayments.pagesCount : 1
+  const totalPageCount = data ? data.getPayments.pagesCount : 1
 
   return {
     data,

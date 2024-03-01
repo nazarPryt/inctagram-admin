@@ -1,7 +1,9 @@
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
+import { PATH } from '@/shared/constants/PATH'
 import {
   BlockedIcon,
+  NavLink,
   Table,
   TableBody,
   TableCell,
@@ -36,10 +38,21 @@ export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) =
                 <TableCell>{user.userBan && <BlockedIcon />}</TableCell>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.userName}</TableCell>
-                <TableCell>ва</TableCell>
+                <TableCell>
+                  <NavLink
+                    href={`${PATH.USER_PROFILE}/${user.id}`}
+                    icon={''}
+                    name={`${user.userName}`}
+                    pathname={`${user.userName}`}
+                  />
+                </TableCell>
                 <TableCell>{new Date(user.createdAt).toLocaleDateString('ru-RU')}</TableCell>
                 <TableCell>
-                  <UsersListPopover userId={user.id} userName={user.userName} />
+                  <UsersListPopover
+                    userBan={user.userBan?.reason ? user.userBan : null}
+                    userId={user.id}
+                    userName={user.userName}
+                  />
                 </TableCell>
               </TableRow>
             )

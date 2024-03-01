@@ -15,8 +15,9 @@ export const ProfileInfo = ({ userID }: { userID: number }) => {
     return <ProfileInfoSkeleton />
   }
   if (data) {
-    const profile = data.getProfileInfo.profile
-    const profileAvatar = profile.avatars?.length ? profile.avatars[1].url : ''
+    const profile = data.getUser.profile
+    const profileAvatar = profile.avatars?.length ? profile.avatars[1].url || '' : ''
+
     const userName =
       profile.firstName && profile.lastName && profile.userName
         ? `${profile.firstName} ${profile.lastName}`

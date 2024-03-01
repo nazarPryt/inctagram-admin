@@ -5,12 +5,12 @@ import * as Types from '../../../shared/lib/ApolloClient/Schema.types'
 const defaultOptions = {} as const
 
 export type GetUsersListQueryVariables = Types.Exact<{
-  blockStatus?: Types.InputMaybe<Types.BlockStatus>
   pageNumber?: Types.InputMaybe<Types.Scalars['Int']['input']>
   pageSize: Types.Scalars['Int']['input']
   searchTerm: Types.Scalars['String']['input']
   sortBy: Types.Scalars['String']['input']
   sortDirection?: Types.InputMaybe<Types.SortDirection>
+  statusFilter?: Types.InputMaybe<Types.UserBlockStatus>
 }>
 
 export type GetUsersListQuery = {
@@ -35,7 +35,7 @@ export const GetUsersListDocument = gql`
     $sortBy: String!
     $sortDirection: SortDirection
     $searchTerm: String!
-    $blockStatus: BlockStatus
+    $statusFilter: UserBlockStatus
   ) {
     getUsers(
       pageSize: $pageSize
@@ -43,7 +43,7 @@ export const GetUsersListDocument = gql`
       sortBy: $sortBy
       sortDirection: $sortDirection
       searchTerm: $searchTerm
-      blockStatus: $blockStatus
+      statusFilter: $statusFilter
     ) {
       users {
         createdAt
@@ -78,7 +78,7 @@ export const GetUsersListDocument = gql`
  *      sortBy: // value for 'sortBy'
  *      sortDirection: // value for 'sortDirection'
  *      searchTerm: // value for 'searchTerm'
- *      blockStatus: // value for 'blockStatus'
+ *      statusFilter: // value for 'statusFilter'
  *   },
  * });
  */

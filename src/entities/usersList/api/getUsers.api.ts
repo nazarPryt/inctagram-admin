@@ -7,7 +7,7 @@ export const GET_USERS = gql`
     $sortBy: String!
     $sortDirection: SortDirection
     $searchTerm: String!
-    $blockStatus: BlockStatus
+    $statusFilter: UserBlockStatus
   ) {
     getUsers(
       pageSize: $pageSize
@@ -15,7 +15,7 @@ export const GET_USERS = gql`
       sortBy: $sortBy
       sortDirection: $sortDirection
       searchTerm: $searchTerm
-      blockStatus: $blockStatus
+      statusFilter: $statusFilter
     ) {
       users {
         createdAt

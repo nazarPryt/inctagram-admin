@@ -20,20 +20,21 @@ export const PostPhotos = ({ photos }: PostItemType) => {
         slidesPerView={1}
         spaceBetween={0}
       >
-        {photos.map((photo, index) => {
-          if (photo.height === 360) {
-            return (
-              <SwiperSlide className={'slide'} key={index}>
-                <Image
-                  alt={'Picture of the author'}
-                  height={photo.height}
-                  src={photo.url}
-                  width={photo.width}
-                />
-              </SwiperSlide>
-            )
-          }
-        })}
+        {photos &&
+          photos.map((photo, index) => {
+            if (photo.height === 360) {
+              return (
+                <SwiperSlide className={'slide'} key={index}>
+                  <Image
+                    alt={'Picture of the author'}
+                    height={photo.height}
+                    src={photo.url || ''}
+                    width={photo.width || 20}
+                  />
+                </SwiperSlide>
+              )
+            }
+          })}
       </Swiper>
     </PostPhotosStyled>
   )

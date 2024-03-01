@@ -1,15 +1,16 @@
 import { ChangeEvent } from 'react'
 
 import { blockedUsersOptions } from '@/entities/usersList/ui/FilterBar/options/filterOptions'
+import { UserBlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
 import { InputText, Select } from '@nazar-pryt/inctagram-ui-kit'
 
 import { FilterBarStyled } from './FilterBar.styled'
 
 type FilterBarType = {
-  blockedValue: string
+  blockedValue: UserBlockStatus
   clearSearch: () => void
   searchValue: string
-  setBlocked: (value: string) => void
+  setBlocked: (value: UserBlockStatus) => void
   setSearch: (value: string) => void
 }
 export const FilterBar = ({
@@ -33,7 +34,7 @@ export const FilterBar = ({
         value={searchValue}
       />
       <Select
-        onChange={setBlocked}
+        onChange={setBlocked as (value: string) => void}
         options={blockedUsersOptions}
         placeholder={'Not selected'}
         value={blockedValue}

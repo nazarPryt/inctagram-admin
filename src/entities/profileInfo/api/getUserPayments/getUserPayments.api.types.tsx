@@ -14,7 +14,7 @@ export type GetUserPaymentsQueryVariables = Types.Exact<{
 
 export type GetUserPaymentsQuery = {
   __typename?: 'Query'
-  getListPaymentsById: {
+  getPaymentsByUser: {
     __typename?: 'PaymentPaginationModel'
     items: Array<{
       __typename?: 'Subscription'
@@ -24,10 +24,10 @@ export type GetUserPaymentsQuery = {
       paymentType?: Types.PaymentMethod | null
       payments: Array<{
         __typename?: 'Payment'
-        amount: number
-        currency: Types.CurrencyType
-        id: number
-        userId: number
+        amount?: null | number
+        currency?: Types.CurrencyType | null
+        id?: null | number
+        userId?: null | number
       }>
       price: number
       startDate?: any | null
@@ -45,7 +45,7 @@ export const GetUserPaymentsDocument = gql`
     $sortBy: String!
     $sortDirection: SortDirection
   ) {
-    getListPaymentsById(
+    getPaymentsByUser(
       userId: $userID
       pageSize: $pagesize
       pageNumber: $pageNumber

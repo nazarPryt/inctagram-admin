@@ -2,29 +2,41 @@ import { useEffect, useState } from 'react'
 
 import { useGetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { useDebounce } from '@/shared/hooks/useDebounce'
-import { BlockStatus, SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
+import { SortDirection, UserBlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
 
 export const useUsersList = () => {
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(10)
   const [search, setSearch] = useState('') //search current input value
   const [searchTerm, setSearchTerm] = useState('') //search debounced value
-  const [blocked, setBlocked] = useState('active')
+  const [blocked, setBlocked] = useState(UserBlockStatus.All)
   const [sort, setOnSort] = useState<{ direction: SortDirection; key: string }>({
     direction: SortDirection.Asc,
     key: 'id',
   })
 
-  const blockStatus = blocked === 'active' ? undefined : BlockStatus.Blocked
+  let blockStatus: UserBlockStatus
+
+  if (blocked === UserBlockStatus.All) {
+    blockStatus = UserBlockStatus.All
+  } else if (blocked === UserBlockStatus.Blocked) {
+    blockStatus = UserBlockStatus.Blocked
+  } else {
+    blockStatus = UserBlockStatus.Unblocked
+  }
+
+  useEffect(() => {
+    setPageNumber(1)
+  }, [blockStatus])
 
   const { data, loading } = useGetUsersListQuery({
     variables: {
-      blockStatus,
       pageNumber,
       pageSize,
       searchTerm,
       sortBy: sort.key,
       sortDirection: sort.direction,
+      statusFilter: blockStatus,
     },
   })
   const debouncedValue = useDebounce<string>(search, 800)

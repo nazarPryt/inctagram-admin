@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
-import { PATH } from '@/shared/constants/PATH'
 import {
   BlockedIcon,
   Dialog,
@@ -12,12 +11,17 @@ import {
   Popover,
   PopoverItem,
   Select,
+  SquarePlusIcon,
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
-export type UsersListPopoverType = { userId: number; userName: string }
+export type UsersListPopoverType = {
+  userBan: { __typename?: 'UserBan'; createdAt: any; reason: string } | null
+  userId: number
+  userName: string
+}
 
-export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => {
+export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopoverType) => {
   const [popover, setPopover] = useState(false)
 
   const { handleCloseDialog, handleDeleteUser, handleOpenDialog, loading, removeDialog } =
@@ -32,6 +36,7 @@ export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => 
     handleBanUser,
     handleCloseBanDialog,
     handleOpenBanDialog,
+    handleUnBan,
     setBanReason,
   } = useBanUser({
     userId,
@@ -42,11 +47,16 @@ export const UsersListPopover = ({ userId, userName }: UsersListPopoverType) => 
     <>
       <Popover icon={<DotsHorizontal />} isOpen={popover} onOpenChange={setPopover}>
         <PopoverItem icon={<PersonRemoveIcon />} name={'Delete User'} onClick={handleOpenDialog} />
-        <PopoverItem
-          icon={<BlockedIcon />}
-          name={'Bun in the system'}
-          onClick={handleOpenBanDialog}
-        />
+        {userBan ? (
+          <PopoverItem icon={<SquarePlusIcon />} name={'UnBun'} onClick={handleUnBan} />
+        ) : (
+          <PopoverItem
+            icon={<BlockedIcon />}
+            name={'Bun in the system'}
+            onClick={handleOpenBanDialog}
+          />
+        )}
+
         <PopoverItem
           as={Link}
           href={`user/${userId}`}

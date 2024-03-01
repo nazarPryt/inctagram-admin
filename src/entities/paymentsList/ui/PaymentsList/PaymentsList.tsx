@@ -22,7 +22,7 @@ export const PaymentsList = () => {
       <PaymentsListTable
         loading={loading}
         onSort={handleOnSort}
-        payments={data?.getAllPayments.items}
+        payments={data?.getPayments.items}
         sort={sort}
       />
       <Pagination
