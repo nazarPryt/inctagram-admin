@@ -28,7 +28,7 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
 
   const [_popover, setPopover] = useState(false)
   const userName = user?.getUser.userName || ''
-  const userIDid = user?.getUser.id || 1
+  const userIDid = user?.getUser.id || 0
   const {
     banDialog,
     banReason,
@@ -43,10 +43,9 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
     userName,
   })
 
-  // Todo 'https://loremflickr.com/50/50'  replace with  icon.svg
   const avatar = user?.getUser.profile.avatars?.length
-    ? user.getUser.profile.avatars[0].url || 'https://loremflickr.com/50/50'
-    : 'https://loremflickr.com/50/50'
+    ? user.getUser.profile.avatars[0].url || ''
+    : ''
 
   const handleUnBanClick = () => {
     user?.getUser?.userBan?.reason ? handleUnBan() : handleOpenBanDialog()
@@ -54,26 +53,29 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
   const handleMouseMove = () => setShow(true)
   const handleMouseOut = () => setShow(false)
 
+  if (!user) {
+    return null
+  }
+
   return (
     <PostUserInfoStyled>
-      <Avatar alt={'dsd'} src={avatar} userName={user?.getUser.profile.userName || 'na ad'} />
-      <Link href={`${PATH.USER}${userID}`}>{user?.getUser.profile.userName}</Link>
+      <Avatar alt={'dsd'} src={avatar} userName={user.getUser.profile.userName || ''} />
+      <Link href={`${PATH.USER}${userID}`}>{user.getUser.profile.userName}</Link>
       <IconButton
         onClick={handleUnBanClick}
         onMouseMove={handleMouseMove}
         onMouseOut={handleMouseOut}
       >
-        {user?.getUser?.userBan?.reason ? (
-          // Todo implement in UI-KIT
+        {user.getUser.userBan?.reason ? (
           <>
-            <div style={{ color: 'white' }}>
+            <div className={'icon_profile'}>
               <ProfileIcon />
               {show && 'unBun'}
             </div>
           </>
         ) : (
           <>
-            <div style={{ color: 'white' }}>
+            <div className={'icon_profile'}>
               <BlockedIcon />
               {show && 'Bun'}
             </div>
@@ -100,6 +102,7 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
           value={banReason}
         />
       </Dialog>
+      {/*<BanUserDialog handleOpen={handleUnBanClick} userId={userIDid} userName={userName} />*/}
     </PostUserInfoStyled>
   )
 }
