@@ -4,6 +4,7 @@ import { Providers } from '@/shared/Providers/Providers'
 import { useLoader } from '@/shared/hooks/useLoader'
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
+import { appWithTranslation } from 'next-i18next'
 
 import '@/shared/styles/nprogress.css'
 
@@ -15,13 +16,12 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppPropsWithLayout) {
+const App = ({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) => {
   useLoader()
 
   const getLayout = Component.getLayout ?? (page => page)
 
   return <Providers>{getLayout(<Component {...pageProps} />)}</Providers>
 }
+
+export default appWithTranslation(App)

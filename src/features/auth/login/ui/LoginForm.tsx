@@ -1,6 +1,5 @@
 import { useLogin } from '@/features/auth/login/hook/useLogin'
 import { LoginFormStyled } from '@/features/auth/login/ui/LoginForm.styled'
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   AuthContainer,
   Button,
@@ -8,6 +7,7 @@ import {
   InputText,
   Loader,
 } from '@nazar-pryt/inctagram-ui-kit'
+import { useTranslation } from 'next-i18next'
 
 export const LoginForm = () => {
   const { errors, handleSubmit, loading, onSubmit, register } = useLogin()
@@ -17,20 +17,20 @@ export const LoginForm = () => {
     <AuthContainer>
       <LoginFormStyled onSubmit={handleSubmit(onSubmit)}>
         {loading && <Loader fullScreen />}
-        <h1>Sign In {t.test}</h1>
+        <h1>{t('login.sign_in')}</h1>
         <InputText
           {...register('email')}
           error={errors.email?.message}
-          label={'Email'}
+          label={t('login.email')}
           type={'email'}
         />
         <InputPassword
           {...register('password')}
           error={errors.password?.message}
-          label={'Password'}
+          label={t('login.password')}
         />
         <Button disabled={loading} fullwidth type={'submit'}>
-          Sign In
+          {t('login.sign_in')}
         </Button>
       </LoginFormStyled>
     </AuthContainer>

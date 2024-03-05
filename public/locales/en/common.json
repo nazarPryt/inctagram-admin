@@ -1,0 +1,13 @@
+{
+  "header": {
+    "admin_page": "adminPage"
+  },
+  "login": {
+    "sign_in": "Sign In",
+    "email": "Email",
+    "password": "Password"
+  },
+  "test": {
+    "test_message": "Test message"
+  }
+}

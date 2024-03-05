@@ -1,0 +1,13 @@
+{
+  "header": {
+    "admin_page": "администратор"
+  },
+  "login": {
+    "sign_in": "Войти",
+    "email": "Почта",
+    "password": "Пароль"
+  },
+  "test": {
+    "test_message": "Тестовое сообщение"
+  }
+}
