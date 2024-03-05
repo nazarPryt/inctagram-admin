@@ -1,5 +1,5 @@
 import { useGetAllPayments } from '@/entities/paymentsList/hook/useGetAllPayments'
-import { PaymentsListTable } from '@/entities/paymentsList/ui/PaymentsListTable/PaymentsListTable'
+import { PaymentsListTable } from '@/entities/paymentsList/ui/PaymentsListTable'
 import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
 import { PaymentsListStyled } from './PaymentsList.styled'

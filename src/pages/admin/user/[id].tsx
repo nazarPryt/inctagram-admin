@@ -1,6 +1,7 @@
 import { Profile } from '@/entities/profileInfo/ui/Profile/Profile'
-import { getJustHeader } from '@/shared/layouts/Authorized/JustHeader'
 import { useRouter } from 'next/router'
+
+import { getJustHeader } from '../../../_app/layouts/Authorized/JustHeader'
 
 export default function UserIdPage() {
   const router = useRouter()

@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { GET_PROFILE_INFO } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api'
+import { GET_USERS } from '@/entities/usersList/api/getUsers.api'
 import { useRemoveUserMutation } from '@/features/removeUser/api/removeUser.api.types'
 
 type useRemoveUserType = {
@@ -10,7 +12,8 @@ type useRemoveUserType = {
 }
 
 export const useRemoveUser = ({ setPopover, userId, userName }: useRemoveUserType) => {
-  const [removeUserMutation, { data, error, loading }] = useRemoveUserMutation({
+  const [removeUserMutation, { loading }] = useRemoveUserMutation({
+    refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
     variables: {
       userId,
     },

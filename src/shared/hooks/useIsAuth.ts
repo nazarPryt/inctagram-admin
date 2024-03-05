@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
-import { PATH } from '@/shared/constants/PATH'
-import { isLoggedIn } from '@/shared/constants/constants'
+import { appSettings } from '@/_app/AppSettings'
+import { PATH } from '@/_app/AppSettings/PATH'
 import { loadFromSessionStorage } from '@/shared/hooks/loadFromSessionStorage'
 import { useRouter } from 'next/router'
 
 export const useIsAuth = () => {
   const router = useRouter()
-  const isAuth = loadFromSessionStorage(isLoggedIn)
+  const isAuth = loadFromSessionStorage(appSettings.isLoggedIn)
   const currentPath = router.pathname
 
   useEffect(() => {

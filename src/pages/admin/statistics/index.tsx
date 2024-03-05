@@ -1,4 +1,4 @@
-import { getAuthorizedLayout } from '@/shared/layouts/Authorized'
+import { getAuthorizedLayout } from '@/_app/layouts/Authorized'
 
 export default function StatisticsPage() {
   return <div>Statistics Page</div>

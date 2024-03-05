@@ -1,18 +1,13 @@
-import { ProfileStyled } from '@/entities/profileInfo/ui/Profile/Profile.styled'
 import { ProfileInfo } from '@/entities/profileInfo/ui/ProfileInfo'
 import { ProfileTabs } from '@/entities/profileInfo/ui/ProfileTabs'
-import { PATH } from '@/shared/constants/PATH'
-import { BackToPrevious } from '@nazar-pryt/inctagram-ui-kit'
-import { useRouter } from 'next/router'
+import { BackToPrevious } from '@/shared/components/BackToPrevious'
+
+import { ProfileStyled } from './Profile.styled'
 
 export const Profile = ({ userId }: { userId: number }) => {
-  const router = useRouter()
-
   return (
     <ProfileStyled>
-      {/* Todo change */}
-      {/*<BackToPrevious href={PATH.USERS} title={'Back to Users List'} />*/}
-      <BackToPrevious href={'#'} onClick={() => router.back()} title={'Back to last page'} />
+      <BackToPrevious title={'Back to dashboard'} />
       <ProfileInfo userID={userId} />
       <ProfileTabs userId={userId} />
     </ProfileStyled>

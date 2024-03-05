@@ -1,5 +1,5 @@
+import { PATH } from '@/_app/AppSettings/PATH'
 import { useLogOut } from '@/features/auth/logOut'
-import { PATH } from '@/shared/constants/PATH'
 import {
   LogOutIcon,
   NavButton,

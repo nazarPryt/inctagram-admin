@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { PATH } from '@/_app/AppSettings/PATH'
+import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
@@ -16,7 +18,7 @@ import {
 import Link from 'next/link'
 
 export type UsersListPopoverType = {
-  userBan: { __typename?: 'UserBan'; createdAt: any; reason: string } | null
+  userBan: GetUsersListQuery['getUsers']['users'][number]['userBan']
   userId: number
   userName: string
 }
@@ -60,7 +62,7 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
 
         <PopoverItem
           as={Link}
-          href={`user/${userId}`}
+          href={`${PATH.USER}${userId}`}
           icon={<DotsHorizontal />}
           name={'More information'}
         />

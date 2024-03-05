@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
+import { PATH } from '@/_app/AppSettings/PATH'
 import { PostUserInfoStyled } from '@/entities/postsList/ui/PostUserInfo/PostUserInfo.styled'
 import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
-import { PATH } from '@/shared/constants/PATH'
 import {
   Avatar,
   BlockedIcon,
