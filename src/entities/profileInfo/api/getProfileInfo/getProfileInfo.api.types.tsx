@@ -12,37 +12,59 @@ export type GetProfileInfoQuery = {
   __typename?: 'Query'
   getUser: {
     __typename?: 'User'
+    createdAt: any
+    email: string
+    id: number
     profile: {
       __typename?: 'Profile'
+      aboutMe?: null | string
       avatars?: Array<{
         __typename?: 'Avatar'
+        fileSize?: null | number
         height?: null | number
         url?: null | string
         width?: null | number
       }> | null
+      city?: null | string
       createdAt: any
+      dateOfBirth?: any | null
       firstName?: null | string
       id: number
       lastName?: null | string
       userName?: null | string
     }
+    userBan?: { __typename: 'UserBan'; createdAt: any; reason: string } | null
+    userName: string
   }
 }
 
 export const GetProfileInfoDocument = gql`
   query getProfileInfo($userID: Int! = 10) {
     getUser(userId: $userID) {
+      id
+      userName
+      email
+      createdAt
       profile {
-        createdAt
         id
-        lastName
-        firstName
         userName
+        firstName
+        lastName
+        city
+        dateOfBirth
+        aboutMe
+        createdAt
         avatars {
           url
-          height
           width
+          height
+          fileSize
         }
+      }
+      userBan {
+        reason
+        createdAt
+        __typename
       }
     }
   }

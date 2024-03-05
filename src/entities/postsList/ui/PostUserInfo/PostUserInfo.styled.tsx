@@ -15,4 +15,8 @@ export const PostUserInfoStyled = styled.div`
       text-decoration: underline;
     }
   }
+
+  .icon_profile {
+    color: ${props => props.theme.textColor[100]};
+  }
 `

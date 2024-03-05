@@ -10,8 +10,8 @@ import {
   PersonRemoveIcon,
   Popover,
   PopoverItem,
+  ProfileIcon,
   Select,
-  SquarePlusIcon,
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
@@ -39,6 +39,7 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
     handleUnBan,
     setBanReason,
   } = useBanUser({
+    setPopover,
     userId,
     userName,
   })
@@ -48,7 +49,7 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
       <Popover icon={<DotsHorizontal />} isOpen={popover} onOpenChange={setPopover}>
         <PopoverItem icon={<PersonRemoveIcon />} name={'Delete User'} onClick={handleOpenDialog} />
         {userBan ? (
-          <PopoverItem icon={<SquarePlusIcon />} name={'UnBun'} onClick={handleUnBan} />
+          <PopoverItem icon={<ProfileIcon />} name={'UnBun'} onClick={handleUnBan} />
         ) : (
           <PopoverItem
             icon={<BlockedIcon />}

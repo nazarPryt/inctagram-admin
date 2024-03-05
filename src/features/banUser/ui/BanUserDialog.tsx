@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { Dialog, Select } from '@nazar-pryt/inctagram-ui-kit'
@@ -8,6 +10,8 @@ type BanUserDialogType = {
   userName: string
 }
 export const BanUserDialog = ({ handleOpen, userId, userName }: BanUserDialogType) => {
+  const [_popover, setPopover] = useState(false)
+
   const {
     banDialog,
     banReason,
@@ -16,6 +20,7 @@ export const BanUserDialog = ({ handleOpen, userId, userName }: BanUserDialogTyp
     handleOpenBanDialog,
     setBanReason,
   } = useBanUser({
+    setPopover,
     userId,
     userName,
   })
