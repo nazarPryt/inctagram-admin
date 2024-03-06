@@ -1,12 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authToken, isLoggedIn } from '@/shared/constants'
-import { PATH } from '@/shared/constants/PATH'
+import { appSettings } from '@/_app/AppSettings'
+import { PATH } from '@/_app/AppSettings/PATH'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { z } from 'zod'
 
 import { useLoginAdminMutation } from '../api/login.api.types'
+
+const email = appSettings.AUTH_LOGIN
+const password = appSettings.AUTH_PASS
 
 const loginAdminSchema = z.object({
   email: z.string().email(),
@@ -25,7 +28,7 @@ export const useLogin = () => {
     handleSubmit,
     register,
   } = useForm<loginAdminSchemaType>({
-    defaultValues: { email: 'admin@gmail.com', password: 'admin' },
+    defaultValues: { email, password },
     resolver: zodResolver(loginAdminSchema),
   })
   const onSubmit: SubmitHandler<loginAdminSchemaType> = async data => {
@@ -40,9 +43,9 @@ export const useLogin = () => {
   return { errors, handleSubmit, loading, onSubmit, register }
 }
 export const saveAuthToken = (data: loginAdminSchemaType) => {
-  sessionStorage.setItem(isLoggedIn, 'true')
+  sessionStorage.setItem(appSettings.isLoggedIn, 'true')
 
   const base64 = btoa(`${data.email}:${data.password}`)
 
-  sessionStorage.setItem(authToken, base64)
+  sessionStorage.setItem(appSettings.authToken, base64)
 }

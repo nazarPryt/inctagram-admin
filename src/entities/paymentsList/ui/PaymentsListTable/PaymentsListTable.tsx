@@ -23,7 +23,7 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
-  if (payments) {
+  if (payments && !!payments?.length) {
     return (
       <PaymentsListTableStyled>
         <TableHead columns={PaymentsListTableHeader} onSort={onSort} sort={sort} />
@@ -39,7 +39,7 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
                   />
                   {payment.userName}
                 </TableCell>
-                <TableCell>{new Date(+payment.createdAt).toLocaleDateString('ru-Ru')}</TableCell>
+                <TableCell>{new Date(payment.createdAt).toLocaleDateString('ru-Ru')}</TableCell>
                 <TableCell>
                   {payment.amount} {payment.currency}
                 </TableCell>

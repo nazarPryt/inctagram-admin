@@ -1,5 +1,5 @@
-import { LangSelect } from '@/shared/components/LangSelect/LangSelect'
-import { PATH } from '@/shared/constants/PATH'
+import { PATH } from '@/_app/AppSettings/PATH'
+import { LangSelect } from '@/shared/components/LangSelect'
 import Link from 'next/link'
 
 import { HeaderStyled } from './Header.styled'

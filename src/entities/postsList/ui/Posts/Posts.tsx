@@ -7,15 +7,13 @@ import { SortDirection } from '@/shared/lib/ApolloClient/Schema.types'
 import { InputText } from '@nazar-pryt/inctagram-ui-kit'
 
 export const Posts = () => {
-  const [page, setPage] = useState(1)
   const { data, loading } = useGetPostsQuery({
-    // skip: true,
     variables: {
-      endCursorPostId: 3,
+      endCursorPostId: 1,
       pageSize: 10,
       searchTerm: '',
       sortBy: '',
-      sortDirection: SortDirection.Asc,
+      sortDirection: SortDirection.Desc,
     },
   })
 

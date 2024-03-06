@@ -1,3 +1,4 @@
+import { typography } from '@nazar-pryt/inctagram-ui-kit'
 import { styled } from 'styled-components'
 
 export const HeaderStyled = styled.header`
@@ -18,7 +19,7 @@ export const HeaderStyled = styled.header`
     color: ${props => props.theme.textColor['100']};
 
     span {
-      ${props => props.theme.typography.Semi_bold_small_text}
+      ${typography.Semi_bold_small_text}
     }
   }
 

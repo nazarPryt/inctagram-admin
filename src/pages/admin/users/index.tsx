@@ -1,5 +1,5 @@
-import { UsersList } from '@/entities/usersList/ui/UsersList/UsersList'
-import { getAuthorizedLayout } from '@/shared/layouts/Authorized'
+import { getAuthorizedLayout } from '@/_app/layouts/Authorized'
+import { UsersList } from '@/entities/usersList/ui/UsersList'
 
 export default function UsersListPage() {
   return <UsersList />
