@@ -1,10 +1,12 @@
 import { useProfilePayments } from '@/entities/profileInfo/hook/useProfilePayments'
 import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
+  TableHeadColumnType,
   TableRow,
   TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
@@ -15,6 +17,36 @@ import { PaymentsListHeader } from './ProfilePaymentsHeader'
 export const ProfilePayments = ({ userID }: { userID: number }) => {
   const { data, loading, pageNumber, pagesize, setOnSort, setPageNumber, setPageSize, sort } =
     useProfilePayments({ userID })
+  const { t } = useTranslation()
+
+  // Todo Change PaymentsListHeader1 || PaymentsListHeader
+  const PaymentsListHeader1: TableHeadColumnType[] = [
+    {
+      key: 'Date-of-Payment',
+      sortable: true,
+      title: t.table.payment_date,
+    },
+    {
+      key: 'End-date-of-subscription',
+      sortable: true,
+      title: t.table.payment_end_date_sub,
+    },
+    {
+      key: 'amount',
+      sortable: true,
+      title: t.table.amount,
+    },
+    {
+      key: 'subscription',
+      sortable: true,
+      title: t.table.subscription,
+    },
+    {
+      key: 'payment',
+      sortable: true,
+      title: t.table.payment_method,
+    },
+  ]
 
   if (loading) {
     return <TableSkeleton columns={5} rows={5} />
@@ -23,7 +55,7 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
     return (
       <ProfilePaymentsStyled>
         <Table>
-          <TableHead columns={PaymentsListHeader} sort={sort} />
+          <TableHead columns={PaymentsListHeader1} sort={sort} />
           <TableBody>
             {data?.getPaymentsByUser.items.map(payment => {
               return (
@@ -44,5 +76,5 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
     )
   }
 
-  return <IsEmpty text={'User doesnt have any payments yet'} />
+  return <IsEmpty text={t.profile_payments.not_payments} />
 }

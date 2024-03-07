@@ -1,17 +1,18 @@
 import { GetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.api.types'
 import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   Avatar,
   TableBody,
   TableCell,
   TableHead,
+  TableHeadColumnType,
   TableHeadSortType,
   TableRow,
   TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 
 import { PaymentsListTableStyled } from './PaymentsListTable.styled'
-import { PaymentsListTableHeader } from './PaymentsListTableHeader'
 
 type PropsType = {
   loading: boolean
@@ -20,13 +21,44 @@ type PropsType = {
   sort: TableHeadSortType
 }
 export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType) => {
+  const { t } = useTranslation()
+
+  // Todo Change PaymentsListTableHeader1 || PaymentsListTableHeader
+  const PaymentsListTableHeader1: TableHeadColumnType[] = [
+    {
+      key: 'userName',
+      sortable: true,
+      title: t.table.user_name,
+    },
+    {
+      key: 'data-added',
+      sortable: true,
+      title: t.table.added,
+    },
+    {
+      key: 'amount',
+      sortable: true,
+      title: t.table.amount,
+    },
+    {
+      key: 'subscription',
+      sortable: true,
+      title: t.table.subscription,
+    },
+    {
+      key: 'payment',
+      sortable: true,
+      title: t.table.payment_method,
+    },
+  ]
+
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
   if (payments && !!payments?.length) {
     return (
       <PaymentsListTableStyled>
-        <TableHead columns={PaymentsListTableHeader} onSort={onSort} sort={sort} />
+        <TableHead columns={PaymentsListTableHeader1} onSort={onSort} sort={sort} />
         <TableBody>
           {payments.map(payment => {
             return (
@@ -53,5 +85,5 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
     )
   }
 
-  return <IsEmpty text={'Payments list is empty'} />
+  return <IsEmpty text={t.table.payments_list_empty} />
 }

@@ -5,6 +5,7 @@ import { PostUserInfoStyled } from '@/entities/postsList/ui/PostUserInfo/PostUse
 import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
 import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   Avatar,
   BlockedIcon,
@@ -43,6 +44,7 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
     userName,
   })
 
+  const { t } = useTranslation()
   const avatar = user?.getUser.profile.avatars?.length
     ? user.getUser.profile.avatars[0].url || ''
     : ''
@@ -70,19 +72,19 @@ export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
           <>
             <div className={'icon_profile'}>
               <ProfileIcon />
-              {show && 'unBun'}
+              {show && t.user_list_popover.unban}
             </div>
           </>
         ) : (
           <>
             <div className={'icon_profile'}>
               <BlockedIcon />
-              {show && 'Bun'}
+              {show && t.user_list_popover.ban}
             </div>
           </>
         )}
       </IconButton>
-      {/*Todo must be used component BanUserDialog.tsx*/}
+      {/* Todo must be used component BanUserDialog.tsx */}
       <Dialog
         cancelButtonText={'No'}
         confirmButtonText={'Yes'}

@@ -17,20 +17,20 @@ export const LoginForm = () => {
     <AuthContainer>
       <LoginFormStyled onSubmit={handleSubmit(onSubmit)}>
         {loading && <Loader fullScreen />}
-        <h1>Sign In {t.test}</h1>
+        <h1>{t.login.sign_in}</h1>
         <InputText
           {...register('email')}
           error={errors.email?.message}
-          label={'Email'}
+          label={t.login.email}
           type={'email'}
         />
         <InputPassword
           {...register('password')}
           error={errors.password?.message}
-          label={'Password'}
+          label={t.login.password}
         />
         <Button disabled={loading} fullwidth type={'submit'}>
-          Sign In
+          {t.login.sign_in}
         </Button>
       </LoginFormStyled>
     </AuthContainer>
