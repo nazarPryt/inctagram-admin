@@ -1,6 +1,5 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog, Select } from '@nazar-pryt/inctagram-ui-kit'
-
-import { banOptions } from '../banOptions'
 
 type BanUserDialogType = {
   banDialog: boolean
@@ -20,23 +19,41 @@ export const BanUserDialog = ({
   setBanReason,
   userName,
 }: BanUserDialogType) => {
+  const { t } = useTranslation()
+  const banOptions1 = [
+    {
+      label: t.user_list_popover.ban_bad_behavior,
+      value: 'bad-behavior',
+    },
+    {
+      label: t.user_list_popover.ban_advertising,
+      value: 'advertising-placement',
+    },
+    {
+      label: t.user_list_popover.ban_another,
+      value: 'another-reason',
+    },
+  ]
+
   return (
     <Dialog
-      cancelButtonText={'No'}
-      confirmButtonText={'Yes'}
+      cancelButtonText={t.common.no}
+      confirmButtonText={t.common.yes}
       disabled={loading}
       invertButtons
       onCancelButtonClick={handleCloseBanDialog}
       onClose={handleCloseBanDialog}
       onConfirmButtonClick={handleBanUser}
       open={banDialog}
-      title={'Ban user'}
+      title={t.user_list_popover.ban}
     >
-      <p>Are you sure to ban this user, {userName}?</p>
+      <p>
+        {t.user_list_popover.ban_question}, {userName}?
+      </p>
       <Select
         onChange={setBanReason}
-        options={banOptions}
-        placeholder={'Reason for ban'}
+        options={banOptions1}
+        placeholder={t.user_list_popover.ban_reason}
         portal={false}
         value={banReason}
       />

@@ -27,10 +27,10 @@ export const UnBanUserDialog = ({
       onClose={handleCloseUnBanDialog}
       onConfirmButtonClick={handleUnBanUser}
       open={isUnBanDialogOpen}
-      title={t.user_list_popover.ban}
+      title={t.user_list_popover.unban}
     >
       <p>
-        {t.user_list_popover.ban_question}, {userName}?
+        {t.user_list_popover.unban_question}, {userName}?
       </p>
     </Dialog>
   )

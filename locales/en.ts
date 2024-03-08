@@ -71,6 +71,7 @@ export const en = {
     delete_question: 'Are you sure to delete user',
     more: 'More information',
     unban: 'UnBan',
+    unban_question: 'Are you sure to unBan this user',
   },
   y_documentation: {
     example1: {

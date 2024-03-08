@@ -73,6 +73,7 @@ export const ru: LocaleType = {
     delete_question: 'Вы уверены, что хотите удалить пользователя',
     more: 'Больше информации',
     unban: 'Разблокировать пользователя',
+    unban_question: 'Вы уверены, что хотите разблокировать пользователя',
   },
   y_documentation: {
     example1: {
