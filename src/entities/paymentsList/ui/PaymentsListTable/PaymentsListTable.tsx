@@ -1,4 +1,5 @@
 import { GetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.api.types'
+import { usePaymentsListTableHeader } from '@/entities/paymentsList/hook/usePaymentsListTableHeader'
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
@@ -6,7 +7,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableHeadColumnType,
   TableHeadSortType,
   TableRow,
   TableSkeleton,
@@ -23,34 +23,7 @@ type PropsType = {
 export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType) => {
   const { t } = useTranslation()
 
-  // Todo Change PaymentsListTableHeader1 || PaymentsListTableHeader
-  const PaymentsListTableHeader1: TableHeadColumnType[] = [
-    {
-      key: 'userName',
-      sortable: true,
-      title: t.table.user_name,
-    },
-    {
-      key: 'data-added',
-      sortable: true,
-      title: t.table.added,
-    },
-    {
-      key: 'amount',
-      sortable: true,
-      title: t.table.amount,
-    },
-    {
-      key: 'subscription',
-      sortable: true,
-      title: t.table.subscription,
-    },
-    {
-      key: 'payment',
-      sortable: true,
-      title: t.table.payment_method,
-    },
-  ]
+  const PaymentsListTableHeader = usePaymentsListTableHeader()
 
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
@@ -58,7 +31,7 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
   if (payments && !!payments?.length) {
     return (
       <PaymentsListTableStyled>
-        <TableHead columns={PaymentsListTableHeader1} onSort={onSort} sort={sort} />
+        <TableHead columns={PaymentsListTableHeader} onSort={onSort} sort={sort} />
         <TableBody>
           {payments.map(payment => {
             return (

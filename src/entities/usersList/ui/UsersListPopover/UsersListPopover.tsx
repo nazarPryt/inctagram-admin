@@ -42,22 +42,6 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
   })
   const { t } = useTranslation()
 
-  // Todo Change banOptions1 || banOptions
-  const banOptions1 = [
-    {
-      label: t.user_list_popover.ban_bad_behavior,
-      value: 'bad-behavior',
-    },
-    {
-      label: t.user_list_popover.ban_advertising,
-      value: 'advertising-placement',
-    },
-    {
-      label: t.user_list_popover.ban_another,
-      value: 'another-reason',
-    },
-  ]
-
   return (
     <>
       <Popover icon={<DotsHorizontal />} isOpen={popover} onOpenChange={setPopover}>

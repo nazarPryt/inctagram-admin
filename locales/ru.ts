@@ -43,9 +43,9 @@ export const ru: LocaleType = {
   table: {
     added: 'Дата добавления',
     amount: 'Количество, $',
-    content_followers: 'Контент для подписчиков',
-    content_following: 'Контент для Following',
-    content_uploaded_files: 'Контент для UploadedFiles',
+    // content_followers: 'Контент для подписчиков',
+    // content_following: 'Контент для Following',
+    // content_uploaded_files: 'Контент для UploadedFiles',
     followers: 'Подписчики',
     following: 'Следующий',
     payment_date: 'Дата платежа',
@@ -59,9 +59,9 @@ export const ru: LocaleType = {
     user_id: 'ID пользователя',
     user_name: 'Имя пользователя',
   },
-  test: {
-    test_message: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
-  },
+  // test: {
+  //   test_message: 'Lorem Ipsum - это текст-"рыба", часто используемый в печати',
+  // },
   user_list_popover: {
     ban: 'Заблокировать пользователя',
     ban_advertising: 'Размещение рекламы',
@@ -75,11 +75,11 @@ export const ru: LocaleType = {
     unban: 'Разблокировать пользователя',
     unban_question: 'Вы уверены, что хотите разблокировать пользователя',
   },
-  y_documentation: {
-    example1: {
-      getDescription(name: string, species: string) {
-        return `Person ${name} use to the ${species}`
-      },
-    },
-  },
+  // y_documentation: {
+  //   example1: {
+  //     getDescription(name: string, species: string) {
+  //       return `Person ${name} use to the ${species}`
+  //     },
+  //   },
+  // },
 }

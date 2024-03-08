@@ -1,7 +1,6 @@
 import { PATH } from '@/_app/AppSettings/PATH'
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
-import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   BlockedIcon,
   Button,
@@ -9,12 +8,13 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableHeadColumnType,
   TableHeadSortType,
   TableRow,
   TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
+
+import { useUsersListTableHeader } from '../../hook/useUsersListTableHeader'
 
 type PropsType = {
   loading: boolean
@@ -24,55 +24,22 @@ type PropsType = {
 }
 
 export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) => {
-  const { t } = useTranslation()
+  const usersListTableHeader = useUsersListTableHeader()
 
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
 
-  // Todo Change UsersListTableHeader1 || UsersListTableHeader
-  const UsersListTableHeader1: TableHeadColumnType[] = [
-    {
-      key: '',
-      sortable: false,
-      title: '',
-    },
-    {
-      key: 'id',
-      sortable: true,
-      title: t.table.user_id,
-    },
-    {
-      key: 'username',
-      sortable: true,
-      title: t.table.user_name,
-    },
-    {
-      key: 'profile-link',
-      sortable: true,
-      title: t.table.profile_link,
-    },
-    {
-      key: 'createdBy',
-      sortable: true,
-      title: t.table.added,
-    },
-    {
-      key: '',
-      sortable: false,
-      title: '',
-    },
-  ]
-
   return (
     <Table>
-      <TableHead columns={UsersListTableHeader1} onSort={onSort} sort={sort} />
+      <TableHead columns={usersListTableHeader} onSort={onSort} sort={sort} />
       <TableBody>
         {userList &&
           userList.map(user => {
             return (
               <TableRow key={user.id}>
-                <TableCell>{user.userBan && <BlockedIcon />}</TableCell>
+                {/* Todo Change:  need to do fix into TableCell - style={{ padding: 0 }} */}
+                <TableCell style={{ padding: 0 }}>{user.userBan && <BlockedIcon />}</TableCell>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.userName}</TableCell>
                 <TableCell>

@@ -41,9 +41,9 @@ export const en = {
   table: {
     added: 'Data added',
     amount: 'Amount, $',
-    content_followers: 'Content for Followers',
-    content_following: 'Content for Following',
-    content_uploaded_files: 'Content for UploadedFiles',
+    // content_followers: 'Content for Followers',
+    // content_following: 'Content for Following',
+    // content_uploaded_files: 'Content for UploadedFiles',
     followers: 'Followers',
     following: 'Following',
     payment_date: 'Date of Payment',
@@ -57,9 +57,9 @@ export const en = {
     user_id: 'User ID',
     user_name: 'User name',
   },
-  test: {
-    test_message: 'Lorem Ipsum is simply dummy text of the printing',
-  },
+  // test: {
+  //   test_message: 'Lorem Ipsum is simply dummy text of the printing',
+  // },
   user_list_popover: {
     ban: 'Ban in the system',
     ban_advertising: 'Advertising placement',
@@ -73,12 +73,12 @@ export const en = {
     unban: 'UnBan',
     unban_question: 'Are you sure to unBan this user',
   },
-  y_documentation: {
-    example1: {
-      getDescription(name: string, species: string) {
-        return `Person ${name} use to the ${species}`
-      },
-    },
-  },
+  // y_documentation: {
+  //   example1: {
+  //     getDescription(name: string, species: string) {
+  //       return `Person ${name} use to the ${species}`
+  //     },
+  //   },
+  // },
 }
 export type LocaleType = typeof en

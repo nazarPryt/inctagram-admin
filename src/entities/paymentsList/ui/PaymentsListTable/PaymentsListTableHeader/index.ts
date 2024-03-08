@@ -1,1 +1,0 @@
-export { PaymentsListTableHeader } from './PaymentsListTableHeader'

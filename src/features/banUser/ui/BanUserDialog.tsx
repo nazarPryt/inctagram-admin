@@ -1,3 +1,4 @@
+import { useBanOptions } from '@/features/banUser/hook/useBanOptions'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog, Select } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -20,20 +21,8 @@ export const BanUserDialog = ({
   userName,
 }: BanUserDialogType) => {
   const { t } = useTranslation()
-  const banOptions1 = [
-    {
-      label: t.user_list_popover.ban_bad_behavior,
-      value: 'bad-behavior',
-    },
-    {
-      label: t.user_list_popover.ban_advertising,
-      value: 'advertising-placement',
-    },
-    {
-      label: t.user_list_popover.ban_another,
-      value: 'another-reason',
-    },
-  ]
+
+  const banOptions = useBanOptions()
 
   return (
     <Dialog
@@ -52,7 +41,7 @@ export const BanUserDialog = ({
       </p>
       <Select
         onChange={setBanReason}
-        options={banOptions1}
+        options={banOptions}
         placeholder={t.user_list_popover.ban_reason}
         portal={false}
         value={banReason}
