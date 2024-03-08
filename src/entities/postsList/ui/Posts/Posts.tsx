@@ -7,7 +7,7 @@ import { InputText } from '@nazar-pryt/inctagram-ui-kit'
 export const Posts = () => {
   const { data, loading } = useGetPostsQuery({
     variables: {
-      endCursorPostId: 4, //todo ask why null is unacceptable? how we can know what id should be on first load
+      endCursorPostId: 0, //todo ask why null is unacceptable? how we can know what id should be on first load
       pageSize: 10,
       searchTerm: '',
       sortBy: '',

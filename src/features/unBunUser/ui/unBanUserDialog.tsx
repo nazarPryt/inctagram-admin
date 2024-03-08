@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@nazar-pryt/inctagram-ui-kit'
 
 type PropsType = {
@@ -14,19 +15,23 @@ export const UnBanUserDialog = ({
   loading,
   userName,
 }: PropsType) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog
-      cancelButtonText={'No'}
-      confirmButtonText={'Yes'}
+      cancelButtonText={t.common.no}
+      confirmButtonText={t.common.yes}
       disabled={loading}
       invertButtons
       onCancelButtonClick={handleCloseUnBanDialog}
       onClose={handleCloseUnBanDialog}
       onConfirmButtonClick={handleUnBanUser}
       open={isUnBanDialogOpen}
-      title={'Ban user'}
+      title={t.user_list_popover.ban}
     >
-      <p>Are you sure you want to UN BAN, {userName}?</p>
+      <p>
+        {t.user_list_popover.ban_question}, {userName}?
+      </p>
     </Dialog>
   )
 }
