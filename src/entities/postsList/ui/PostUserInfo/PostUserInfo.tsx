@@ -1,110 +1,58 @@
-import { useState } from 'react'
-
 import { PATH } from '@/_app/AppSettings/PATH'
-import { PostUserInfoStyled } from '@/entities/postsList/ui/PostUserInfo/PostUserInfo.styled'
 import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
-import { banOptions } from '@/features/banUser/banOptions'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
-import { useTranslation } from '@/shared/hooks/useTranslation'
-import {
-  Avatar,
-  BlockedIcon,
-  Dialog,
-  IconButton,
-  ProfileIcon,
-  Select,
-} from '@nazar-pryt/inctagram-ui-kit'
+import { useUnBunUser } from '@/features/unBunUser/hook/useUnBunUser'
+import { Avatar, BlockedIcon, IconButton, ProfileIcon } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
+
+import { PostUserInfoStyled } from './PostUserInfo.styled'
 
 type PostUserInfoPropsType = {
   userID: number
 }
 export const PostUserInfo = ({ userID }: PostUserInfoPropsType) => {
-  const [show, setShow] = useState(false)
   const { data: user } = useGetProfileInfoQuery({
     variables: {
       userID,
     },
   })
 
-  const [_popover, setPopover] = useState(false)
   const userName = user?.getUser.userName || ''
-  const userIDid = user?.getUser.id || 0
-  const {
-    banDialog,
-    banReason,
-    handleBanUser,
-    handleCloseBanDialog,
-    handleOpenBanDialog,
-    handleUnBan,
-    setBanReason,
-  } = useBanUser({
-    setPopover,
-    userId: userIDid,
+
+  const { handleOpenBanDialog, renderBanUserDialog } = useBanUser({
+    userId: userID,
+    userName,
+  })
+  const { handleOpenUnBanDialog, renderUnBanUserDialog } = useUnBunUser({
+    userId: userID,
     userName,
   })
 
-  const { t } = useTranslation()
-  const avatar = user?.getUser.profile.avatars?.length
-    ? user.getUser.profile.avatars[0].url || ''
-    : ''
+  if (user && user.getUser) {
+    const avatar = user.getUser.profile.avatars?.length
+      ? user.getUser.profile.avatars[0].url || ''
+      : ''
+    const userName = user.getUser.userName
 
-  const handleUnBanClick = () => {
-    user?.getUser?.userBan?.reason ? handleUnBan() : handleOpenBanDialog()
-  }
-  const handleMouseMove = () => setShow(true)
-  const handleMouseOut = () => setShow(false)
+    return (
+      <PostUserInfoStyled>
+        <Avatar alt={userName} src={avatar} userName={userName} />
+        <Link href={`${PATH.USER}${userID}`}>{userName}</Link>
 
-  if (!user) {
-    return null
-  }
-
-  return (
-    <PostUserInfoStyled>
-      <Avatar alt={'dsd'} src={avatar} userName={user.getUser.profile.userName || ''} />
-      <Link href={`${PATH.USER}${userID}`}>{user.getUser.profile.userName}</Link>
-      <IconButton
-        onClick={handleUnBanClick}
-        onMouseMove={handleMouseMove}
-        onMouseOut={handleMouseOut}
-      >
         {user.getUser.userBan?.reason ? (
-          <>
-            <div className={'icon_profile'}>
-              <ProfileIcon />
-              {show && t.user_list_popover.unban}
-            </div>
-          </>
+          <IconButton onClick={handleOpenUnBanDialog}>
+            <ProfileIcon />
+          </IconButton>
         ) : (
-          <>
-            <div className={'icon_profile'}>
-              <BlockedIcon />
-              {show && t.user_list_popover.ban}
-            </div>
-          </>
+          <IconButton onClick={handleOpenBanDialog}>
+            <BlockedIcon />
+          </IconButton>
         )}
-      </IconButton>
-      {/* Todo must be used component BanUserDialog.tsx */}
-      <Dialog
-        cancelButtonText={'No'}
-        confirmButtonText={'Yes'}
-        invertButtons
-        onCancelButtonClick={handleCloseBanDialog}
-        onClose={handleCloseBanDialog}
-        onConfirmButtonClick={handleBanUser}
-        open={banDialog}
-        title={'Ban user'}
-      >
-        <p>Are you sure to ban this user, {userName}?</p>
-        <Select
-          onChange={setBanReason}
-          options={banOptions}
-          placeholder={'Reason for ban'}
-          portal={false}
-          value={banReason}
-        />
-      </Dialog>
-      {/*<BanUserDialog handleOpen={handleUnBanClick} userId={userIDid} userName={userName} />*/}
-    </PostUserInfoStyled>
-  )
+        {renderUnBanUserDialog()}
+        {renderBanUserDialog()}
+      </PostUserInfoStyled>
+    )
+  }
+
+  return null
 }

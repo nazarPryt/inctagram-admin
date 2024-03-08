@@ -4,16 +4,15 @@ import { PATH } from '@/_app/AppSettings/PATH'
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
+import { useUnBunUser } from '@/features/unBunUser/hook/useUnBunUser'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   BlockedIcon,
-  Dialog,
   DotsHorizontal,
   PersonRemoveIcon,
   Popover,
   PopoverItem,
   ProfileIcon,
-  Select,
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
@@ -26,20 +25,17 @@ export type UsersListPopoverType = {
 export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopoverType) => {
   const [popover, setPopover] = useState(false)
 
-  const { handleCloseDialog, handleDeleteUser, handleOpenDialog, removeDialog } = useRemoveUser({
+  const { handleOpenDialog, renderRemoveUserDialog } = useRemoveUser({
     setPopover,
     userId,
     userName,
   })
-  const {
-    banDialog,
-    banReason,
-    handleBanUser,
-    handleCloseBanDialog,
-    handleOpenBanDialog,
-    handleUnBan,
-    setBanReason,
-  } = useBanUser({
+  const { handleOpenBanDialog, renderBanUserDialog } = useBanUser({
+    setPopover,
+    userId,
+    userName,
+  })
+  const { handleOpenUnBanDialog, renderUnBanUserDialog } = useUnBunUser({
     setPopover,
     userId,
     userName,
@@ -74,7 +70,7 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
           <PopoverItem
             icon={<ProfileIcon />}
             name={t.user_list_popover.unban}
-            onClick={handleUnBan}
+            onClick={handleOpenUnBanDialog}
           />
         ) : (
           <PopoverItem
@@ -91,41 +87,9 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
           name={t.user_list_popover.more}
         />
       </Popover>
-      <Dialog
-        cancelButtonText={t.common.no}
-        confirmButtonText={t.common.yes}
-        invertButtons
-        onCancelButtonClick={handleCloseBanDialog}
-        onClose={handleCloseBanDialog}
-        onConfirmButtonClick={handleBanUser}
-        open={banDialog}
-        title={t.user_list_popover.ban}
-      >
-        <p>
-          {t.user_list_popover.ban_question}, {userName}?
-        </p>
-        <Select
-          onChange={setBanReason}
-          options={banOptions1}
-          placeholder={t.user_list_popover.ban_reason}
-          portal={false}
-          value={banReason}
-        />
-      </Dialog>
-      <Dialog
-        cancelButtonText={t.common.no}
-        confirmButtonText={t.common.yes}
-        invertButtons
-        onCancelButtonClick={handleCloseDialog}
-        onClose={handleCloseDialog}
-        onConfirmButtonClick={handleDeleteUser}
-        open={removeDialog}
-        title={t.user_list_popover.delete}
-      >
-        <p>
-          {t.user_list_popover.delete_question} {userName}?
-        </p>
-      </Dialog>
+      {renderUnBanUserDialog()}
+      {renderBanUserDialog()}
+      {renderRemoveUserDialog()}
     </>
   )
 }
