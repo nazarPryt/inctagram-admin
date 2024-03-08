@@ -3,26 +3,22 @@ import { toast } from 'react-toastify'
 
 import { GET_PROFILE_INFO } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api'
 import { GET_USERS } from '@/entities/usersList/api/getUsers.api'
-import { useBanUserMutation, useUnbanUserMutation } from '@/features/banUser/api/banUser.api.types'
+
+import { useBanUserMutation } from '../api/banUser.api.types'
+import { BanUserDialog } from '../ui/BanUserDialog'
 
 type useBanUserType = {
-  setPopover: Dispatch<SetStateAction<boolean>>
+  setPopover?: Dispatch<SetStateAction<boolean>>
   userId: number
   userName: string
 }
 export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => {
   const [banReason, setBanReason] = useState('')
   const [banDialog, setBanDialog] = useState(false)
-  const [banUserMutation, { data, error, loading }] = useBanUserMutation({
+  const [banUserMutation, { data, loading }] = useBanUserMutation({
     refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
     variables: {
       banReason,
-      userId,
-    },
-  })
-  const [unBanUserMutation] = useUnbanUserMutation({
-    refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
-    variables: {
       userId,
     },
   })
@@ -35,49 +31,38 @@ export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => 
   }
   const handleBanUser = async () => {
     try {
-      const res = await banUserMutation()
+      await banUserMutation()
 
-      if (res.data?.banUser) {
+      if (data?.banUser) {
         toast(`User ${userName} was successfully BANED`, { type: 'success' })
       }
     } catch (e) {
       toast(`cant do it`, { type: 'error' })
     } finally {
       setBanDialog(false)
-      setPopover(false)
-    }
-  }
-
-  const handleUnBan = async () => {
-    try {
-      const res = await unBanUserMutation()
-
-      if (res.data?.unbanUser) {
-        toast(`User ${userName} was successfully UNBANED`, { type: 'success' })
-      }
-    } catch (e) {
-      toast(`cant do it`, { type: 'error' })
-    } finally {
-      setPopover(false)
+      setPopover && setPopover(false)
     }
   }
 
   const handleSetBanReason = (value: string) => {
     setBanReason(value)
   }
+  const renderBanUserDialog = () => {
+    return (
+      <BanUserDialog
+        banDialog={banDialog}
+        banReason={banReason}
+        handleBanUser={handleBanUser}
+        handleCloseBanDialog={handleCloseBanDialog}
+        loading={loading}
+        setBanReason={handleSetBanReason}
+        userName={userName}
+      />
+    )
+  }
 
   return {
-    banDialog,
-    banReason,
-    banUserMutation,
-    data,
-    error,
-    handleBanUser,
-    handleCloseBanDialog,
     handleOpenBanDialog,
-    handleSetBanReason,
-    handleUnBan,
-    loading,
-    setBanReason,
+    renderBanUserDialog,
   }
 }

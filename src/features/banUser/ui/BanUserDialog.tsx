@@ -1,34 +1,30 @@
-import { useState } from 'react'
-
-import { banOptions } from '@/features/banUser/banOptions'
-import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { Dialog, Select } from '@nazar-pryt/inctagram-ui-kit'
 
+import { banOptions } from '../banOptions'
+
 type BanUserDialogType = {
-  handleOpen: (value: boolean) => void
-  userId: number
+  banDialog: boolean
+  banReason: string
+  handleBanUser: () => void
+  handleCloseBanDialog: () => void
+  loading: boolean
+  setBanReason: (value: string) => void
   userName: string
 }
-export const BanUserDialog = ({ handleOpen, userId, userName }: BanUserDialogType) => {
-  const [_popover, setPopover] = useState(false)
-
-  const {
-    banDialog,
-    banReason,
-    handleBanUser,
-    handleCloseBanDialog,
-    handleOpenBanDialog,
-    setBanReason,
-  } = useBanUser({
-    setPopover,
-    userId,
-    userName,
-  })
-
+export const BanUserDialog = ({
+  banDialog,
+  banReason,
+  handleBanUser,
+  handleCloseBanDialog,
+  loading,
+  setBanReason,
+  userName,
+}: BanUserDialogType) => {
   return (
     <Dialog
       cancelButtonText={'No'}
       confirmButtonText={'Yes'}
+      disabled={loading}
       invertButtons
       onCancelButtonClick={handleCloseBanDialog}
       onClose={handleCloseBanDialog}

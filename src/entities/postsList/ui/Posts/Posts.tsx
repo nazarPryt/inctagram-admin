@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { useGetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
 import { PostsStyled } from '@/entities/postsList/ui/Posts/Posts.styled'
 import { PostsList } from '@/entities/postsList/ui/PostsList/PostsList'
@@ -9,7 +7,7 @@ import { InputText } from '@nazar-pryt/inctagram-ui-kit'
 export const Posts = () => {
   const { data, loading } = useGetPostsQuery({
     variables: {
-      endCursorPostId: 1,
+      endCursorPostId: 4, //todo ask why null is unacceptable? how we can know what id should be on first load
       pageSize: 10,
       searchTerm: '',
       sortBy: '',

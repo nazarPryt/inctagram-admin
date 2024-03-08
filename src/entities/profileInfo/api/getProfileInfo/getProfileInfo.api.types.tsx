@@ -44,6 +44,7 @@ export const GetProfileInfoDocument = gql`
       id
       userName
       email
+
       createdAt
       profile {
         id
