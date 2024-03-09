@@ -1,25 +1,21 @@
+import { useProfileInfoTableTitle } from '@/entities/profileInfo/hook/useProfileInfoTableTitle'
 import { ProfilePayments } from '@/entities/profileInfo/ui/ProfilePayments/ProfilePayments'
 import { TabContent, Tabs } from '@nazar-pryt/inctagram-ui-kit'
 
 import { ProfileTabsStyled } from './ProfileTabs.styled'
 
 export const ProfileTabs = ({ userId }: { userId: number }) => {
-  const tabs = [
-    { title: 'Uploaded files', value: 'UploadedFiles' },
-    { title: 'Payments', value: 'Payments' },
-    { title: 'Followers', value: 'Followers' },
-    { title: 'Following', value: 'Following' },
-  ]
+  const tabsTitle = useProfileInfoTableTitle()
 
   return (
     <ProfileTabsStyled>
-      <Tabs defaultValue={'Payments'} fullWidth tabs={tabs}>
-        <TabContent value={'Following'}>Content for Following</TabContent>
-        <TabContent value={'Followers'}>Content for Followers</TabContent>
+      <Tabs defaultValue={'Payments'} fullWidth tabs={tabsTitle}>
+        <TabContent value={'Following'}>t.table.content_following</TabContent>
+        <TabContent value={'Followers'}>t.table.content_followers</TabContent>
         <TabContent value={'Payments'}>
           <ProfilePayments userID={userId} />
         </TabContent>
-        <TabContent value={'UploadedFiles'}>Content for UploadedFiles</TabContent>
+        <TabContent value={'UploadedFiles'}>t.table.content_uploaded_files</TabContent>
       </Tabs>
     </ProfileTabsStyled>
   )

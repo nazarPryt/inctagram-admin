@@ -4,6 +4,7 @@ export const useLogOut = () => {
   const router = useRouter()
   const HandleLogOut = () => {
     sessionStorage.clear()
+    localStorage.clear()
     router.reload()
   }
 

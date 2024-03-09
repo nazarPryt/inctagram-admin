@@ -1,3 +1,4 @@
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@nazar-pryt/inctagram-ui-kit'
 
 type RemoveUserDialogType = {
@@ -14,19 +15,23 @@ export const RemoveUserDialog = ({
   loading,
   userName,
 }: RemoveUserDialogType) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog
-      cancelButtonText={'No'}
-      confirmButtonText={'Yes'}
+      cancelButtonText={t.common.no}
+      confirmButtonText={t.common.yes}
       disabled={loading}
       invertButtons
       onCancelButtonClick={handleCloseDialog}
       onClose={handleCloseDialog}
       onConfirmButtonClick={handleDeleteUser}
       open={isRemoveDialogOpen}
-      title={'Delete user'}
+      title={t.user_list_popover.delete}
     >
-      <p>Are you sure to delete user {userName}?</p>
+      <p>
+        {t.user_list_popover.delete_question} {userName}?
+      </p>
     </Dialog>
   )
 }

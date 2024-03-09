@@ -1,5 +1,6 @@
 import { useProfilePayments } from '@/entities/profileInfo/hook/useProfilePayments'
 import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   Table,
   TableBody,
@@ -9,12 +10,14 @@ import {
   TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 
+import { usePaymentsListHeader } from '../../hook/useProfilePaymentsHeader'
 import { ProfilePaymentsStyled } from './ProfilePayments.styled'
-import { PaymentsListHeader } from './ProfilePaymentsHeader'
 
 export const ProfilePayments = ({ userID }: { userID: number }) => {
-  const { data, loading, pageNumber, pagesize, setOnSort, setPageNumber, setPageSize, sort } =
-    useProfilePayments({ userID })
+  const { data, loading, sort } = useProfilePayments({ userID })
+  const { t } = useTranslation()
+
+  const paymentsListHeader = usePaymentsListHeader()
 
   if (loading) {
     return <TableSkeleton columns={5} rows={5} />
@@ -23,7 +26,7 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
     return (
       <ProfilePaymentsStyled>
         <Table>
-          <TableHead columns={PaymentsListHeader} sort={sort} />
+          <TableHead columns={paymentsListHeader} sort={sort} />
           <TableBody>
             {data?.getPaymentsByUser.items.map(payment => {
               return (
@@ -44,5 +47,5 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
     )
   }
 
-  return <IsEmpty text={'User doesnt have any payments yet'} />
+  return <IsEmpty text={t.profile_payments.not_payments} />
 }

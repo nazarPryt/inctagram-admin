@@ -1,5 +1,7 @@
 import { GetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.api.types'
+import { usePaymentsListTableHeader } from '@/entities/paymentsList/hook/usePaymentsListTableHeader'
 import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   Avatar,
   TableBody,
@@ -11,7 +13,6 @@ import {
 } from '@nazar-pryt/inctagram-ui-kit'
 
 import { PaymentsListTableStyled } from './PaymentsListTable.styled'
-import { PaymentsListTableHeader } from './PaymentsListTableHeader'
 
 type PropsType = {
   loading: boolean
@@ -20,6 +21,10 @@ type PropsType = {
   sort: TableHeadSortType
 }
 export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType) => {
+  const { t } = useTranslation()
+
+  const PaymentsListTableHeader = usePaymentsListTableHeader()
+
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
@@ -53,5 +58,5 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
     )
   }
 
-  return <IsEmpty text={'Payments list is empty'} />
+  return <IsEmpty text={t.table.payments_list_empty} />
 }

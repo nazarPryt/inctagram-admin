@@ -5,6 +5,7 @@ import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { useBanUser } from '@/features/banUser/hook/useBanUser'
 import { useRemoveUser } from '@/features/removeUser/hook/useRemoveUser'
 import { useUnBunUser } from '@/features/unBunUser/hook/useUnBunUser'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   BlockedIcon,
   DotsHorizontal,
@@ -39,17 +40,26 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
     userId,
     userName,
   })
+  const { t } = useTranslation()
 
   return (
     <>
       <Popover icon={<DotsHorizontal />} isOpen={popover} onOpenChange={setPopover}>
-        <PopoverItem icon={<PersonRemoveIcon />} name={'Delete User'} onClick={handleOpenDialog} />
+        <PopoverItem
+          icon={<PersonRemoveIcon />}
+          name={t.user_list_popover.delete}
+          onClick={handleOpenDialog}
+        />
         {userBan ? (
-          <PopoverItem icon={<ProfileIcon />} name={'UnBun'} onClick={handleOpenUnBanDialog} />
+          <PopoverItem
+            icon={<ProfileIcon />}
+            name={t.user_list_popover.unban}
+            onClick={handleOpenUnBanDialog}
+          />
         ) : (
           <PopoverItem
             icon={<BlockedIcon />}
-            name={'Bun in the system'}
+            name={t.user_list_popover.ban}
             onClick={handleOpenBanDialog}
           />
         )}
@@ -58,7 +68,7 @@ export const UsersListPopover = ({ userBan, userId, userName }: UsersListPopover
           as={Link}
           href={`${PATH.USER}${userId}`}
           icon={<DotsHorizontal />}
-          name={'More information'}
+          name={t.user_list_popover.more}
         />
       </Popover>
       {renderUnBanUserDialog()}

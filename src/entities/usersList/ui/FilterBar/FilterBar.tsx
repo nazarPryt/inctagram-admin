@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react'
 
-import { blockedUsersOptions } from '@/entities/usersList/ui/FilterBar/options/filterOptions'
+import { useFilterOptions } from '@/entities/usersList/hook/useFilterOptions'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UserBlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
 import { InputText, Select } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -20,27 +21,30 @@ export const FilterBar = ({
   setBlocked,
   setSearch,
 }: FilterBarType) => {
+  const { t } = useTranslation()
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
   }
+
+  const blockedUsersOptions = useFilterOptions()
 
   return (
     <FilterBarStyled>
       <InputText
         onChange={handleChange}
         onClearClick={clearSearch}
-        placeholder={'Search...'}
+        placeholder={t.common.search}
         search
         value={searchValue}
       />
       <Select
         //Todo Question
-
         onChange={setBlocked as (value: string) => void}
         options={blockedUsersOptions}
         placeholder={'Not selected'}
         value={blockedValue}
-        width={200}
+        width={350}
       />
     </FilterBarStyled>
   )

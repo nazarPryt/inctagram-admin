@@ -1,5 +1,6 @@
 import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
 import { ProfileInfoSkeleton } from '@/shared/components/ProfileInfoSkeleton/ProfileInfoSkeleton'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Avatar } from '@nazar-pryt/inctagram-ui-kit'
 
 import { ProfileInfoStyled } from './ProfileInfo.styled'
@@ -10,6 +11,8 @@ export const ProfileInfo = ({ userID }: { userID: number }) => {
       userID,
     },
   })
+
+  const { t } = useTranslation()
 
   if (loading) {
     return <ProfileInfoSkeleton />
@@ -36,11 +39,11 @@ export const ProfileInfo = ({ userID }: { userID: number }) => {
         </div>
         <div className={'bottomGroup'}>
           <div>
-            <div className={'blurText'}>UserID</div>
+            <div className={'blurText'}>{t.profile_info.user_id}</div>
             <div className={'importantText'}>{profile.id}</div>
           </div>
           <div>
-            <div className={'blurText'}>Profile Creation Date</div>
+            <div className={'blurText'}>{t.profile_info.profile_create}</div>
             <div className={'importantText'}>
               {new Date(profile.createdAt).toLocaleDateString('ru-RU')}
             </div>

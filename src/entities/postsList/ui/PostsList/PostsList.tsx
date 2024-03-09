@@ -1,6 +1,7 @@
 import { GetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
 import { PostItem } from '@/entities/postsList/ui/PostItem/PostItem'
 import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 
 import { PostsListSkeleton } from '../PostsListSkeleton'
 import { PostsListStyled } from './PostsList.styled'
@@ -10,6 +11,8 @@ type PostsListType = {
   posts?: GetPostsQuery['getPosts']['items']
 }
 export const PostsList = ({ loading, posts }: PostsListType) => {
+  const { t } = useTranslation()
+
   if (loading) {
     return <PostsListSkeleton />
   }
@@ -24,5 +27,5 @@ export const PostsList = ({ loading, posts }: PostsListType) => {
     )
   }
 
-  return <IsEmpty text={'This is weird, but no one didnt make any post yet'} />
+  return <IsEmpty text={t.posts_list.not_posts} />
 }

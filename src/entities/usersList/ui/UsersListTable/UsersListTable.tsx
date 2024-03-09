@@ -4,7 +4,6 @@ import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
 import {
   BlockedIcon,
   Button,
-  NavLink,
   Table,
   TableBody,
   TableCell,
@@ -15,7 +14,7 @@ import {
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
-import { UsersListTableHeader } from './UsersListTableHeader'
+import { useUsersListTableHeader } from '../../hook/useUsersListTableHeader'
 
 type PropsType = {
   loading: boolean
@@ -25,19 +24,22 @@ type PropsType = {
 }
 
 export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) => {
+  const usersListTableHeader = useUsersListTableHeader()
+
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
 
   return (
     <Table>
-      <TableHead columns={UsersListTableHeader} onSort={onSort} sort={sort} />
+      <TableHead columns={usersListTableHeader} onSort={onSort} sort={sort} />
       <TableBody>
         {userList &&
           userList.map(user => {
             return (
               <TableRow key={user.id}>
-                <TableCell>{user.userBan && <BlockedIcon />}</TableCell>
+                {/* Todo Change:  need to do fix into TableCell - style={{ padding: 0 }} */}
+                <TableCell style={{ padding: 0 }}>{user.userBan && <BlockedIcon />}</TableCell>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.userName}</TableCell>
                 <TableCell>
