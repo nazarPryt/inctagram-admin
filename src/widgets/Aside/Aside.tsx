@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import { AsideStyled } from './Aside.styled'
 
 export const Aside = () => {
-  const { HandleLogOut } = useLogOut()
+  const { handleOpenLogoutDialog, renderLogoutDialog } = useLogOut()
   const { pathname } = useRouter()
   const { t } = useTranslation()
 
@@ -46,8 +46,9 @@ export const Aside = () => {
           name={t.aside.posts_list}
           pathname={pathname}
         />
-        <NavButton icon={<LogOutIcon />} onClick={HandleLogOut} title={t.aside.logout} />
+        <NavButton icon={<LogOutIcon />} onClick={handleOpenLogoutDialog} title={t.aside.logout} />
       </nav>
+      {renderLogoutDialog()}
     </AsideStyled>
   )
 }
