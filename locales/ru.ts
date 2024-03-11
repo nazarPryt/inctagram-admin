@@ -27,6 +27,10 @@ export const ru: LocaleType = {
     password: 'Пароль',
     sign_in: 'Войти',
   },
+  pagination: {
+    on_page: 'на странице',
+    show: 'показать',
+  },
   logout: {
     logout_question: 'Вы уверены, что хотите выйти',
     title: 'Выход из системы',

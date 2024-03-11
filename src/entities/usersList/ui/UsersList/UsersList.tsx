@@ -1,6 +1,7 @@
 import { useUsersList } from '@/entities/usersList/hook/useUsersList'
 import { FilterBar } from '@/entities/usersList/ui/FilterBar/FilterBar'
 import { UsersListTable } from '@/entities/usersList/ui/UsersListTable/UsersListTable'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
 import { UsersListStyled } from './UsersList.styled'
@@ -23,6 +24,8 @@ export const UsersList = () => {
     totalPageCount,
   } = useUsersList()
 
+  const { t } = useTranslation()
+
   return (
     <UsersListStyled>
       <FilterBar
@@ -41,10 +44,12 @@ export const UsersList = () => {
       <Pagination
         count={totalPageCount}
         onChange={setPageNumber}
+        onPage={t.pagination.on_page}
         onPerPageChange={setPageSize}
         page={pageNumber}
         perPage={pageSize}
         perPageOptions={[10, 20, 30, 50, 100]}
+        show={t.pagination.show}
       />
     </UsersListStyled>
   )
