@@ -29,6 +29,10 @@ export const en = {
     on_page: 'on page',
     show: 'show',
   },
+  logout: {
+    logout_question: 'Are you sure you want logout',
+    title: 'Sign Out',
+  },
   posts_list: {
     not_posts: 'This is weird, but no one didnt make any post yet',
   },

@@ -31,6 +31,10 @@ export const ru: LocaleType = {
     on_page: 'на странице',
     show: 'показать',
   },
+  logout: {
+    logout_question: 'Вы уверены, что хотите выйти',
+    title: 'Выход из системы',
+  },
   posts_list: {
     not_posts: 'Странно, но никто еще не написал ни одного поста',
   },
