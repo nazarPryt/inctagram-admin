@@ -1,11 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { GET_PROFILE_INFO } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api'
 import { GET_USERS } from '@/entities/usersList/api/getUsers.api'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import { useBanUserMutation } from '../api/banUser.api.types'
 import { BanUserDialog } from '../ui/BanUserDialog'

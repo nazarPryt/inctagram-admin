@@ -15,11 +15,20 @@ const banUserFormSchema = z.object({
     .string()
     .max(
       textAreaValueLength,
-      `Ban reason-message cant be more then ${textAreaValueLength} symbols!!`
+      `Ban-reason message cant be more then ${textAreaValueLength} symbols!!`
     ),
 })
 
 export type BanUserFormSchemaType = z.infer<typeof banUserFormSchema>
+
+type SchemaType = {
+  [key in BanOptions]: keyof BanUserFormSchemaType
+}
+const Schema: SchemaType = {
+  ['advertising-placement']: 'reasonSelectValue',
+  ['another-reason']: 'textAreaValue',
+  ['bad-behavior']: 'reasonSelectValue',
+}
 
 type BanUserDialogType = {
   banDialog: boolean
@@ -42,17 +51,23 @@ export const BanUserDialog = ({
     control,
     formState: { errors },
     handleSubmit,
-    register,
     watch,
   } = useForm<BanUserFormSchemaType>({
-    defaultValues: { textAreaValue: '' },
+    defaultValues: { reasonSelectValue: undefined, textAreaValue: '' }, // todo fix possibility to pass null as default value
     resolver: zodResolver(banUserFormSchema),
   })
 
-  const onSubmit: SubmitHandler<BanUserFormSchemaType> = data => console.log(data)
+  const toServer = (value: string) => {
+    console.log('toServer: ', value)
+  }
+  const onSubmit: SubmitHandler<BanUserFormSchemaType> = data => {
+    const sendingKeyFromData = Schema[data.reasonSelectValue]
+
+    toServer(data[sendingKeyFromData])
+  }
   const banOptions = useBanOptions()
 
-  const showTextArea = watch('reasonSelectValue') === 'another-reason'
+  const showTextArea = watch('reasonSelectValue') === BanOptions.anotherReason
 
   return (
     <Dialog
@@ -90,6 +105,7 @@ export const BanUserDialog = ({
             name={'textAreaValue'}
             render={({ field: { onChange, value } }) => (
               <TextArea
+                autoFocus
                 error={errors.textAreaValue?.message}
                 maxLength={textAreaValueLength}
                 onChange={onChange}
