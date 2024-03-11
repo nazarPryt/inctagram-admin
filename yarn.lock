@@ -1533,10 +1533,10 @@
   resolved "https://registry.yarnpkg.com/@kamilkisiela/fast-url-parser/-/fast-url-parser-1.1.4.tgz#9d68877a489107411b953c54ea65d0658b515809"
   integrity sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==
 
-"@nazar-pryt/inctagram-ui-kit@^0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.33.tgz#36feb354583639d6874e2987e0d697ea13f99379"
-  integrity sha512-xMDnLGt2pb1oN+Z7SGM+RJeaQhUSIE6g7Mm/p49duRE1R4ToR5wSrsAuKq1PK7512+BgU/POWrepmQiQ1eiA8A==
+"@nazar-pryt/inctagram-ui-kit@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@nazar-pryt/inctagram-ui-kit/-/inctagram-ui-kit-0.0.34.tgz#ec83e9c73b8bc46218351c15853f2d287835aca1"
+  integrity sha512-/h181sPdLzbsbYUh+IafOV1w9V71sxx6h+hPVYWXKB3wCGoGxYY5nN6Q5t/g1JC8yxCSPoGA1EeGuDpRF0qkNw==
   dependencies:
     "@headlessui-float/react" "0.13.0"
     "@headlessui/react" "1.7.17"

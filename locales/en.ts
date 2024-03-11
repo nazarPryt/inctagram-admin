@@ -25,6 +25,10 @@ export const en = {
     password: 'Password',
     sign_in: 'Sign In',
   },
+  pagination: {
+    on_page: 'on page',
+    show: 'show',
+  },
   posts_list: {
     not_posts: 'This is weird, but no one didnt make any post yet',
   },
