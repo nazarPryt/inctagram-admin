@@ -5,9 +5,10 @@ import { dequal as deepEqual } from 'dequal'
 export function useLocalStorage<T = any>(key: string, initialValue: T): [T, (value: T) => void] {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
+  const isBrowser = typeof window !== 'undefined'
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      if (window !== undefined) {
+      if (isBrowser) {
         // Get from local storage by key
         const item = window.localStorage.getItem(key)
 
@@ -27,7 +28,7 @@ export function useLocalStorage<T = any>(key: string, initialValue: T): [T, (val
   const setValue = useCallback(
     (value: T) => {
       try {
-        if (!deepEqual(storedValue, value) && window !== undefined) {
+        if (!deepEqual(storedValue, value) && isBrowser) {
           // Save state
           setStoredValue(value)
           // Save to local storage
