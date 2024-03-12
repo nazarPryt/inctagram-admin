@@ -1,15 +1,26 @@
 import { useEffect } from 'react'
 
+import flagRus from '@/public/assets/flagRus.png'
+import flagUK from '@/public/assets/flagUK.png'
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage'
 import { Select, SelectOptionType } from '@nazar-pryt/inctagram-ui-kit'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 export const LangSelect = () => {
   const { asPath, locale, pathname, push, query } = useRouter()
   const [storedValue, setValue] = useLocalStorage('lang', 'en')
   const options: SelectOptionType[] = [
-    { label: 'ru', value: 'ru' },
-    { label: 'en', value: 'en' },
+    {
+      icon: <Image alt={'flagRus'} height={36} src={flagRus} width={36} />,
+      label: 'Russian',
+      value: 'ru',
+    },
+    {
+      icon: <Image alt={'flagUK'} height={36} src={flagUK} width={36} />,
+      label: 'English',
+      value: 'en',
+    },
   ]
 
   useEffect(() => {
@@ -24,9 +35,5 @@ export const LangSelect = () => {
     setValue(selectedLocale)
   }
 
-  return (
-    <div>
-      <Select onChange={changeLangHandler} options={options} value={locale!} />
-    </div>
-  )
+  return <Select onChange={changeLangHandler} options={options} value={locale!} width={140} />
 }

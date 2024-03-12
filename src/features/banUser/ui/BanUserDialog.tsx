@@ -7,15 +7,16 @@ import { z } from 'zod'
 
 import { BanOptions, useBanOptions } from '../hook/useBanOptions'
 
-const textAreaValueLength = 10
+const maxTextAreaValueLength = 10
 
 const banUserFormSchema = z.object({
   reasonSelectValue: z.nativeEnum(BanOptions),
   textAreaValue: z
     .string()
+    .trim()
     .max(
-      textAreaValueLength,
-      `Ban-reason message cant be more then ${textAreaValueLength} symbols!!`
+      maxTextAreaValueLength,
+      `Ban-reason message cant be more then ${maxTextAreaValueLength} symbols!!`
     ),
 })
 
@@ -32,10 +33,9 @@ const Schema: SchemaType = {
 
 type BanUserDialogType = {
   banDialog: boolean
-  handleBanUser: () => void
+  handleBanUser: (banReason: string) => void
   handleCloseBanDialog: () => void
   loading: boolean
-  setBanReason: (value: string) => void
   userName: string
 }
 export const BanUserDialog = ({
@@ -43,7 +43,6 @@ export const BanUserDialog = ({
   handleBanUser,
   handleCloseBanDialog,
   loading,
-  setBanReason,
   userName,
 }: BanUserDialogType) => {
   const { t } = useTranslation()
@@ -51,19 +50,21 @@ export const BanUserDialog = ({
     control,
     formState: { errors },
     handleSubmit,
+    setError,
     watch,
   } = useForm<BanUserFormSchemaType>({
     defaultValues: { reasonSelectValue: undefined, textAreaValue: '' }, // todo fix possibility to pass null as default value
     resolver: zodResolver(banUserFormSchema),
   })
 
-  const toServer = (value: string) => {
-    console.log('toServer: ', value)
-  }
   const onSubmit: SubmitHandler<BanUserFormSchemaType> = data => {
     const sendingKeyFromData = Schema[data.reasonSelectValue]
 
-    toServer(data[sendingKeyFromData])
+    if (data[sendingKeyFromData].length) {
+      handleBanUser(data[sendingKeyFromData])
+    } else {
+      setError('textAreaValue', { message: 'Ban-reason message is required' })
+    }
   }
   const banOptions = useBanOptions()
 
@@ -107,7 +108,7 @@ export const BanUserDialog = ({
               <TextArea
                 autoFocus
                 error={errors.textAreaValue?.message}
-                maxLength={textAreaValueLength}
+                maxLength={maxTextAreaValueLength}
                 onChange={onChange}
                 style={{ backgroundColor: 'gray' }}
                 value={value}
