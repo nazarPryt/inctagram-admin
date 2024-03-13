@@ -15,7 +15,6 @@ export const RemoveUserDocument = gql`
     removeUser(userId: $userId)
   }
 `
-
 export type RemoveUserMutationFn = Apollo.MutationFunction<
   RemoveUserMutation,
   RemoveUserMutationVariables

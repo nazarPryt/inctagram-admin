@@ -1,3 +1,4 @@
+import { ProfileFiles } from '@/entities/profileFiles'
 import { useProfileInfoTableTitle } from '@/entities/profileInfo/hook/useProfileInfoTableTitle'
 import { ProfilePayments } from '@/entities/profileInfo/ui/ProfilePayments/ProfilePayments'
 import { TabContent, Tabs } from '@nazar-pryt/inctagram-ui-kit'
@@ -15,7 +16,9 @@ export const ProfileTabs = ({ userId }: { userId: number }) => {
         <TabContent value={'Payments'}>
           <ProfilePayments userID={userId} />
         </TabContent>
-        <TabContent value={'UploadedFiles'}>t.table.content_uploaded_files</TabContent>
+        <TabContent value={'UploadedFiles'}>
+          <ProfileFiles userID={userId} />
+        </TabContent>
       </Tabs>
     </ProfileTabsStyled>
   )
