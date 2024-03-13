@@ -12,15 +12,11 @@ type useBanUserType = {
   userId: number
   userName: string
 }
+
 export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => {
-  const [banReason, setBanReason] = useState('')
   const [banDialog, setBanDialog] = useState(false)
-  const [banUserMutation, { data, loading }] = useBanUserMutation({
+  const [banUserMutation, { loading }] = useBanUserMutation({
     refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
-    variables: {
-      banReason,
-      userId,
-    },
   })
 
   const handleOpenBanDialog = () => {
@@ -29,11 +25,11 @@ export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => 
   const handleCloseBanDialog = () => {
     setBanDialog(false)
   }
-  const handleBanUser = async () => {
+  const handleBanUser = async (banReason: string) => {
     try {
-      await banUserMutation()
+      const res = await banUserMutation({ variables: { banReason, userId } })
 
-      if (data?.banUser) {
+      if (res.data?.banUser) {
         toast(`User ${userName} was successfully BANED`, { type: 'success' })
       }
     } catch (e) {
@@ -44,18 +40,13 @@ export const useBanUser = ({ setPopover, userId, userName }: useBanUserType) => 
     }
   }
 
-  const handleSetBanReason = (value: string) => {
-    setBanReason(value)
-  }
   const renderBanUserDialog = () => {
     return (
       <BanUserDialog
         banDialog={banDialog}
-        banReason={banReason}
         handleBanUser={handleBanUser}
         handleCloseBanDialog={handleCloseBanDialog}
         loading={loading}
-        setBanReason={handleSetBanReason}
         userName={userName}
       />
     )

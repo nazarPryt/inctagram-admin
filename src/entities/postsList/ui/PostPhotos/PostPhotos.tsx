@@ -22,7 +22,7 @@ export const PostPhotos = ({ photos }: PostItemType) => {
       >
         {photos &&
           photos.map((photo, index) => {
-            if (photo.height === 360) {
+            if (photo.height === 1440) {
               return (
                 <SwiperSlide className={'slide'} key={index}>
                   <Image

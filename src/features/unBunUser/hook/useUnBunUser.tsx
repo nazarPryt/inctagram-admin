@@ -14,7 +14,7 @@ type useUnBunUserType = {
 }
 export const useUnBunUser = ({ setPopover, userId, userName }: useUnBunUserType) => {
   const [isUnBanDialogOpen, setIsUnBanDialogOpen] = useState(false)
-  const [unBanUserMutation, { data, loading }] = useUnbanUserMutation({
+  const [unBanUserMutation, { loading }] = useUnbanUserMutation({
     refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
     variables: {
       userId,
@@ -29,9 +29,9 @@ export const useUnBunUser = ({ setPopover, userId, userName }: useUnBunUserType)
 
   const handleUnBanUser = async () => {
     try {
-      await unBanUserMutation()
+      const res = await unBanUserMutation()
 
-      if (data?.unbanUser) {
+      if (res.data?.unbanUser) {
         toast(`User ${userName} was successfully unBaned`, { type: 'success' })
       }
     } catch (e) {

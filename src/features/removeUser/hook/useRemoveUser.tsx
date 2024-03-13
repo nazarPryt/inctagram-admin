@@ -14,7 +14,7 @@ type useRemoveUserType = {
 }
 
 export const useRemoveUser = ({ setPopover, userId, userName }: useRemoveUserType) => {
-  const [removeUserMutation, { data, loading }] = useRemoveUserMutation({
+  const [removeUserMutation, { loading }] = useRemoveUserMutation({
     refetchQueries: [GET_USERS, 'getUsersList', GET_PROFILE_INFO, 'getProfileInfo'],
     variables: {
       userId,
@@ -31,9 +31,9 @@ export const useRemoveUser = ({ setPopover, userId, userName }: useRemoveUserTyp
   }
   const handleDeleteUser = async () => {
     try {
-      await removeUserMutation()
+      const res = await removeUserMutation()
 
-      if (data?.removeUser) {
+      if (res.data?.removeUser) {
         toast(`User ${userName} was successfully removed`, { type: 'success' })
       }
     } catch (e) {
