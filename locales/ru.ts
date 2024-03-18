@@ -35,6 +35,10 @@ export const ru: LocaleType = {
     on_page: 'на странице',
     show: 'показать',
   },
+  post: {
+    end_post: 'Ура! Вы все увидели!',
+    no_posts: 'Пока нет публикаций',
+  },
   posts_list: {
     not_posts: 'Странно, но никто еще не написал ни одного поста',
   },
