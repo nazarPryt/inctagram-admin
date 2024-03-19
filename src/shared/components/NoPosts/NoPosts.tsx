@@ -1,11 +1,15 @@
-import {NoPostsWrapper} from './NoPosts.styled'
-import {NoPostsIcon} from './icon/NoPostsIcon'
+import { useTranslation } from '@/shared/hooks/useTranslation'
+
+import { NoPostsWrapper } from './NoPosts.styled'
+import { NoPostsIcon } from './icon/NoPostsIcon'
 
 export const NoPosts = () => {
-    return (
-        <NoPostsWrapper>
-            <NoPostsIcon />
-            <h1>No Posts Yet</h1>
-        </NoPostsWrapper>
-    )
+  const { t } = useTranslation()
+
+  return (
+    <NoPostsWrapper>
+      <NoPostsIcon />
+      <h1>{t.post.no_posts}</h1>
+    </NoPostsWrapper>
+  )
 }

@@ -33,6 +33,10 @@ export const en = {
     on_page: 'on page',
     show: 'show',
   },
+  post: {
+    end_post: 'Yay! You have seen it all',
+    no_posts: 'No Posts Yet',
+  },
   posts_list: {
     not_posts: 'This is weird, but no one didnt make any post yet',
   },
