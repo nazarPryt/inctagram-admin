@@ -13,6 +13,7 @@ export const useProfilePayments = ({ userID }: { userID: number }) => {
     key: 'id',
   })
   const { data, loading } = useGetUserPaymentsQuery({
+    skip: !userID,
     variables: {
       pageNumber,
       pagesize,

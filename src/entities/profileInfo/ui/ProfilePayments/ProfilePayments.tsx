@@ -1,6 +1,7 @@
 import { useProfilePayments } from '@/entities/profileInfo/hook/useProfilePayments'
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { toLocalFormat } from '@/shared/utils/toLocalFormat'
 import {
   Table,
   TableBody,
@@ -31,10 +32,8 @@ export const ProfilePayments = ({ userID }: { userID: number }) => {
             {data?.getPaymentsByUser.items.map(payment => {
               return (
                 <TableRow key={payment.id}>
-                  <TableCell>
-                    {new Date(payment.dateOfPayment).toLocaleDateString('ru-RU')}
-                  </TableCell>
-                  <TableCell>{new Date(payment.endDate).toLocaleDateString('ru-RU')}</TableCell>
+                  <TableCell>{toLocalFormat(payment.dateOfPayment)}</TableCell>
+                  <TableCell>{toLocalFormat(payment.endDate)}</TableCell>
                   <TableCell>{payment.price}</TableCell>
                   <TableCell>{payment.type}</TableCell>
                   <TableCell>{payment.paymentType}</TableCell>

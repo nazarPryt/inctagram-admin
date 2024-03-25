@@ -2,38 +2,34 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { ScrollToTop } from '@/shared/components/ScrollToTop'
-import { Skeleton } from '@nazar-pryt/inctagram-ui-kit'
 
 import { useProfileFiles } from './hook/useProfileFiles'
 import { ProfileFilesStyled } from './profileFiles.styled'
-import { ProfileFileItem } from './ui/ProfileFileItem'
+import { ProfileFilesList } from './ui/ProfileFilesList'
+import { ProfileFilesSkeleton } from './ui/ProfileFilesSkeleton'
 
 export const ProfileFiles = ({ userId }: { userId: number }) => {
-  const { data, fetchMoreData, hasMore, isHavePosts, loading } = useProfileFiles({ userId })
+  const { fetchMoreData, hasMore, isHavePosts, loading, posts } = useProfileFiles({ userId })
 
   if (loading) {
-    return <div>isLoading...</div>
+    return <ProfileFilesSkeleton />
   }
 
   if (isHavePosts) {
     return (
       <ProfileFilesStyled>
         <InfiniteScroll
-          // @ts-ignore
-          dataLength={data?.getPostsByUser.items.length}
+          dataLength={posts.length}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
+              <b>This is all</b>
             </p>
           }
           hasMore={hasMore}
-          loader={<Skeleton height={300} width={300} />}
-          // loader={<HomePostSkeleton />}
+          loader={<ProfileFilesSkeleton />}
           next={fetchMoreData}
         >
-          {data.getPostsByUser.items.map((post, index) => (
-            <ProfileFileItem key={index} post={post} />
-          ))}
+          <ProfileFilesList posts={posts} />
         </InfiniteScroll>
         <ScrollToTop />
       </ProfileFilesStyled>
