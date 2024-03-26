@@ -1,8 +1,8 @@
-import { GetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
-import { PostItem } from '@/entities/postsList/ui/PostItem/PostItem'
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 
+import { GetPostsQuery } from '../../api/getPosts.api.types'
+import { PostItem } from '../../ui/PostItem'
 import { PostsListStyled } from './PostsList.styled'
 
 type PostsListType = {

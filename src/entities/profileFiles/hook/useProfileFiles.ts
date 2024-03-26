@@ -5,6 +5,9 @@ import { useGetPostsByUserQuery } from '../api/getPostsByUser.api.types'
 type PropsType = {
   userId: number
 }
+
+//https://dev.to/moruno21/graphql-infinite-scroll-4oan
+
 export const useProfileFiles = ({ userId }: PropsType) => {
   const { data, fetchMore, loading } = useGetPostsByUserQuery({
     variables: {

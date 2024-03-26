@@ -1,8 +1,8 @@
-import { GetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
-import { PostDescription } from '@/entities/postsList/ui/PostDescription/PostDescription'
-import { PostItemStyled } from '@/entities/postsList/ui/PostItem/PostItem.styled'
-import { PostPhotos } from '@/entities/postsList/ui/PostPhotos/PostPhotos'
-import { PostUserInfo } from '@/entities/postsList/ui/PostUserInfo/PostUserInfo'
+import { GetPostsQuery } from '../../api/getPosts.api.types'
+import { PostDescription } from '../../ui/PostDescription'
+import { PostPhotos } from '../../ui/PostPhotos'
+import { PostUserInfo } from '../../ui/PostUserInfo'
+import { PostItemStyled } from './PostItem.styled'
 
 type PostItemType = {
   post: GetPostsQuery['getPosts']['items'][number]
