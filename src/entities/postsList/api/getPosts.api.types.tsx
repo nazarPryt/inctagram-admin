@@ -20,6 +20,7 @@ export type GetPostsQuery = {
       __typename?: 'Post'
       createdAt: any
       description: string
+      id: number
       images?: Array<{
         __typename?: 'ImagePost'
         height?: null | number
@@ -27,6 +28,20 @@ export type GetPostsQuery = {
         width?: null | number
       }> | null
       ownerId: number
+      postOwner: {
+        __typename?: 'PostOwnerModel'
+        avatars?: Array<{
+          __typename?: 'Avatar'
+          fileSize?: null | number
+          height?: null | number
+          url?: null | string
+          width?: null | number
+        }> | null
+        firstName?: null | string
+        id: number
+        lastName?: null | string
+        userName: string
+      }
     }>
     pageSize: number
     pagesCount: number
@@ -61,6 +76,19 @@ export const GetPostsDocument = gql`
         ownerId
         description
         createdAt
+        id
+        postOwner {
+          id
+          firstName
+          lastName
+          userName
+          avatars {
+            url
+            height
+            width
+            fileSize
+          }
+        }
       }
     }
   }

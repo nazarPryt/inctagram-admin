@@ -26,6 +26,19 @@ export const GET_POSTS = gql`
         ownerId
         description
         createdAt
+        id
+        postOwner {
+          id
+          firstName
+          lastName
+          userName
+          avatars {
+            url
+            height
+            width
+            fileSize
+          }
+        }
       }
     }
   }
