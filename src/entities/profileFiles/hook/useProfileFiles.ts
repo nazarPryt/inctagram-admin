@@ -6,47 +6,52 @@ type PropsType = {
   userId: number
 }
 export const useProfileFiles = ({ userId }: PropsType) => {
-  const [endCursorId, setEndCursorId] = useState<null | number | undefined>(0)
+  // const [endCursorId, setEndCursorId] = useState<null | number | undefined>(0)
 
   const { data, fetchMore, loading } = useGetPostsByUserQuery({
     variables: {
-      endCursorId,
+      endCursorId: 0,
       userId,
     },
   })
+  const posts = data ? data.getPostsByUser.items ?? [] : []
 
-  const posts = useMemo(() => (data ? data.getPostsByUser.items ?? [] : []), [data])
-  const totalCount = useMemo(() => (data ? data.getPostsByUser.totalCount ?? 1 : 1), [data])
-  const isHavePosts = data?.getPostsByUser.items ? data.getPostsByUser.items.length > 0 : false
-  const hasMore = totalCount > posts?.length
+  const endCursorId = data?.getPostsByUser?.items?.slice(-1)[0]?.id
 
   const fetchMoreData = useCallback(() => {
     if (posts.length === totalCount) {
       return
     }
-    const lastPostId = posts.length ? posts[posts.length - 1].id : undefined
 
     fetchMore({
       updateQuery: (previousResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
           return previousResult
         }
-        setEndCursorId(lastPostId)
+        const newPosts = fetchMoreResult.getPostsByUser?.items
+        const { pageSize, pagesCount, totalCount } = fetchMoreResult.getPostsByUser
 
-        return Object.assign({}, previousResult, {
-          posts: {
-            data: [
-              ...(previousResult.getPostsByUser.items ?? []),
-              ...(fetchMoreResult.getPostsByUser.items ?? []),
-            ],
-          },
-        })
+        return newPosts?.length
+          ? {
+              getPostsByUser: {
+                __typename: previousResult.getPostsByUser.__typename,
+                items: [...previousResult.getPostsByUser.items!, ...newPosts],
+                pageSize,
+                pagesCount,
+                totalCount,
+              },
+            }
+          : previousResult
       },
       variables: {
         endCursorId,
       },
     })
   }, [endCursorId])
+
+  const totalCount = data ? data.getPostsByUser.totalCount ?? 1 : 1
+  const isHavePosts = true
+  const hasMore = totalCount > posts?.length
 
   return { fetchMoreData, hasMore, isHavePosts, loading, posts }
 }
