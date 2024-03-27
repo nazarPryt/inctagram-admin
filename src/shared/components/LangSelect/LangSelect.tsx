@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 export const LangSelect = () => {
-  const { asPath, locale, pathname, push, query } = useRouter()
+  const { asPath, locale, pathname, query, replace } = useRouter()
   const [storedValue, setValue] = useLocalStorage('lang', 'en')
   const options: SelectOptionType[] = [
     {
@@ -31,7 +31,7 @@ export const LangSelect = () => {
   }, [])
 
   const changeLangHandler = (selectedLocale: string) => {
-    void push({ pathname, query }, asPath, { locale: selectedLocale })
+    void replace({ pathname, query }, asPath, { locale: selectedLocale })
     setValue(selectedLocale)
   }
 

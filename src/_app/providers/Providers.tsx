@@ -1,38 +1,16 @@
 import { ReactNode } from 'react'
 
+import ErrorBoundary from '@/_app/providers/ErrorBoundary'
+import { Theme } from '@/_app/providers/Theme'
 import { client } from '@/shared/lib/ApolloClient'
 import { ApolloProvider } from '@apollo/client'
-import { GlobalStyles, ToastContainerStyled, darkTheme } from '@nazar-pryt/inctagram-ui-kit'
-import { Inter } from 'next/font/google'
-import { ThemeProvider } from 'styled-components'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <style global jsx>{`
-        html {
-          font-family: ${inter.style.fontFamily};
-        }
-      `}</style>
+    <ErrorBoundary>
       <ApolloProvider client={client}>
-        <ThemeProvider theme={darkTheme}>
-          <GlobalStyles />
-          {children}
-          <ToastContainerStyled
-            autoClose={5000}
-            closeOnClick
-            draggable
-            hideProgressBar={false}
-            newestOnTop={false}
-            pauseOnFocusLoss
-            pauseOnHover
-            position={'bottom-left'}
-            rtl={false}
-          />
-        </ThemeProvider>
+        <Theme>{children}</Theme>
       </ApolloProvider>
-    </>
+    </ErrorBoundary>
   )
 }

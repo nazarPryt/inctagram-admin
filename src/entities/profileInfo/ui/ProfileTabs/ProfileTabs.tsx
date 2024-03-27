@@ -17,7 +17,7 @@ export const ProfileTabs = ({ userId }: { userId: number }) => {
           <ProfilePayments userID={userId} />
         </TabContent>
         <TabContent value={'UploadedFiles'}>
-          <ProfileFiles userID={userId} />
+          <ProfileFiles userId={userId} />
         </TabContent>
       </Tabs>
     </ProfileTabsStyled>

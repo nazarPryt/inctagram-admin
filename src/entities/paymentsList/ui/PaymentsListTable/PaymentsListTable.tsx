@@ -2,6 +2,7 @@ import { GetAllPaymentsQuery } from '@/entities/paymentsList/api/getAllPayments.
 import { usePaymentsListTableHeader } from '@/entities/paymentsList/hook/usePaymentsListTableHeader'
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { toLocalFormat } from '@/shared/utils/toLocalFormat'
 import {
   Avatar,
   TableBody,
@@ -44,7 +45,7 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
                   />
                   {payment.userName}
                 </TableCell>
-                <TableCell>{new Date(payment.createdAt).toLocaleDateString('ru-Ru')}</TableCell>
+                <TableCell>{toLocalFormat(payment.createdAt)}</TableCell>
                 <TableCell>
                   {payment.amount} {payment.currency}
                 </TableCell>

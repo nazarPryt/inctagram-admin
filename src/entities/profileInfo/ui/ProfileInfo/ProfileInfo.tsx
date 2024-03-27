@@ -7,6 +7,7 @@ import { ProfileInfoStyled } from './ProfileInfo.styled'
 
 export const ProfileInfo = ({ userID }: { userID: number }) => {
   const { data, loading } = useGetProfileInfoQuery({
+    skip: !userID,
     variables: {
       userID,
     },

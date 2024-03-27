@@ -1,48 +1,51 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { useGetPostsQuery } from '@/entities/postsList/api/getPosts.api.types'
 
-export const useGetAllPosts = () => {
-  const [endCursorPostId, setEndCursorPostId] = useState<number>(0)
-  const [pageSize, setPageSize] = useState(10)
+//https://dev.to/moruno21/graphql-infinite-scroll-4oan
 
-  const { data, fetchMore, loading, previousData } = useGetPostsQuery({
+export const useGetAllPosts = () => {
+  const { data, fetchMore, loading } = useGetPostsQuery({
     variables: {
-      endCursorPostId,
-      pageSize,
+      endCursorPostId: 0,
+      pageSize: 10,
     },
   })
 
+  const posts = useMemo(() => (data ? data.getPosts.items ?? [] : []), [data])
+  const totalCount = useMemo(() => (data ? data.getPosts.totalCount ?? 1 : 1), [data])
   const isHavePosts = data?.getPosts.items ? data.getPosts.items.length > 0 : false
-  const posts = data?.getPosts.items || []
-  const totalCount = data?.getPosts.totalCount || 0
   const hasMore = totalCount > posts.length
 
+  const endCursorPostId = data?.getPosts.items.slice(-1)[0]?.id
+
   const fetchMoreData = useCallback(() => {
-    if (data?.getPosts.items.length === data?.getPosts.totalCount) {
+    if (posts.length === totalCount) {
       return
     }
-
     fetchMore({
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (previousResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
-          return prev
+          return previousResult
         }
+        const newPosts = fetchMoreResult.getPosts?.items ?? []
 
-        setPageSize(prev => prev + 10)
-
-        return Object.assign({}, prev, {
-          posts: {
-            data: [...(prev.getPosts.items ?? []), ...(fetchMoreResult.getPosts.items ?? [])],
-          },
-        })
+        return Object.assign(
+          {},
+          { ...previousResult },
+          {
+            getPosts: {
+              ...previousResult.getPosts,
+              items: [...previousResult.getPosts.items!, ...newPosts],
+            },
+          }
+        )
       },
       variables: {
         endCursorPostId,
-        pageSize: pageSize,
       },
     })
-  }, [fetchMore, data?.getPosts.items])
+  }, [endCursorPostId])
 
-  return { data, fetchMoreData, hasMore, isHavePosts, loading }
+  return { fetchMoreData, hasMore, isHavePosts, loading, posts }
 }
