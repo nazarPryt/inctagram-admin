@@ -17,7 +17,7 @@ const config: CodegenConfig = {
     'src/shared/lib/ApolloClient/Schema.types.ts': { plugins: ['typescript'] },
   },
   ignoreNoDocuments: true,
-  schema: 'https://instareplica.fun/api/v1/graphql',
+  schema: 'https://nazarit.com/api/v1/graphql',
 }
 
 export default config

@@ -7,7 +7,7 @@ export const AsideStyled = styled.aside`
   height: calc(100vh - 100px);
   border-right: 1px solid ${props => props.theme.bodyColor['100']};
 
-  ${typography.Medium_text_14()}
+  ${typography.Medium_text_14}
 
   nav {
     display: flex;
