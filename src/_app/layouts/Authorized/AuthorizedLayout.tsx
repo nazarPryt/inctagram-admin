@@ -15,8 +15,8 @@ const AuthorizedLayout: NextPage<PropsWithChildren> = ({ children }) => {
     <Container>
       <AuthorizedLayoutStyled>
         <Header />
-        <Aside />
         <section>{children}</section>
+        <Aside />
       </AuthorizedLayoutStyled>
     </Container>
   )

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
-import { GlobalStyles, ToastContainerStyled, darkTheme } from '@nazar-pryt/inctagram-ui-kit'
+import { GlobalStyles } from '@/shared/styles/GlobalStyles'
+import { ToastContainerStyled, darkTheme } from '@nazar-pryt/inctagram-ui-kit'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'styled-components'
 

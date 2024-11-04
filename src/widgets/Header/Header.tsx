@@ -1,4 +1,5 @@
 import { PATH } from '@/_app/AppSettings/PATH'
+import { Container } from '@/shared/components/Container'
 import { LangSelect } from '@/shared/components/LangSelect'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import Link from 'next/link'
