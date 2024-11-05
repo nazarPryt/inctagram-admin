@@ -66,7 +66,9 @@ export const en = {
     profile_link: 'Profile Link',
     subscription: 'Subscription',
     uploaded_files: 'Uploaded files',
+    user_details: 'Details',
     user_id: 'User ID',
+    user_is_blocked: 'BLOCKED',
     user_name: 'User name',
   },
   // test: {

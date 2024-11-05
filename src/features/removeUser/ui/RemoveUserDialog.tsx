@@ -1,3 +1,4 @@
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -16,6 +17,7 @@ export const RemoveUserDialog = ({
   userName,
 }: RemoveUserDialogType) => {
   const { t } = useTranslation()
+  const { isMobile } = useScreenDetector()
 
   return (
     <Dialog
@@ -27,6 +29,7 @@ export const RemoveUserDialog = ({
       onClose={handleCloseDialog}
       onConfirmButtonClick={handleDeleteUser}
       open={isRemoveDialogOpen}
+      size={isMobile ? 'sm' : 'md'}
       title={t.user_list_popover.delete}
     >
       <p>

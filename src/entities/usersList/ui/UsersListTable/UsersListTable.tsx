@@ -1,6 +1,8 @@
 import { PATH } from '@/_app/AppSettings/PATH'
 import { GetUsersListQuery } from '@/entities/usersList/api/getUsers.api.types'
 import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
+import { IsEmpty } from '@/shared/components/IsEmpty'
+import { useTranslation } from '@/shared/hooks/useTranslation'
 import {
   BlockedIcon,
   Button,
@@ -24,8 +26,12 @@ type PropsType = {
 }
 
 export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) => {
+  const { t } = useTranslation()
   const usersListTableHeader = useUsersListTableHeader()
 
+  if (!userList) {
+    return <IsEmpty text={t.table.payments_list_empty} /> //todo
+  }
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }

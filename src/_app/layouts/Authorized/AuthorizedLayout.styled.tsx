@@ -39,8 +39,7 @@ export const AuthorizedLayoutStyled = styled.div`
     main {
       flex: 1;
       overflow-y: auto;
-      margin-bottom: 40px;
-      margin-top: 60px;
+      margin: 60px 0;
     }
 
     aside {

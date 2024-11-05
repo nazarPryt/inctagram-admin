@@ -1,6 +1,8 @@
 import { useUsersList } from '@/entities/usersList/hook/useUsersList'
 import { FilterBar } from '@/entities/usersList/ui/FilterBar/FilterBar'
+import { MobileUsersListTable } from '@/entities/usersList/ui/MobileUsersListTable'
 import { UsersListTable } from '@/entities/usersList/ui/UsersListTable/UsersListTable'
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -25,6 +27,7 @@ export const UsersList = () => {
   } = useUsersList()
 
   const { t } = useTranslation()
+  const { isMobile } = useScreenDetector()
 
   return (
     <UsersListStyled>
@@ -35,12 +38,15 @@ export const UsersList = () => {
         setBlocked={setBlocked}
         setSearch={handleSearchTerm}
       />
-      <UsersListTable
-        loading={loading}
-        onSort={handleOnSort}
-        sort={sort}
-        userList={data?.getUsers.users}
-      />
+      {isMobile && <MobileUsersListTable loading={loading} userList={data?.getUsers.users} />}
+      {!isMobile && (
+        <UsersListTable
+          loading={loading}
+          onSort={handleOnSort}
+          sort={sort}
+          userList={data?.getUsers.users}
+        />
+      )}
       <Pagination
         count={totalPageCount}
         onChange={setPageNumber}

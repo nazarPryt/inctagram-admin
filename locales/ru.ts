@@ -68,7 +68,9 @@ export const ru: LocaleType = {
     profile_link: 'Ссылка на Профиль',
     subscription: 'Подписка',
     uploaded_files: 'Загруженные файлы',
+    user_details: 'Детали',
     user_id: 'ID пользователя',
+    user_is_blocked: 'ЗАБЛОКИРОВАН',
     user_name: 'Имя пользователя',
   },
   // test: {

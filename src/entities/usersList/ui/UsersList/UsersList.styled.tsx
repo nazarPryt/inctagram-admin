@@ -1,3 +1,4 @@
+import { breakpoints } from '@/shared/styles/ViewPort'
 import { styled } from 'styled-components'
 
 export const UsersListStyled = styled.div`
@@ -8,5 +9,12 @@ export const UsersListStyled = styled.div`
 
   table {
     width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.tablet}px) {
+    > div:nth-child(3) {
+      flex-direction: column;
+      gap: 5px;
+    }
   }
 `

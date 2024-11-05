@@ -1,3 +1,4 @@
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -18,6 +19,7 @@ export const BanUserDialog = ({
   userName,
 }: BanUserDialogType) => {
   const { t } = useTranslation()
+  const { isMobile } = useScreenDetector()
 
   const { renderBanUserForm, submitBanUserForm } = useBanUserForm({ handleBanUser, userName })
 
@@ -31,6 +33,7 @@ export const BanUserDialog = ({
       onClose={handleCloseBanDialog}
       onConfirmButtonClick={submitBanUserForm}
       open={banDialog}
+      size={isMobile ? 'sm' : 'md'}
       title={t.user_list_popover.ban}
     >
       {renderBanUserForm()}
