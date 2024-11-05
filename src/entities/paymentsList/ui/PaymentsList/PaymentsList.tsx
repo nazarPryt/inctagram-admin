@@ -1,5 +1,7 @@
 import { useGetAllPayments } from '@/entities/paymentsList/hook/useGetAllPayments'
+import { MobilePaymentsListTable } from '@/entities/paymentsList/ui/MobilePaymentsListTable'
 import { PaymentsListTable } from '@/entities/paymentsList/ui/PaymentsListTable'
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -19,15 +21,19 @@ export const PaymentsList = () => {
   } = useGetAllPayments()
 
   const { t } = useTranslation()
+  const { isMobile } = useScreenDetector()
 
   return (
     <PaymentsListStyled>
-      <PaymentsListTable
-        loading={loading}
-        onSort={handleOnSort}
-        payments={data?.getPayments.items}
-        sort={sort}
-      />
+      {!isMobile && (
+        <PaymentsListTable
+          loading={loading}
+          onSort={handleOnSort}
+          payments={data?.getPayments.items}
+          sort={sort}
+        />
+      )}
+      {isMobile && <MobilePaymentsListTable loading={loading} payments={data?.getPayments.items} />}
       <Pagination
         count={totalPageCount}
         onChange={setPageNumber}
@@ -35,7 +41,7 @@ export const PaymentsList = () => {
         onPerPageChange={setPageSize}
         page={pageNumber}
         perPage={pageSize}
-        perPageOptions={[10, 20, 30, 50, 100]}
+        perPageOptions={[10, 20, 30]}
         show={t.pagination.show}
       />
     </PaymentsListStyled>

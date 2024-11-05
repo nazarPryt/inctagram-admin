@@ -9,6 +9,7 @@ export const AuthorizedLayoutStyled = styled.div`
     'header header'
     'aside main';
   column-gap: 1rem;
+
   header {
     grid-area: header;
   }
@@ -21,7 +22,7 @@ export const AuthorizedLayoutStyled = styled.div`
     grid-area: aside;
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (max-width: ${breakpoints.tablet}px) {
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -38,6 +39,8 @@ export const AuthorizedLayoutStyled = styled.div`
     main {
       flex: 1;
       overflow-y: auto;
+      margin-bottom: 40px;
+      margin-top: 60px;
     }
 
     aside {

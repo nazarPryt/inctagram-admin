@@ -11,11 +11,11 @@ import { CSSObject, Interpolation, css } from 'styled-components'
 //
 // // Define commonly used breakpoints
 export const breakpoints = {
-  mobile: '767.98px',
-  mobileSmall: '479.98px',
-  pc: '1200px',
-  tablet: '991.98px',
-}
+  mobile: 767.98,
+  mobileSmall: 479.98,
+  pc: 1024,
+  tablet: 991.98,
+} as const
 
 // Create media query shortcuts for commonly used breakpoints
 // export const mediaMobile = media(breakpoints.mobile)

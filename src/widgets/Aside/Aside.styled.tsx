@@ -19,7 +19,7 @@ export const AsideStyled = styled.aside`
     margin-top: 60px;
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (max-width: ${breakpoints.tablet}px) {
     display: flex;
     background-color: ${props => props.theme.bodyColor['100']};
     border: none;

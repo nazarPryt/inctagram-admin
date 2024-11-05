@@ -29,35 +29,36 @@ export const PaymentsListTable = ({ loading, onSort, payments, sort }: PropsType
   if (loading) {
     return <TableSkeleton columns={5} rows={10} />
   }
-  if (payments && !!payments?.length) {
-    return (
-      <PaymentsListTableStyled>
-        <TableHead columns={PaymentsListTableHeader} onSort={onSort} sort={sort} />
-        <TableBody>
-          {payments.map(payment => {
-            return (
-              <TableRow key={payment.id}>
-                <TableCell className={'userNameCell'}>
-                  <Avatar
-                    size={36}
-                    src={payment.avatars?.length ? payment.avatars[0].url || '' : ''}
-                    userName={payment.userName}
-                  />
-                  {payment.userName}
-                </TableCell>
-                <TableCell>{toLocalFormat(payment.createdAt)}</TableCell>
-                <TableCell>
-                  {payment.amount} {payment.currency}
-                </TableCell>
-                <TableCell>{payment.type}</TableCell>
-                <TableCell>{payment.paymentMethod}</TableCell>
-              </TableRow>
-            )
-          })}
-        </TableBody>
-      </PaymentsListTableStyled>
-    )
+  if (!payments) {
+    return <IsEmpty text={t.table.payments_list_empty} />
   }
 
-  return <IsEmpty text={t.table.payments_list_empty} />
+  return (
+    <PaymentsListTableStyled>
+      <TableHead columns={PaymentsListTableHeader} onSort={onSort} sort={sort} />
+
+      <TableBody>
+        {payments.map(payment => {
+          return (
+            <TableRow key={payment.id}>
+              <TableCell className={'userNameCell'}>
+                <Avatar
+                  size={36}
+                  src={payment.avatars?.length ? payment.avatars[0].url || '' : ''}
+                  userName={payment.userName}
+                />
+                {payment.userName}
+              </TableCell>
+              <TableCell>{toLocalFormat(payment.createdAt)}</TableCell>
+              <TableCell>
+                {payment.amount} {payment.currency}
+              </TableCell>
+              <TableCell>{payment.type}</TableCell>
+              <TableCell>{payment.paymentMethod}</TableCell>
+            </TableRow>
+          )
+        })}
+      </TableBody>
+    </PaymentsListTableStyled>
+  )
 }
