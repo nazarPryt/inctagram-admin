@@ -1,14 +1,24 @@
-import { css } from 'styled-components'
+import { CSSObject, Interpolation, css } from 'styled-components'
 
-export const ViewPort = {
-  mobile: css`
-    max-width: 768px; // Phones L
-  `,
-  mobileSmall: css`
-    max-width: 480px; // Phones S
-  `,
-  pc: css`
-    max-width: 1120px; // PC, laptops, some tablets in horizontal position
-  `,
-  tablet: '992px', // Tablets, some phones in horizontal position
+// // Define a function to handle any breakpoint size
+// export const media =
+//   (maxWidth: number) =>
+//   (...args: [CSSObject | TemplateStringsArray, ...Interpolation<any>[]]) => css`
+//     @media (max-width: ${maxWidth}px) {
+//       ${css(...args)};
+//     }
+//   `
+//
+// // Define commonly used breakpoints
+export const breakpoints = {
+  mobile: '767.98px',
+  mobileSmall: '479.98px',
+  pc: '1200px',
+  tablet: '991.98px',
 }
+
+// Create media query shortcuts for commonly used breakpoints
+// export const mediaMobile = media(breakpoints.mobile)
+// export const mediaTablet = media(breakpoints.tablet)
+// export const mediaDesktop = media(breakpoints.desktop)
+// export const mediaLargeDesktop = media(breakpoints.largeDesktop)

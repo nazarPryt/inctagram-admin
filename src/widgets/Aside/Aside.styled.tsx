@@ -1,4 +1,4 @@
-import { ViewPort } from '@/shared/styles/ViewPort'
+import { breakpoints } from '@/shared/styles/ViewPort'
 import { typography } from '@nazar-pryt/inctagram-ui-kit'
 import { styled } from 'styled-components'
 
@@ -19,7 +19,7 @@ export const AsideStyled = styled.aside`
     margin-top: 60px;
   }
 
-  @media (min-width: ${ViewPort.tablet}) {
+  @media (max-width: ${breakpoints.tablet}) {
     display: flex;
     background-color: ${props => props.theme.bodyColor['100']};
     border: none;

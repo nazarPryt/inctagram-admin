@@ -1,26 +1,27 @@
+import { breakpoints } from '@/shared/styles/ViewPort'
 import { styled } from 'styled-components'
 
 export const AuthorizedLayoutStyled = styled.div`
   display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 80px 1fr;
   grid-template-areas:
-    'header header header'
-    'aside section section';
-  grid-template-rows: auto 1fr;
-  grid-template-columns: auto 1fr 1fr;
-
+    'header header'
+    'aside main';
+  column-gap: 1rem;
   header {
     grid-area: header;
   }
 
-  section {
-    grid-area: section;
+  main {
+    grid-area: main;
   }
 
   aside {
     grid-area: aside;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: ${breakpoints.tablet}) {
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -34,7 +35,7 @@ export const AuthorizedLayoutStyled = styled.div`
       z-index: 10;
     }
 
-    section {
+    main {
       flex: 1;
       overflow-y: auto;
     }
