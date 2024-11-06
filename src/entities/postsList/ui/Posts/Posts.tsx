@@ -18,27 +18,27 @@ export const Posts = () => {
     return <PostsListSkeleton />
   }
 
-  if (isHavePosts) {
-    return (
-      <PostsStyled>
-        <InputText search />
-        <InfiniteScroll
-          dataLength={posts.length}
-          endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>{t.post.end_post}</b>
-            </p>
-          }
-          hasMore={hasMore}
-          loader={<PostsListSkeleton />}
-          next={fetchMoreData}
-        >
-          <PostsList posts={posts} />
-        </InfiniteScroll>
-        <ScrollToTop />
-      </PostsStyled>
-    )
+  if (!isHavePosts) {
+    return <IsEmpty text={t.post.no_posts} />
   }
 
-  return <IsEmpty text={t.post.no_posts} />
+  return (
+    <PostsStyled>
+      <InputText search />
+      <InfiniteScroll
+        dataLength={posts.length}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>{t.post.end_post}</b>
+          </p>
+        }
+        hasMore={hasMore}
+        loader={<PostsListSkeleton />}
+        next={fetchMoreData}
+      >
+        <PostsList posts={posts} />
+      </InfiniteScroll>
+      <ScrollToTop />
+    </PostsStyled>
+  )
 }

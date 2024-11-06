@@ -4,7 +4,7 @@ import { MobileUsersListTable } from '@/entities/usersList/ui/MobileUsersListTab
 import { UsersListTable } from '@/entities/usersList/ui/UsersListTable/UsersListTable'
 import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
-import { Pagination } from '@nazar-pryt/inctagram-ui-kit'
+import { Pagination, TableSkeleton } from '@nazar-pryt/inctagram-ui-kit'
 
 import { UsersListStyled } from './UsersList.styled'
 
@@ -28,6 +28,14 @@ export const UsersList = () => {
 
   const { t } = useTranslation()
   const { isMobile } = useScreenDetector()
+
+  if (loading) {
+    return isMobile ? (
+      <TableSkeleton columns={1} rows={4} />
+    ) : (
+      <TableSkeleton columns={4} rows={10} />
+    )
+  }
 
   return (
     <UsersListStyled>

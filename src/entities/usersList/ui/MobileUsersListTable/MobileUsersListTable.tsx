@@ -4,7 +4,7 @@ import { UsersListPopover } from '@/entities/usersList/ui/UsersListPopover'
 import { IsEmpty } from '@/shared/components/IsEmpty'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { toLocalFormat } from '@/shared/utils/toLocalFormat'
-import { BlockedIcon, Button, TableSkeleton } from '@nazar-pryt/inctagram-ui-kit'
+import { BlockedIcon, Button } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
 import { MobileUsersListTableStyled } from './MobileUsersListTable.styled'
@@ -17,9 +17,6 @@ export type Props = {
 export const MobileUsersListTable = ({ loading, userList }: Props) => {
   const { t } = useTranslation()
 
-  if (loading) {
-    return <TableSkeleton columns={1} rows={4} />
-  }
   if (!userList) {
     return <IsEmpty text={t.table.payments_list_empty} />
   }

@@ -46,13 +46,13 @@ export const MobileUsersListTableStyled = styled.div`
 
     button {
       animation: ${pulse} 1s ease-in-out infinite;
-      //background: ${props => props.theme.palette.primary[500]};
       border-radius: 50%;
     }
   }
 
   thead {
     align-items: flex-start;
+    text-align: left;
   }
 
   svg {

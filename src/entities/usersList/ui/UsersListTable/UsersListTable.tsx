@@ -12,7 +12,6 @@ import {
   TableHead,
   TableHeadSortType,
   TableRow,
-  TableSkeleton,
 } from '@nazar-pryt/inctagram-ui-kit'
 import Link from 'next/link'
 
@@ -31,9 +30,6 @@ export const UsersListTable = ({ loading, onSort, sort, userList }: PropsType) =
 
   if (!userList) {
     return <IsEmpty text={t.table.payments_list_empty} /> //todo
-  }
-  if (loading) {
-    return <TableSkeleton columns={5} rows={10} />
   }
 
   return (

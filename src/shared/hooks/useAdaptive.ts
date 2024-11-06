@@ -24,10 +24,8 @@ export const useScreenDetector = () => {
       })
     }
 
-    // Set initial device type
     handleResize()
 
-    // Listen for resize events
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)

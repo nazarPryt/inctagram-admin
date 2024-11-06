@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <HeaderStyled>
       <Link className={'InctagramLogo'} href={PATH.LOGIN}>
-        Inctagram<span>{t.header.admin_page}</span>
+        Incta<span>{t.header.admin_page}</span>
       </Link>
       <div className={'block'}>
         <LangSelect />

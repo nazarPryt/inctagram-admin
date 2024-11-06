@@ -1,7 +1,7 @@
 import { typography } from '@nazar-pryt/inctagram-ui-kit'
 import { styled } from 'styled-components'
 
-export const MobilePaymentsListTableStyled = styled.div`
+export const MobileProfilePaymentsListStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
