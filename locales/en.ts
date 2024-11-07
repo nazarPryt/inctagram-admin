@@ -12,6 +12,11 @@ export const en = {
     search: 'Search...',
     yes: 'Yes',
   },
+  empty: {
+    this_is_all: 'This is all',
+    user_payments: 'User doesnt have any payments yet',
+    user_posts: 'The user has not uploaded any posts yet',
+  },
   filter: {
     all: 'ALL',
     blocked: 'BLOCKED',
@@ -43,9 +48,6 @@ export const en = {
   profile_info: {
     profile_create: 'Profile Creation Date',
     user_id: 'User ID',
-  },
-  profile_payments: {
-    not_payments: 'User doesnt have any payments yet',
   },
   statistics_page: {
     title: 'Statistics Page',

@@ -7,6 +7,7 @@ export const HeaderStyled = styled.header`
   justify-content: space-between;
   position: sticky;
   top: 0;
+  padding: 0 10px;
   border-bottom: 1px solid ${props => props.theme.bodyColor['100']};
   margin-bottom: 24px;
   z-index: 2;

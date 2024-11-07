@@ -14,13 +14,18 @@ export const ru: LocaleType = {
     search: 'Поиск...',
     yes: 'Да',
   },
+  empty: {
+    this_is_all: 'Это все',
+    user_payments: 'У пользователя еще нет платежей',
+    user_posts: 'Пользователь еще не загрузил никаких постов',
+  },
   filter: {
     all: 'ВСЕ',
     blocked: 'ЗАБЛОКИРОВАНЫЕ',
     not_blocked: 'НЕ ЗАБЛОКИРОВАНЫЕ',
   },
   header: {
-    admin_page: 'Администрирование',
+    admin_page: 'Админ',
   },
   login: {
     email: 'Почта',
@@ -46,14 +51,11 @@ export const ru: LocaleType = {
     profile_create: 'Дата создания профиля',
     user_id: 'ID пользователя',
   },
-  profile_payments: {
-    not_payments: 'У пользователя еще нет платежей',
-  },
   statistics_page: {
     title: 'Страница статистики',
   },
   table: {
-    added: 'Дата добавления',
+    added: 'Добавлен',
     amount: 'Количество, $',
     // content_followers: 'Контент для подписчиков',
     // content_following: 'Контент для Following',
@@ -69,7 +71,7 @@ export const ru: LocaleType = {
     subscription: 'Подписка',
     uploaded_files: 'Загруженные файлы',
     user_details: 'Детали',
-    user_id: 'ID пользователя',
+    user_id: 'ID',
     user_is_blocked: 'ЗАБЛОКИРОВАН',
     user_name: 'Имя пользователя',
   },

@@ -24,5 +24,14 @@ export const useProfilePayments = ({ userID }: { userID: number }) => {
   })
   const payments = data?.getPaymentsByUser.items
 
-  return { loading, pageNumber, pagesize, payments, setOnSort, setPageNumber, setPageSize, sort }
+  return {
+    loading,
+    pageNumber,
+    pagesize,
+    payments,
+    setOnSort,
+    setPageNumber,
+    setPageSize,
+    sort,
+  }
 }

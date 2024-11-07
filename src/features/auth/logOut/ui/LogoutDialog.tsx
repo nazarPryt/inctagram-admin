@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { Dialog } from '@nazar-pryt/inctagram-ui-kit'
 
@@ -11,6 +12,7 @@ type PropsType = {
 
 export const LogoutDialog = ({ handleCloseLogout, handleLogout, logoutDialogOpen }: PropsType) => {
   const { t } = useTranslation()
+  const { isMobile } = useScreenDetector()
 
   return (
     <Dialog
@@ -21,6 +23,7 @@ export const LogoutDialog = ({ handleCloseLogout, handleLogout, logoutDialogOpen
       onClose={handleCloseLogout}
       onConfirmButtonClick={handleLogout}
       open={logoutDialogOpen}
+      size={isMobile ? 'sm' : 'md'}
       title={t.logout.title}
     >
       <p>{t.logout.logout_question}?</p>

@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react'
 
 import { useFilterOptions } from '@/entities/usersList/hook/useFilterOptions'
+import { useScreenDetector } from '@/shared/hooks/useAdaptive'
 import { useTranslation } from '@/shared/hooks/useTranslation'
 import { UserBlockStatus } from '@/shared/lib/ApolloClient/Schema.types'
 import { InputText, Select } from '@nazar-pryt/inctagram-ui-kit'
@@ -22,7 +23,7 @@ export const FilterBar = ({
   setSearch,
 }: FilterBarType) => {
   const { t } = useTranslation()
-
+  const { isMobile } = useScreenDetector()
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.currentTarget.value)
   }
@@ -39,12 +40,11 @@ export const FilterBar = ({
         value={searchValue}
       />
       <Select
-        //Todo Question
         onChange={setBlocked as (value: string) => void}
         options={blockedUsersOptions}
         placeholder={'Not selected'}
         value={blockedValue}
-        width={350}
+        width={isMobile ? 250 : 350}
       />
     </FilterBarStyled>
   )

@@ -1,6 +1,7 @@
 import { useGetProfileInfoQuery } from '@/entities/profileInfo/api/getProfileInfo/getProfileInfo.api.types'
 import { ProfileInfoSkeleton } from '@/shared/components/ProfileInfoSkeleton/ProfileInfoSkeleton'
 import { useTranslation } from '@/shared/hooks/useTranslation'
+import { toLocalFormat } from '@/shared/utils/toLocalFormat'
 import { Avatar } from '@nazar-pryt/inctagram-ui-kit'
 
 import { ProfileInfoStyled } from './ProfileInfo.styled'
@@ -45,9 +46,7 @@ export const ProfileInfo = ({ userID }: { userID: number }) => {
           </div>
           <div>
             <div className={'blurText'}>{t.profile_info.profile_create}</div>
-            <div className={'importantText'}>
-              {new Date(profile.createdAt).toLocaleDateString('ru-RU')}
-            </div>
+            <div className={'importantText'}>{toLocalFormat(profile.createdAt)}</div>
           </div>
         </div>
       </ProfileInfoStyled>
