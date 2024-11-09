@@ -15,6 +15,7 @@
     "@apollo/client": "3.8.8",
     "@hookform/resolvers": "3.3.2",
     "@nazar-pryt/inctagram-ui-kit": "^0.0.38",
+    "@sentry/nextjs": "8.37.1",
     "date-fns": "3.2.0",
     "dequal": "2.0.3",
     "graphql": "16.8.1",
